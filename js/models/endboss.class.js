@@ -4,6 +4,19 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+// Create a variable to store the startAlert value
+export let startAlert = 0; // set the initial value of the startAlert variable to
+
+// Create a variable to store the alertInterval value for the end boss
+let alertInterval = true; // set the initial value of the alertInterval variable to true
+
+export function resetAlert() {
+  if (alertInterval) {
+    startAlert = 0; // reset the value of the startAlert variable to 0
+  }
+  alertInterval = false; // set the alertInterval variable to false
+}
+
 // Create Endboss class that extends MovableObject class
 // It is used to create the end boss in the game
 export class Endboss extends MovableObject {
@@ -14,14 +27,10 @@ export class Endboss extends MovableObject {
 
   // Array of images for the end boss walk animation
   IMAGES_WALK = [
-    "../../assets/images/enemies/chicken_boss/2_alert/G5.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G6.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G7.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G8.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G9.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G10.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G11.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G1.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G2.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G3.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G4.png",
   ];
   // Array of images for the end boss walk animation
   IMAGES_ALERT = [
@@ -71,10 +80,15 @@ export class Endboss extends MovableObject {
   // Animate the end boss by playing the end boss walk animation repeatedly at a certain interval
   endbossAnimation() {
     setStoppableInterval(() => {
-      if (this.isDead()) {
+      if (startAlert <= 10) {
+        this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
+        startAlert++;
+      } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
         this.y = 150; // set the y position of the end boss to 0
-      } else this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
+      } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT); // play the hurt animation if the chicken is hurt
+      } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
     }, 200);
   }
 }

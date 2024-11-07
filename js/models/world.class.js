@@ -46,7 +46,7 @@ export class World {
   }
 
   gameOver() {
-    console.log("Game Over!"); // Call the die method of the character object if the character is dead
+    console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
   }
 
   checkEnemyIsDead() {

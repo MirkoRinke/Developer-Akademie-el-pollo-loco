@@ -2,6 +2,7 @@
 import { Character } from "./character.class.js";
 import { level1 } from "../Levels/level1.js";
 import { StatusBarHealth } from "./status-bar-health.class.js";
+import { SalsaBottlesBar } from "./salsa-bottles-bar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
@@ -15,7 +16,8 @@ export class World {
   canvas; // Canvas
   keyboard; // Keyboard
   camera_x = 0; // Camera x-coordinate
-  StatusBarHealth = new StatusBarHealth(); // Create a new status bar object.
+  statusBarHealth = new StatusBarHealth(); // Create a new status bar object.
+  salsaBottlesBar = new SalsaBottlesBar(); // Create a new salsa bottles bar object
   throwableObjects = []; // Array to store throwable objects
   salsaBottles = []; // Array to store salsa bottles
   currentBottles = 0; // Current number of salsa bottles
@@ -88,6 +90,7 @@ export class World {
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); // Create a new throwable object (bottle)
       this.throwableObjects.push(bottle); // Add the throwable object to the throwableObjects array of the world object
       this.currentBottles--; // Decrease the current number of bottles by 1
+      this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
     }
   }
 
@@ -98,7 +101,7 @@ export class World {
       if (this.character.isColliding(enemy)) {
         // If the character is colliding with the enemy
         this.character.hit(); // Call the hit method of the character object
-        this.StatusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
+        this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
       }
       this.throwableObjects.forEach((throwableObject) => {
         // For each throwable object in the throwableObjects array
@@ -107,13 +110,13 @@ export class World {
           enemy.hit(); // Call the hit method of the enemy object
         }
       });
-
       this.level.salsaBottles.forEach((salsaBottle) => {
         // For each salsa bottle in the salsa bottles array of the level object
         // Check if the character is colliding with the salsa bottle
         if (this.character.isColliding(salsaBottle)) {
           this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
           this.currentBottles++; // Increase the current number of bottles by 1
+          this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
         }
       });
     });
@@ -126,7 +129,8 @@ export class World {
     this.addObjectsToMap(this.level.backgroundObjects); // Add the background objects to the map
 
     this.ctx.translate(-this.camera_x, 0); // Translate the context of the canvas to the negative of the camera x-coordinate
-    this.addToMap(this.StatusBarHealth); // Add the status bar to the map
+    this.addToMap(this.statusBarHealth); // Add the status bar to the map
+    this.addToMap(this.salsaBottlesBar); // Add the salsa bottles bar to the map
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
 
     this.addObjectsToMap(this.level.salsaBottles); // Add the salsa bottles to the map

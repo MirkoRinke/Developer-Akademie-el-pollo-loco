@@ -55,6 +55,8 @@ export class MovableObject extends DrawableObject {
 
   // The hit method will be used to reduce the energy of the object
   hit() {
+    const currentTime = new Date().getTime(); // Get the current time
+    if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
     this.energy -= 2; // Reduce the energy of the object by 2
     if (this.energy <= 0) {
       // If the energy of the object is less than or equal to 0

@@ -34,7 +34,13 @@ export class World {
     setInterval(() => {
       this.checkCollisions(); // Call the checkCollisions method to check for collisions
       this.checkThrowableObjects(); // Call the checkThrowableObjects method to check for throwable objects
+      if (this.character.isDead()) this.die(); // Call the die method of the character object if the character is dead
     }, 200);
+  }
+
+  // Method to end the game temporarily
+  die() {
+    console.log("Game Over!");
   }
 
   // Method to check for throwable objects in the game world
@@ -55,6 +61,13 @@ export class World {
         this.character.hit(); // Call the hit method of the character object
         this.statusBar.setPercentage(this.character.energy); // Set the character energy in the status bar
       }
+      this.throwableObjects.forEach((throwableObject) => {
+        // For each throwable object in the throwableObjects array
+        if (throwableObject.isColliding(enemy)) {
+          // If the throwable object is colliding with the enemy
+          enemy.hit(); // Call the hit method of the enemy object
+        }
+      });
     });
   }
 

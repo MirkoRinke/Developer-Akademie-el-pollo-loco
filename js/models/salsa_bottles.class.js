@@ -1,6 +1,7 @@
-import { DrawableObject } from "./drawable-object.class.js";
+// import { DrawableObject } from "./drawable-object.class.js";
+import { MovableObject } from "./movable-object-class.js";
 
-export class SalsaBottles extends DrawableObject {
+export class SalsaBottles extends MovableObject {
   IMAGES = ["../../assets/images/items/salsa_bottle/1_salsa_bottle_on_ground.png", "../../assets/images/items/salsa_bottle/2_salsa_bottle_on_ground.png"];
 
   constructor() {

@@ -21,7 +21,7 @@ export class DrawableObject {
 
   // This method is used to draw a frame around the object
   drawFrame(ctx) {
-    if (this.constructor.name === "Character" || this.constructor.name === "Chicken" || this.constructor.name === "ThrowableObject") {
+    if (this.constructor.name === "Character" || this.constructor.name === "Chicken" || this.constructor.name === "ThrowableObject" || this.constructor.name === "SalsaBottles") {
       // Check if the object is a character or a chicken
       ctx.beginPath(); // Start drawing
       ctx.lineWidth = "5"; // Set the line width

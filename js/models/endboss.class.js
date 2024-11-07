@@ -1,6 +1,9 @@
 // Load MovableObject class from movable-object-class.js
 import { MovableObject } from "./movable-object-class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // Create Endboss class that extends MovableObject class
 // It is used to create the end boss in the game
 export class Endboss extends MovableObject {
@@ -34,7 +37,7 @@ export class Endboss extends MovableObject {
 
   // Animate the end boss by playing the end boss walk animation repeatedly at a certain interval
   endbossAnimation() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
     }, 200);
   }

@@ -1,6 +1,9 @@
 // Load the MovableObject class from the movable-object-class.js file
 import { MovableObject } from "./movable-object-class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // Chicken class is a subclass of MovableObject
 // It is used to create the chicken enemy in the game
 export class Chicken extends MovableObject {
@@ -32,14 +35,14 @@ export class Chicken extends MovableObject {
 
   // Manage the chicken movement by moving the chicken to the left
   manageChickenMovement() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.x -= this.speed;
     }, 1000 / 60);
   }
 
   // Animate the chicken by playing the chicken walking animation
   chickenAnimation() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
       } else this.playAnimation(this.IMAGES_WALK); // play the walking animation if the chicken is alive

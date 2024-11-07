@@ -1,6 +1,9 @@
 // Load the MovableObject class from the movable-object-class.js file
 import { MovableObject } from "./movable-object-class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // Character class is a subclass of MovableObject
 // It is used to create the main character of the game
 export class Character extends MovableObject {
@@ -64,7 +67,7 @@ export class Character extends MovableObject {
 
   // Manage the character movement by checking if the character can move right, left
   manageCharacterMovement() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.walking_sound.pause();
       if (this.canMoveRight()) this.characterMoveRight(); // check if the character can move right and move the character right
       if (this.canMoveLeft()) this.characterMoveLeft(); // check if the character can move left and move the character left
@@ -76,7 +79,7 @@ export class Character extends MovableObject {
   // Animate the character by playing different animations based on the character's state
   characterAnimation() {
     let deadAnimation = false; // set deadAnimation to false
-    setInterval(() => {
+    setStoppableInterval(() => {
       if (deadAnimation) {
         this.playAnimation(this.IMAGES_REMOVE_CHARACTER);
       } else if (this.isDead() && !deadAnimation) {

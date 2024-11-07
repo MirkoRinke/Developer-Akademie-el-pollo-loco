@@ -1,6 +1,9 @@
 // Load DrawableObject class from drawable-object-class.js
 import { DrawableObject } from "./drawable-object.class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // Create MovableObject class that extends DrawableObject class
 // This class will be used to create objects that can move
 export class MovableObject extends DrawableObject {
@@ -13,7 +16,7 @@ export class MovableObject extends DrawableObject {
 
   // The applyGravity method will be used to apply gravity to the object
   applyGravity() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       // If the object is in the air
       if (this.isInAir()) {
         this.y -= this.speedY; // Move the object in Y direction

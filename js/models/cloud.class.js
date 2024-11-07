@@ -1,6 +1,9 @@
 // Load the MovableObject class from the movable-object-class.js file
 import { MovableObject } from "./movable-object-class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // Cloud class is a subclass of MovableObject
 // It is used to create the cloud background in the game
 export class Cloud extends MovableObject {
@@ -20,7 +23,7 @@ export class Cloud extends MovableObject {
 
   // Manage the cloud movement by moving the cloud to the left at a constant speed
   manageCloudMovement() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.x -= this.speed;
     }, 1000 / 60);
   }

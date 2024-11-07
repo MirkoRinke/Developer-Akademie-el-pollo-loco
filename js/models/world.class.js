@@ -4,6 +4,9 @@ import { level1 } from "../Levels/level1.js";
 import { StatusBar } from "./status-bar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
+// import the setStoppableInterval function from the script.js file
+import { setStoppableInterval } from "../script.js";
+
 // World class is used to create the game world
 export class World {
   character = new Character(); // Create a new character object
@@ -31,7 +34,7 @@ export class World {
 
   // Method to run the game loops for the game world
   run() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.checkCollisions(); // Call the checkCollisions method to check for collisions
       this.checkThrowableObjects(); // Call the checkThrowableObjects method to check for throwable objects
       this.checkCharacterIsDead(); // Call the checkCharacterIsDead method to check if the character is dead

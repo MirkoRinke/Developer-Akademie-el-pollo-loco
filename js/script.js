@@ -18,7 +18,7 @@ export function setStoppableInterval(callback, delay) {
 }
 
 // Function to stop the game by clearing all intervals
-function stopGame() {
+export function stopGame() {
   intervalId.forEach((Id) => {
     clearInterval(Id);
   });

@@ -1,7 +1,7 @@
 // Load Character, level1, StatusBar, ThrowableObject classes from their respective files
 import { Character } from "./character.class.js";
 import { level1 } from "../Levels/level1.js";
-import { StatusBarHealth } from "./status-bar.class.js";
+import { StatusBarHealth } from "./status-bar-health.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file

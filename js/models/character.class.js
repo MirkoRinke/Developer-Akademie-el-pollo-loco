@@ -38,8 +38,9 @@ export class Character extends MovableObject {
     "../../assets/images/player/pepe/5_dead/D-54.png",
     "../../assets/images/player/pepe/5_dead/D-55.png",
     "../../assets/images/player/pepe/5_dead/D-56.png",
-    "../../assets/images/player/pepe/5_dead/D-57.png",
   ];
+  IMAGES_REMOVE_CHARACTER = ["../../assets/images/player/pepe/5_dead/D-57.png"];
+
   // Arrays of image paths for different animations of the character being hurt.
   IMAGES_HURT = ["../../assets/images/player/pepe/4_hurt/H-41.png", "../../assets/images/player/pepe/4_hurt/H-42.png", "../../assets/images/player/pepe/4_hurt/H-43.png"];
   world; // world object
@@ -50,6 +51,7 @@ export class Character extends MovableObject {
     this.loadImages(this.IMAGES_JUMP); // load the images for the jumping animation
     this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
     this.loadImages(this.IMAGES_HURT); // load the images for the being hurt animation
+    this.loadImages(this.IMAGES_REMOVE_CHARACTER); // load the images for the removing animation
     this.applyGravity(); // apply gravity to the character
     this.animate(); // animate the character
   }
@@ -73,10 +75,14 @@ export class Character extends MovableObject {
 
   // Animate the character by playing different animations based on the character's state
   characterAnimation() {
+    let deadAnimation = false; // set deadAnimation to false
     setInterval(() => {
-      if (this.isDead()) {
+      if (deadAnimation) {
+        this.playAnimation(this.IMAGES_REMOVE_CHARACTER);
+      } else if (this.isDead() && !deadAnimation) {
         // check if the character is dead and play the dying animation
         this.playAnimation(this.IMAGES_DEAD);
+        deadAnimation = true;
       } else if (this.isHurt()) {
         // check if the character is hurt and play the being hurt animation
         this.playAnimation(this.IMAGES_HURT);
@@ -97,9 +103,11 @@ export class Character extends MovableObject {
 
   // Character move right and play the walking sound and set the otherDirection to false
   characterMoveRight() {
-    this.moveRight();
-    this.walking_sound.play();
-    this.otherDirection = false;
+    if (!this.isDead()) {
+      this.moveRight();
+      this.walking_sound.play();
+      this.otherDirection = false;
+    }
   }
 
   // Check the character can move left or not by checking the LEFT key is pressed and the x position of the character is greater than 0
@@ -109,9 +117,11 @@ export class Character extends MovableObject {
 
   // Character move left and play the walking sound and set the otherDirection to true
   characterMoveLeft() {
-    this.moveLeft();
-    this.walking_sound.play();
-    this.otherDirection = true;
+    if (!this.isDead()) {
+      this.moveLeft();
+      this.walking_sound.play();
+      this.otherDirection = true;
+    }
   }
 
   // Check the character can jump or not by checking the SPACE key is pressed and the character is not above the ground

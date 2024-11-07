@@ -117,6 +117,8 @@ export class World {
     this.addToMap(this.statusBar); // Add the status bar to the map
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
 
+    this.addObjectsToMap(this.level.salsaBottles); // Add the salsa bottles to the map
+
     this.addToMap(this.character); // Add the character to the map
     this.addObjectsToMap(this.level.enemies); // Add the enemies to the map
     this.addObjectsToMap(this.level.clouds); // Add the clouds to the map

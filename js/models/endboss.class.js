@@ -23,12 +23,41 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/2_alert/G11.png",
     "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
   ];
+  // Array of images for the end boss walk animation
+  IMAGES_ALERT = [
+    "../../assets/images/enemies/chicken_boss/2_alert/G5.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G6.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G7.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G8.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G9.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G10.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G11.png",
+    "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
+  ];
+  // Array of images for the end boss attack animation
+  IMAGES_ATTACK = [
+    "../../assets/images/enemies/chicken_boss/3_attack/G13.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G14.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G15.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G16.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G17.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G18.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G19.png",
+    "../../assets/images/enemies/chicken_boss/3_attack/G20.png",
+  ];
 
+  // Array of images for the end boss hurt animation
+  IMAGES_HURT = ["../../assets/images/enemies/chicken_boss/4_hurt/G21.png", "../../assets/images/enemies/chicken_boss/4_hurt/G22.png", "../../assets/images/enemies/chicken_boss/4_hurt/G23.png"];
+
+  // Array of images for the end boss dying animation
   IMAGES_DEAD = ["../../assets/images/enemies/chicken_boss/5_dead/G24.png", "../../assets/images/enemies/chicken_boss/5_dead/G25.png", "../../assets/images/enemies/chicken_boss/5_dead/G26.png"];
 
   constructor() {
-    super().loadImage(this.IMAGES_WALK[0]); // load the first image of the end boss walk animation
+    super().loadImage(this.IMAGES_ALERT[0]); // load the first image of the end boss walk animation
     this.loadImages(this.IMAGES_WALK); // load all images of the end boss walk animation
+    this.loadImages(this.IMAGES_ALERT); // load all images of the end boss walk animation
+    this.loadImages(this.IMAGES_ATTACK); // load all images of the end boss attack animation
+    this.loadImages(this.IMAGES_HURT); // load all images of the end boss hurt animation
     this.loadImages(this.IMAGES_DEAD); // load all images of the end boss dying animation
     this.x = 2600; // set the x position of the end boss
     this.animate(); // animate the end boss
@@ -45,7 +74,7 @@ export class Endboss extends MovableObject {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
         this.y = 150; // set the y position of the end boss to 0
-      } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
+      } else this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
     }, 200);
   }
 }

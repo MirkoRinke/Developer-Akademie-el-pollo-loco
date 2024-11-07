@@ -11,7 +11,7 @@ export class Character extends MovableObject {
   width = 200; // width of the character
   y = 150; // y position of the character
   speed = 10; // speed of the character
-  energy = 100; //! energy of the character
+  energy = 10000; //! energy of the character
   // Arrays of image paths for different animations of the character walking.
   IMAGES_WALK = [
     "../../assets/images/player/pepe/2_walk/W-21.png",

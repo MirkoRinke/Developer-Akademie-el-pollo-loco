@@ -10,6 +10,7 @@ export class Endboss extends MovableObject {
   height = 400; // height of the end boss
   width = 350; // width of the end boss
   y = 50; // y position of the end boss
+  energy = 10; // energy of the chicken
 
   // Array of images for the end boss walk animation
   IMAGES_WALK = [

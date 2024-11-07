@@ -39,7 +39,14 @@ export class MovableObject extends DrawableObject {
 
   // The isColliding method will be used to check if the object is colliding with another object
   isColliding(movableObject) {
-    return this.x + this.width > movableObject.x && this.y + this.height > movableObject.y && this.x < movableObject.x && this.y < movableObject.y + movableObject.height;
+    let buffer = 0; // Buffer for collision detection
+    if (movableObject.constructor.name === "Chicken") buffer = 5; // Set buffer for Chicken object
+    return (
+      this.x + this.width + buffer > movableObject.x - buffer &&
+      this.y + this.height + buffer > movableObject.y - buffer &&
+      this.x - buffer < movableObject.x + movableObject.width + buffer &&
+      this.y - buffer < movableObject.y + movableObject.height + buffer
+    );
   }
 
   // The hit method will be used to reduce the energy of the object

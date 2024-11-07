@@ -17,6 +17,8 @@ export class World {
   camera_x = 0; // Camera x-coordinate
   statusBar = new StatusBar(); // Create a new status bar object.
   throwableObjects = []; // Array to store throwable objects
+  salsaBottles = []; // Array to store salsa bottles
+  currentBottles = 0; // Current number of salsa bottles
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // Get the context of the canvas
@@ -81,10 +83,11 @@ export class World {
 
   // Method to check for throwable objects in the game world
   checkThrowableObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.D && this.currentBottles > 0) {
       // If the D key is pressed on the keyboard
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); // Create a new throwable object (bottle)
       this.throwableObjects.push(bottle); // Add the throwable object to the throwableObjects array of the world object
+      this.currentBottles--; // Decrease the current number of bottles by 1
     }
   }
 
@@ -102,6 +105,15 @@ export class World {
         if (throwableObject.isColliding(enemy)) {
           // If the throwable object is colliding with the enemy
           enemy.hit(); // Call the hit method of the enemy object
+        }
+      });
+
+      this.level.salsaBottles.forEach((salsaBottle) => {
+        // For each salsa bottle in the salsa bottles array of the level object
+        // Check if the character is colliding with the salsa bottle
+        if (this.character.isColliding(salsaBottle)) {
+          this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
+          this.currentBottles++; // Increase the current number of bottles by 1
         }
       });
     });

@@ -85,12 +85,15 @@ export class World {
 
   // Method to check for throwable objects in the game world
   checkThrowableObjects() {
+    const currentTime = new Date().getTime(); // Get the current time
+    if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
     if (this.keyboard.D && this.currentBottles > 0) {
       // If the D key is pressed on the keyboard
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); // Create a new throwable object (bottle)
       this.throwableObjects.push(bottle); // Add the throwable object to the throwableObjects array of the world object
       this.currentBottles--; // Decrease the current number of bottles by 1
       this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
+      this.lastHit = currentTime; // Set the time of the last hit to the current time
     }
   }
 

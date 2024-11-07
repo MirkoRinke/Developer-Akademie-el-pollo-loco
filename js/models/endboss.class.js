@@ -8,13 +8,13 @@ import { setStoppableInterval } from "../script.js";
 export let startAlert = 0; // set the initial value of the startAlert variable to
 
 // Create a variable to store the alertInterval value for the end boss
-let alertInterval = true; // set the initial value of the alertInterval variable to true
+let firstContact = false; // set the initial value of the alertInterval variable to true
 
 export function resetAlert() {
-  if (alertInterval) {
+  if (!firstContact) {
     startAlert = 0; // reset the value of the startAlert variable to 0
   }
-  alertInterval = false; // set the alertInterval variable to false
+  firstContact = true; // set the alertInterval variable to false
 }
 
 // Create Endboss class that extends MovableObject class
@@ -74,7 +74,15 @@ export class Endboss extends MovableObject {
 
   // Animate the end boss by playing the end boss walk animation
   animate() {
+    this.manageEndbossMovement();
     this.endbossAnimation();
+  }
+
+  // Manage the end boss movement by moving the end boss to the left
+  manageEndbossMovement() {
+    setStoppableInterval(() => {
+      if (firstContact) this.x -= this.speed * 10;
+    }, 1000 / 60);
   }
 
   // Animate the end boss by playing the end boss walk animation repeatedly at a certain interval

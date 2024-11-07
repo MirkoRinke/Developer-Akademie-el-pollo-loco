@@ -44,7 +44,7 @@ export class MovableObject extends DrawableObject {
   isColliding(movableObject) {
     let buffer = 0; // Buffer for collision detection
     if (movableObject.constructor.name === "Chicken") buffer = 5; // Set buffer for Chicken object
-    if (movableObject.constructor.name === "SalsaBottles") buffer = -50; // Set buffer for Character object
+    if (movableObject.constructor.name === "SalsaBottles") buffer = -30; // Set buffer for Character object
     return (
       this.x + this.width + buffer > movableObject.x - buffer &&
       this.y + this.height + buffer > movableObject.y - buffer &&

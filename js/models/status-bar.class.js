@@ -3,7 +3,7 @@ import { DrawableObject } from "./drawable-object.class.js";
 
 // Create StatusBar class that extends DrawableObject
 // This class will be used to create a status bar for the player
-export class StatusBar extends DrawableObject {
+export class StatusBarHealth extends DrawableObject {
   // Create an array of images for the status bar
   IMAGES = [
     "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/0.png",

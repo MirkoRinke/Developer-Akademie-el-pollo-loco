@@ -1,7 +1,7 @@
 // Load Character, level1, StatusBar, ThrowableObject classes from their respective files
 import { Character } from "./character.class.js";
 import { level1 } from "../Levels/level1.js";
-import { StatusBar } from "./status-bar.class.js";
+import { StatusBarHealth } from "./status-bar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
@@ -15,7 +15,7 @@ export class World {
   canvas; // Canvas
   keyboard; // Keyboard
   camera_x = 0; // Camera x-coordinate
-  statusBar = new StatusBar(); // Create a new status bar object.
+  StatusBarHealth = new StatusBarHealth(); // Create a new status bar object.
   throwableObjects = []; // Array to store throwable objects
   salsaBottles = []; // Array to store salsa bottles
   currentBottles = 0; // Current number of salsa bottles
@@ -98,7 +98,7 @@ export class World {
       if (this.character.isColliding(enemy)) {
         // If the character is colliding with the enemy
         this.character.hit(); // Call the hit method of the character object
-        this.statusBar.setPercentage(this.character.energy); // Set the character energy in the status bar
+        this.StatusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
       }
       this.throwableObjects.forEach((throwableObject) => {
         // For each throwable object in the throwableObjects array
@@ -126,7 +126,7 @@ export class World {
     this.addObjectsToMap(this.level.backgroundObjects); // Add the background objects to the map
 
     this.ctx.translate(-this.camera_x, 0); // Translate the context of the canvas to the negative of the camera x-coordinate
-    this.addToMap(this.statusBar); // Add the status bar to the map
+    this.addToMap(this.StatusBarHealth); // Add the status bar to the map
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
 
     this.addObjectsToMap(this.level.salsaBottles); // Add the salsa bottles to the map

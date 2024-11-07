@@ -16,7 +16,7 @@ export class Chicken extends MovableObject {
   constructor() {
     super().loadImage("../../assets/images/enemies/chicken/chicken_normal/1_walk/1_w.png"); // load the image of the chicken using the loadImage method from the MovableObject class
     this.loadImages(this.IMAGES_WALK); // load the images for the walking animation
-    this.x = 300 + Math.random() * 400; // set the x position of the chicken to a random value
+    this.x = 500 + Math.random() * 1000; // set the x position of the chicken to a random value
     this.speed = 0.15 + Math.random() * 0.33; // set the speed of the chicken to a random value
     this.animate(); // animate the chicken
   }

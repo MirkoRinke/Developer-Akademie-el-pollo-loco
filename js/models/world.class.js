@@ -34,13 +34,43 @@ export class World {
     setInterval(() => {
       this.checkCollisions(); // Call the checkCollisions method to check for collisions
       this.checkThrowableObjects(); // Call the checkThrowableObjects method to check for throwable objects
-      if (this.character.isDead()) this.die(); // Call the die method of the character object if the character is dead
+      this.checkCharacterIsDead(); // Call the checkCharacterIsDead method to check if the character is dead
+      this.checkEnemyIsDead(); // Call the checkEnemyIsDead method to check if the enemy is dead
     }, 200);
   }
 
-  // Method to end the game temporarily
-  die() {
-    console.log("Game Over!");
+  checkCharacterIsDead() {
+    if (this.character.isDead()) {
+      this.gameOver();
+    }
+  }
+
+  gameOver() {
+    console.log("Game Over!"); // Call the die method of the character object if the character is dead
+  }
+
+  checkEnemyIsDead() {
+    this.level.enemies.forEach((enemy) => {
+      // For each enemy in the enemies array of the level object
+      if (enemy.isDead()) {
+        enemy.speed = 0; // Set the speed of the enemy to 0 if the enemy is dead
+        setTimeout(() => {
+          this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
+        }, 1000);
+        // If the enemy is dead
+        return true; // Return true
+      }
+    });
+  }
+
+  removeDeadEnemies() {
+    this.level.enemies.forEach((enemy) => {
+      // For each enemy in the enemies array of the level object
+      if (enemy.isDead()) {
+        // If the enemy is dead
+        this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1); // Remove the enemy from the enemies array
+      }
+    });
   }
 
   // Method to check for throwable objects in the game world

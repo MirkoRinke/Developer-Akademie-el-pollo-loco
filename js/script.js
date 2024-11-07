@@ -1,13 +1,29 @@
+let intervalId = []; // variable to store the interval ID
+
 // Load World and Keyboard classes from the models folder
 import { World } from "./models/world.class.js";
 import { Keyboard } from "./models/keyboard.class.js";
 
-// export let canvasWidth = 720;
-// export let canvasHeight = 480;
-
 let canvas; // canvas element
 let world; // world object
 let keyboard = new Keyboard(); // keyboard object to handle key presses
+
+// Function to set a stoppable interval
+export function setStoppableInterval(callback, delay) {
+  setTimeout(() => {
+    // set a timeout to delay the execution of the interval by 0 milliseconds to allow the game to start
+    let Id = setInterval(callback, delay);
+    intervalId.push(Id);
+  }, 0);
+}
+
+// Function to stop the game by clearing all intervals
+function stopGame() {
+  intervalId.forEach((Id) => {
+    clearInterval(Id);
+  });
+}
+window.stopGame = stopGame; //! make the stopGame function available globally temporarily
 
 // Initialize the world object
 async function init() {

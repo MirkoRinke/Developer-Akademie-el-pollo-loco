@@ -5,7 +5,7 @@ import { StatusBar } from "./status-bar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval, stopGame } from "../script.js";
 
 // World class is used to create the game world
 export class World {
@@ -50,6 +50,9 @@ export class World {
 
   gameOver() {
     console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
+    setTimeout(() => {
+      stopGame(); //! Call the stopGame function to stop the game
+    }, 2000);
   }
 
   checkEnemyIsDead() {

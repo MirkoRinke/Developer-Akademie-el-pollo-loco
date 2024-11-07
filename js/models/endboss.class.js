@@ -24,9 +24,12 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
   ];
 
+  IMAGES_DEAD = ["../../assets/images/enemies/chicken_boss/5_dead/G24.png", "../../assets/images/enemies/chicken_boss/5_dead/G25.png", "../../assets/images/enemies/chicken_boss/5_dead/G26.png"];
+
   constructor() {
     super().loadImage(this.IMAGES_WALK[0]); // load the first image of the end boss walk animation
     this.loadImages(this.IMAGES_WALK); // load all images of the end boss walk animation
+    this.loadImages(this.IMAGES_DEAD); // load all images of the end boss dying animation
     this.x = 2600; // set the x position of the end boss
     this.animate(); // animate the end boss
   }
@@ -39,7 +42,10 @@ export class Endboss extends MovableObject {
   // Animate the end boss by playing the end boss walk animation repeatedly at a certain interval
   endbossAnimation() {
     setStoppableInterval(() => {
-      this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
+        this.y = 150; // set the y position of the end boss to 0
+      } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
     }, 200);
   }
 }

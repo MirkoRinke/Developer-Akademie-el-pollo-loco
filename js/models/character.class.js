@@ -4,6 +4,8 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+import { resetAlert } from "./endboss.class.js";
+
 // Character class is a subclass of MovableObject
 // It is used to create the main character of the game
 export class Character extends MovableObject {
@@ -55,8 +57,17 @@ export class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
     this.loadImages(this.IMAGES_HURT); // load the images for the being hurt animation
     this.loadImages(this.IMAGES_REMOVE_CHARACTER); // load the images for the removing animation
+    this.checkCharacterPosition(); // check the character position
     this.applyGravity(); // apply gravity to the character
     this.animate(); // animate the character
+  }
+
+  checkCharacterPosition() {
+    setStoppableInterval(() => {
+      if (this.x > 2000) {
+        resetAlert();
+      }
+    }, 200);
   }
 
   // Animate the character by managing the character movement and character animation

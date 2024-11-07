@@ -66,7 +66,7 @@ export class World {
         enemy.speed = 0; // Set the speed of the enemy to 0 if the enemy is dead
         setTimeout(() => {
           this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
-        }, 1000);
+        }, 2000);
         // If the enemy is dead
         return true; // Return true
       }

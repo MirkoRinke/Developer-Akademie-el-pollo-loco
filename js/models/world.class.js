@@ -8,6 +8,9 @@ import { ThrowableObject } from "./throwable-object.class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval, stopGame } from "../script.js";
 
+// import the checkCharacterCollision function from the endboss.class.js file
+import { checkCharacterCollision } from "./endboss.class.js";
+
 // World class is used to create the game world
 export class World {
   character = new Character(); // Create a new character object
@@ -46,12 +49,14 @@ export class World {
     }, 200);
   }
 
+  // Method to check if the character is dead
   checkCharacterIsDead() {
     if (this.character.isDead()) {
       this.gameOver();
     }
   }
 
+  // Method to stop the game when the character is dead
   gameOver() {
     console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
     setTimeout(() => {
@@ -60,10 +65,12 @@ export class World {
     }, 2000);
   }
 
+  // Method to remove all enemies from the game world
   removeAllEnemies() {
     this.level.enemies = []; //! Set the enemies array of the level object to an empty array
   }
 
+  // Method to check if the enemy is dead
   checkEnemyIsDead() {
     this.level.enemies.forEach((enemy) => {
       // For each enemy in the enemies array of the level object
@@ -79,6 +86,7 @@ export class World {
     });
   }
 
+  // Method to remove dead enemies from the game world
   removeDeadEnemies() {
     this.level.enemies.forEach((enemy) => {
       // For each enemy in the enemies array of the level object
@@ -115,14 +123,14 @@ export class World {
           this.character.hit(); // Call the hit method of the character object
         }
         this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
-        return true; // Return true
+        checkCharacterCollision(true, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
+        return; // Return
       }
       this.throwableObjects.forEach((throwableObject) => {
         // For each throwable object in the throwableObjects array
         if (throwableObject.isColliding(enemy)) {
           // If the throwable object is colliding with the enemy
           enemy.hit(); // Call the hit method of the enemy object
-          return true; // Return true
         }
       });
       this.level.salsaBottles.forEach((salsaBottle) => {
@@ -132,11 +140,10 @@ export class World {
           this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
           this.currentBottles++; // Increase the current number of bottles by 1
           this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
-          return true; // Return true
         }
       });
+      checkCharacterCollision(false, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
     });
-    return false; // Return false
   }
 
   // Method to draw the game world on the canvas

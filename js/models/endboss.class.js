@@ -81,7 +81,7 @@ export class Endboss extends MovableObject {
   // Manage the end boss movement by moving the end boss to the left
   manageEndbossMovement() {
     setStoppableInterval(() => {
-      if (firstContact) this.x -= this.speed * 10;
+      if (firstContact) this.x -= this.speed * 5;
     }, 1000 / 60);
   }
 

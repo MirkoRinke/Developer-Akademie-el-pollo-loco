@@ -8,47 +8,54 @@ import { Cloud } from "../models/cloud.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
 
+// Create X Chicken and 4 ChickenSmall objects
+const chickens = [];
+for (let i = 0; i < 4; i++) {
+  chickens.push(new Chicken());
+}
+
+// Create X ChickenSmall objects
+const chickensSmall = [];
+for (let i = 0; i < 4; i++) {
+  chickensSmall.push(new ChickenSmall());
+}
+
+// Create X SalsaBottles objects
+const salsaBottles = [];
+for (let i = 0; i < 10; i++) {
+  salsaBottles.push(new SalsaBottles());
+}
+
+// Create X Coins objects
+const coins = [];
+for (let i = 0; i < 10; i++) {
+  coins.push(new Coins());
+}
+
+// Create X Cloud objects
+const clouds = [];
+for (let i = 0; i < 1; i++) {
+  clouds.push(new Cloud());
+}
+
+// Create BackgroundObjects
+const backgroundLayers = [
+  "../../assets/images/background/layers/air.png",
+  "../../assets/images/background/layers/3_third_layer/2.png",
+  "../../assets/images/background/layers/2_second_layer/2.png",
+  "../../assets/images/background/layers/1_first_layer/2.png",
+  "../../assets/images/background/layers/3_third_layer/1.png",
+  "../../assets/images/background/layers/2_second_layer/1.png",
+  "../../assets/images/background/layers/1_first_layer/1.png",
+];
+
+// Create X BackgroundObjects objects
+const backgroundObjects = [];
+for (let i = -1; i <= 4; i++) {
+  backgroundLayers.forEach((layer) => {
+    backgroundObjects.push(new BackgroundObjects(layer, 719 * i));
+  });
+}
+
 // Create a new Level with Chicken, Endboss, Cloud and BackgroundObjects
-export const level1 = new Level(
-  [new Chicken(), new Chicken(), new Chicken(), new ChickenSmall(), new ChickenSmall(), new ChickenSmall(), new Endboss()],
-  [
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-    new SalsaBottles(),
-  ],
-  [new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins()],
-  [new Cloud()],
-  [
-    new BackgroundObjects("../../assets/images/background/layers/air.png", -719),
-    new BackgroundObjects("../../assets/images/background/layers/3_third_layer/2.png", -719),
-    new BackgroundObjects("../../assets/images/background/layers/2_second_layer/2.png", -719),
-    new BackgroundObjects("../../assets/images/background/layers/1_first_layer/2.png", -719),
-
-    new BackgroundObjects("../../assets/images/background/layers/air.png", 0),
-    new BackgroundObjects("../../assets/images/background/layers/3_third_layer/1.png", 0),
-    new BackgroundObjects("../../assets/images/background/layers/2_second_layer/1.png", 0),
-    new BackgroundObjects("../../assets/images/background/layers/1_first_layer/1.png", 0),
-
-    new BackgroundObjects("../../assets/images/background/layers/air.png", 719),
-    new BackgroundObjects("../../assets/images/background/layers/3_third_layer/2.png", 719),
-    new BackgroundObjects("../../assets/images/background/layers/2_second_layer/2.png", 719),
-    new BackgroundObjects("../../assets/images/background/layers/1_first_layer/2.png", 719),
-
-    new BackgroundObjects("../../assets/images/background/layers/air.png", 719 * 2),
-    new BackgroundObjects("../../assets/images/background/layers/3_third_layer/1.png", 719 * 2),
-    new BackgroundObjects("../../assets/images/background/layers/2_second_layer/1.png", 719 * 2),
-    new BackgroundObjects("../../assets/images/background/layers/1_first_layer/1.png", 719 * 2),
-
-    new BackgroundObjects("../../assets/images/background/layers/air.png", 719 * 3),
-    new BackgroundObjects("../../assets/images/background/layers/3_third_layer/2.png", 719 * 3),
-    new BackgroundObjects("../../assets/images/background/layers/2_second_layer/2.png", 719 * 3),
-    new BackgroundObjects("../../assets/images/background/layers/1_first_layer/2.png", 719 * 3),
-  ]
-);
+export const level1 = new Level([...chickens, ...chickensSmall, new Endboss()], [...salsaBottles], [...coins], [...clouds], backgroundObjects);

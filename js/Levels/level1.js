@@ -7,34 +7,40 @@ import { Coins } from "../models/coins.class.js";
 import { Cloud } from "../models/cloud.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
+let currentChickens = 4;
+let currentChickensSmall = 4;
+let currentSalsaBottles = 10;
+let currentCoins = 10;
+let currentClouds = 1;
+let currentBackgroundObjects = 4;
 
 // Create X Chicken and 4 ChickenSmall objects
 const chickens = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < currentChickens; i++) {
   chickens.push(new Chicken());
 }
 
 // Create X ChickenSmall objects
 const chickensSmall = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < currentChickensSmall; i++) {
   chickensSmall.push(new ChickenSmall());
 }
 
 // Create X SalsaBottles objects
 const salsaBottles = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < currentSalsaBottles; i++) {
   salsaBottles.push(new SalsaBottles());
 }
 
 // Create X Coins objects
 const coins = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < currentCoins; i++) {
   coins.push(new Coins());
 }
 
 // Create X Cloud objects
 const clouds = [];
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < currentClouds; i++) {
   clouds.push(new Cloud());
 }
 
@@ -51,7 +57,7 @@ const backgroundLayers = [
 
 // Create X BackgroundObjects objects
 const backgroundObjects = [];
-for (let i = -1; i <= 4; i++) {
+for (let i = -1; i <= currentBackgroundObjects; i++) {
   backgroundLayers.forEach((layer) => {
     backgroundObjects.push(new BackgroundObjects(layer, 719 * i));
   });

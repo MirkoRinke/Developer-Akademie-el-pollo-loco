@@ -9,7 +9,18 @@ import { Level } from "../models/level.class.js";
 // Create a new Level with Chicken, Endboss, Cloud and BackgroundObjects
 export const level1 = new Level(
   [new Chicken(), new Chicken(), new Chicken(), new Endboss()],
-  [new SalsaBottles(), new SalsaBottles(), new SalsaBottles(), new SalsaBottles(), new SalsaBottles()],
+  [
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+    new SalsaBottles(),
+  ],
   [new Cloud()],
   [
     new BackgroundObjects("../../assets/images/background/layers/air.png", -719),

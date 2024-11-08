@@ -27,6 +27,7 @@ export class World {
   salsaBottles = []; // Array to store salsa bottles
   coins = []; // Array to store coins
   currentBottles = 0; // Current number of salsa bottles
+  currentCoins = 0; // Current number of coins
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // Get the context of the canvas
@@ -148,11 +149,12 @@ export class World {
       this.level.coins.forEach((coin) => {
         // For each coin in the coins array of the level object
         // Check if the character is colliding with the coin
-        if (this.character.isColliding(coin)) {
+        if (this.character.isColliding(coin) && this.currentCoins < 10) {
           this.level.coins.splice(this.level.coins.indexOf(coin), 1); // Remove the coin from the coins array of the level object
+          this.currentCoins++; // Increase the current number of coins by 1
+          this.coinsBar.setPercentage(this.currentCoins * 10); // Set the percentage of the coins bar
         }
       });
-
       checkCharacterCollision(false, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
     });
   }

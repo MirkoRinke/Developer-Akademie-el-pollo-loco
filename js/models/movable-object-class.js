@@ -44,7 +44,9 @@ export class MovableObject extends DrawableObject {
   isColliding(movableObject) {
     let buffer = 0; // Buffer for collision detection
     if (movableObject.constructor.name === "Chicken") buffer = 5; // Set buffer for Chicken object
+    if (movableObject.constructor.name === "ChickenSmall") buffer = 0; // Set buffer for Chicken object
     if (movableObject.constructor.name === "SalsaBottles") buffer = -30; // Set buffer for Character object
+    if (movableObject.constructor.name === "Character") buffer = -50; // Set buffer for Character object
     return (
       this.x + this.width + buffer > movableObject.x - buffer &&
       this.y + this.height + buffer > movableObject.y - buffer &&
@@ -54,10 +56,13 @@ export class MovableObject extends DrawableObject {
   }
 
   // The hit method will be used to reduce the energy of the object
-  hit(multiplier = 1) {
+  hit(multiplier = 1, fromAbove = false) {
     const currentTime = new Date().getTime(); // Get the current time
     if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
-    this.energy -= 2 * multiplier; // Reduce the energy of the object by 2
+    if (this.energy <= 0) return; // If the object has no energy, return
+    if (!fromAbove) {
+      this.energy -= 2 * multiplier; // Reduce the energy of the object by 2
+    }
     if (this.energy <= 0) {
       // If the energy of the object is less than or equal to 0
       this.energy = 0; // Set the energy of the object to 0

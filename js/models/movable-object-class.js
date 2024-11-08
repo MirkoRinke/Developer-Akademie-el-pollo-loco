@@ -43,16 +43,12 @@ export class MovableObject extends DrawableObject {
   // The isColliding method will be used to check if the object is colliding with another object
   isColliding(movableObject) {
     let buffer = 0; // Buffer for collision detection
-    if (movableObject.constructor.name === "Chicken") buffer = 5; // Set buffer for Chicken object
-    if (movableObject.constructor.name === "ChickenSmall") buffer = 0; // Set buffer for Chicken object
+    if (movableObject.constructor.name === "Chicken") buffer = -25; // Set buffer for Chicken object
+    if (movableObject.constructor.name === "ChickenSmall") buffer = -12; // Set buffer for Chicken object
     if (movableObject.constructor.name === "SalsaBottles") buffer = -30; // Set buffer for Character object
-    if (movableObject.constructor.name === "Character") buffer = -50; // Set buffer for Character object
-    return (
-      this.x + this.width + buffer > movableObject.x - buffer &&
-      this.y + this.height + buffer > movableObject.y - buffer &&
-      this.x - buffer < movableObject.x + movableObject.width + buffer &&
-      this.y - buffer < movableObject.y + movableObject.height + buffer
-    );
+    const collisionX = this.x + this.width + buffer > movableObject.x - buffer && this.x - buffer < movableObject.x + movableObject.width + buffer;
+    const collisionY = this.y + this.height + buffer > movableObject.y - buffer && this.y - buffer < movableObject.y + movableObject.height + buffer;
+    return collisionX && collisionY;
   }
 
   // The hit method will be used to reduce the energy of the object

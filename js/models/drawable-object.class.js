@@ -31,7 +31,7 @@ export class DrawableObject {
       // Check if the object is a character or a chicken
       ctx.beginPath(); // Start drawing
       ctx.lineWidth = "5"; // Set the line width
-      ctx.strokeStyle = "blue"; // Set the line color
+      ctx.strokeStyle = "transparent"; // Set the line color
       ctx.rect(this.x, this.y, this.width, this.height); // Draw the rectangle around the object
       ctx.stroke(); // Finish drawing
     }

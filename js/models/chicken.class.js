@@ -7,6 +7,7 @@ import { setStoppableInterval } from "../script.js";
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
+const canvasWidth = canvas.width;
 
 // Chicken class is a subclass of MovableObject
 // It is used to create the chicken enemy in the game
@@ -26,7 +27,7 @@ export class Chicken extends MovableObject {
     super().loadImage("../../assets/images/enemies/chicken/chicken_normal/1_walk/1_w.png"); // load the image of the chicken using the loadImage method from the MovableObject class
     this.loadImages(this.IMAGES_WALK); // load the images for the walking animation
     this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
-    this.x = 500 + Math.random() * 1000; // set the x position of the chicken to a random value
+    this.x = 500 + Math.random() * (canvasWidth * 2.5); // set the x position of the chicken to a random value
     this.speed = 0.15 + Math.random() * 0.33; // set the speed of the chicken to a random value
     this.animate(); // animate the chicken
   }

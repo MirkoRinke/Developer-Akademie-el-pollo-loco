@@ -23,7 +23,7 @@ export class ChickenSmall extends MovableObject {
     this.loadImages(this.IMAGES_WALK); // load the images for the walking animation
     this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
     this.x = 500 + Math.random() * 1000; // set the x position of the chicken to a random value
-    this.speed = 0.15 + Math.random() * 0.33; // set the speed of the chicken to a random value
+    this.speed = 0.3 + Math.random() * 0.33; // set the speed of the chicken to a random value
     this.animate(); // animate the chicken
   }
 

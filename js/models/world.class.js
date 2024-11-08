@@ -55,8 +55,13 @@ export class World {
   gameOver() {
     console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
     setTimeout(() => {
-      stopGame(); //! Call the stopGame function to stop the game
+      // stopGame(); //! Call the stopGame function to stop the game
+      this.removeAllEnemies(); //! Call the removeAllEnemies function to remove all enemies from the game
     }, 2000);
+  }
+
+  removeAllEnemies() {
+    this.level.enemies = []; //! Set the enemies array of the level object to an empty array
   }
 
   checkEnemyIsDead() {
@@ -67,7 +72,8 @@ export class World {
         setTimeout(() => {
           this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
         }, 2000);
-        // If the enemy is dead
+        // If the enemy is an endboss, call the gameOver method
+        if (enemy.constructor.name === "Endboss") this.gameOver();
         return true; // Return true
       }
     });
@@ -103,7 +109,11 @@ export class World {
       // For each enemy in the enemies array of the level object
       if (this.character.isColliding(enemy)) {
         // If the character is colliding with the enemy
-        this.character.hit(); // Call the hit method of the character object
+        if (enemy.constructor.name === "Endboss") {
+          this.character.hit(4); // Call the hit method of the character object with a multiplier of 4
+        } else {
+          this.character.hit(); // Call the hit method of the character object
+        }
         this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
       }
       this.throwableObjects.forEach((throwableObject) => {
@@ -116,7 +126,7 @@ export class World {
       this.level.salsaBottles.forEach((salsaBottle) => {
         // For each salsa bottle in the salsa bottles array of the level object
         // Check if the character is colliding with the salsa bottle
-        if (this.character.isColliding(salsaBottle)) {
+        if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
           this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
           this.currentBottles++; // Increase the current number of bottles by 1
           this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar

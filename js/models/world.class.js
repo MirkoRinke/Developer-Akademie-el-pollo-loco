@@ -143,6 +143,14 @@ export class World {
           this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
         }
       });
+      this.level.coins.forEach((coin) => {
+        // For each coin in the coins array of the level object
+        // Check if the character is colliding with the coin
+        if (this.character.isColliding(coin)) {
+          this.level.coins.splice(this.level.coins.indexOf(coin), 1); // Remove the coin from the coins array of the level object
+        }
+      });
+
       checkCharacterCollision(false, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
     });
   }

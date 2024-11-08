@@ -115,12 +115,14 @@ export class World {
           this.character.hit(); // Call the hit method of the character object
         }
         this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
+        return true; // Return true
       }
       this.throwableObjects.forEach((throwableObject) => {
         // For each throwable object in the throwableObjects array
         if (throwableObject.isColliding(enemy)) {
           // If the throwable object is colliding with the enemy
           enemy.hit(); // Call the hit method of the enemy object
+          return true; // Return true
         }
       });
       this.level.salsaBottles.forEach((salsaBottle) => {
@@ -130,9 +132,11 @@ export class World {
           this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
           this.currentBottles++; // Increase the current number of bottles by 1
           this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
+          return true; // Return true
         }
       });
     });
+    return false; // Return false
   }
 
   // Method to draw the game world on the canvas

@@ -3,6 +3,7 @@ import { Character } from "./character.class.js";
 import { level1 } from "../Levels/level1.js";
 import { StatusBarHealth } from "./status-bar-health.class.js";
 import { SalsaBottlesBar } from "./salsa-bottles-bar.class.js";
+import { CoinsBar } from "./coins-bar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
@@ -21,6 +22,7 @@ export class World {
   camera_x = 0; // Camera x-coordinate
   statusBarHealth = new StatusBarHealth(); // Create a new status bar object.
   salsaBottlesBar = new SalsaBottlesBar(); // Create a new salsa bottles bar object
+  coinsBar = new CoinsBar(); // Create a new coins bar object
   throwableObjects = []; // Array to store throwable objects
   salsaBottles = []; // Array to store salsa bottles
   coins = []; // Array to store coins
@@ -164,6 +166,7 @@ export class World {
     this.ctx.translate(-this.camera_x, 0); // Translate the context of the canvas to the negative of the camera x-coordinate
     this.addToMap(this.statusBarHealth); // Add the status bar to the map
     this.addToMap(this.salsaBottlesBar); // Add the salsa bottles bar to the map
+    this.addToMap(this.coinsBar); // Add the coins bar to the map
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
 
     this.addObjectsToMap(this.level.salsaBottles); // Add the salsa bottles to the map

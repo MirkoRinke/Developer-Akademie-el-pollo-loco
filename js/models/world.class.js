@@ -50,7 +50,7 @@ export class World {
       this.checkThrowableObjects(); // Call the checkThrowableObjects method to check for throwable objects
       this.checkCharacterIsDead(); // Call the checkCharacterIsDead method to check if the character is dead
       this.checkEnemyIsDead(); // Call the checkEnemyIsDead method to check if the enemy is dead
-    }, 200);
+    }, 1); // Run the game loops every 1 millisecond
   }
 
   // Method to check if the character is dead
@@ -119,9 +119,13 @@ export class World {
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       // For each enemy in the enemies array of the level object
-      if (this.character.isColliding(enemy)) {
-        // If the character is colliding with the enemy
-        if (enemy.constructor.name === "Endboss") {
+      if (this.character.isColliding(enemy) && enemy.energy > 0) {
+        // If the character is colliding with the enemy and the enemy energy is greater than 0
+        if (this.character.isAbove(enemy)) {
+          // Check if the character is above the enemy
+          enemy.hit(4); // Call the hit method of the enemy object
+          // this.character.jump(); // Make the character jump after hitting the enemy
+        } else if (enemy.constructor.name === "Endboss") {
           this.character.hit(4); // Call the hit method of the character object with a multiplier of 4
         } else {
           this.character.hit(); // Call the hit method of the character object

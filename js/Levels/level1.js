@@ -47,12 +47,9 @@ for (let i = 0; i < currentClouds; i++) {
 // Create BackgroundObjects
 const backgroundLayers = [
   "../../assets/images/background/layers/air.png",
-  "../../assets/images/background/layers/3_third_layer/2.png",
-  "../../assets/images/background/layers/2_second_layer/2.png",
-  "../../assets/images/background/layers/1_first_layer/2.png",
-  "../../assets/images/background/layers/3_third_layer/1.png",
-  "../../assets/images/background/layers/2_second_layer/1.png",
-  "../../assets/images/background/layers/1_first_layer/1.png",
+  "../../assets/images/background/layers/3_third_layer/full.png",
+  "../../assets/images/background/layers/2_second_layer/full.png",
+  "../../assets/images/background/layers/1_first_layer/full.png",
 ];
 
 // Create X BackgroundObjects objects

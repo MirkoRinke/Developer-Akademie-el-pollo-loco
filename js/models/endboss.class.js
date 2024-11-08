@@ -10,11 +10,20 @@ export let startAlert = 0; // set the initial value of the startAlert variable t
 // Create a variable to store the alertInterval value for the end boss
 let firstContact = false; // set the initial value of the alertInterval variable to true
 
+// Create a variable to store the isColliding value for the end boss
+let isColliding = false; // set the initial value of the isColliding variable to false
+
+// Function to reset the alert for the end boss
 export function resetAlert() {
   if (!firstContact) {
     startAlert = 0; // reset the value of the startAlert variable to 0
   }
   firstContact = true; // set the alertInterval variable to false
+}
+
+// Function to check character collision with the end boss
+export function checkCharacterCollision(colliding, enemy) {
+  if (enemy === "Endboss") isColliding = colliding;
 }
 
 // Create Endboss class that extends MovableObject class
@@ -92,12 +101,14 @@ export class Endboss extends MovableObject {
     setStoppableInterval(() => {
       if (startAlert <= 10) {
         this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
-        startAlert++;
+        startAlert++; // increment the startAlert variable by 1
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
         this.y = 150; // set the y position of the end boss to 0
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT); // play the hurt animation if the chicken is hurt
+      } else if (isColliding) {
+        this.playAnimation(this.IMAGES_ATTACK); // play the attack animation if the chicken is attacking
       } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
     }, 200);
   }

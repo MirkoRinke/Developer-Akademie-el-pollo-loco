@@ -26,13 +26,6 @@ export class Endboss extends MovableObject {
   energy = 10; // energy of the chicken
 
   // Array of images for the end boss walk animation
-  IMAGES_WALK = [
-    "../../assets/images/enemies/chicken_boss/1_walk/G1.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G2.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G3.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G4.png",
-  ];
-  // Array of images for the end boss walk animation
   IMAGES_ALERT = [
     "../../assets/images/enemies/chicken_boss/2_alert/G5.png",
     "../../assets/images/enemies/chicken_boss/2_alert/G6.png",
@@ -43,6 +36,15 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/2_alert/G11.png",
     "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
   ];
+
+  // Array of images for the end boss walk animation
+  IMAGES_WALK = [
+    "../../assets/images/enemies/chicken_boss/1_walk/G1.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G2.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G3.png",
+    "../../assets/images/enemies/chicken_boss/1_walk/G4.png",
+  ];
+
   // Array of images for the end boss attack animation
   IMAGES_ATTACK = [
     "../../assets/images/enemies/chicken_boss/3_attack/G13.png",

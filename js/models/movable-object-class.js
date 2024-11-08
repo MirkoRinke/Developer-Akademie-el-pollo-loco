@@ -26,8 +26,8 @@ export class MovableObject extends DrawableObject {
   }
 
   // The isInAir method will be used to check if the object is in the air
-  isInAir() {
-    return this.isAboveGround() || this.speedY > 0;
+  isInAir(currentY = 0) {
+    return this.isAboveGround() || this.speedY > currentY;
   }
 
   // The isAboveGround method will be used to check if the object is above the ground

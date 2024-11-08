@@ -79,9 +79,11 @@ export class Character extends MovableObject {
       this.y + this.height <= enemy.y + enemy.height && // check if the y position of the character is less than the y position of the enemy
       this.y + this.height > enemy.y && // check if the y position of the character is greater than the y position of the enemy
       this.x + this.width > enemy.x && // check if the x position of the character is greater than the x position of the enemy
-      this.x < enemy.x + enemy.width // check if the x position of the character is less than the x position of the enemy
+      this.x < enemy.x + enemy.width && // check if the x position of the character is less than the x position of the enemy
+      this.speedY < 0 // check if the character is moving downwards
     );
   }
+
   // Animate the character by managing the character movement and character animation
   animate() {
     this.manageCharacterMovement();

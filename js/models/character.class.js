@@ -62,6 +62,7 @@ export class Character extends MovableObject {
     this.animate(); // animate the character
   }
 
+  // Check the character position and reset the alert if the character is out of the screen
   checkCharacterPosition() {
     setStoppableInterval(() => {
       if (this.x > 2000) {
@@ -70,6 +71,17 @@ export class Character extends MovableObject {
     }, 200);
   }
 
+  // Check if the character is above the ground by checking the y position of the character is less than the ground level
+  isAbove(enemy) {
+    if (enemy.constructor.name === "Endboss") return;
+    if (enemy.constructor.name === "ChickenSmall" && this.playerMoving()) return true;
+    return (
+      this.y + this.height <= enemy.y + enemy.height && // check if the y position of the character is less than the y position of the enemy
+      this.y + this.height > enemy.y && // check if the y position of the character is greater than the y position of the enemy
+      this.x + this.width > enemy.x && // check if the x position of the character is greater than the x position of the enemy
+      this.x < enemy.x + enemy.width // check if the x position of the character is less than the x position of the enemy
+    );
+  }
   // Animate the character by managing the character movement and character animation
   animate() {
     this.manageCharacterMovement();
@@ -103,11 +115,15 @@ export class Character extends MovableObject {
       } else if (this.isAboveGround()) {
         // check if the character is above the ground and play the jumping animation
         this.playAnimation(this.IMAGES_JUMP);
-      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      } else if (this.playerMoving()) {
         // check if the character is moving right or left and play the walking animation
         this.playAnimation(this.IMAGES_WALK);
       }
     }, 50);
+  }
+
+  playerMoving() {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
   // Check the character can move right or not by checking the RIGHT key is pressed and the x position of the character is less than the level_end_x

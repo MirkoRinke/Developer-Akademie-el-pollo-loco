@@ -4,12 +4,16 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+// Reference to the canvas element
+const canvas = document.getElementById("canvas");
+const canvasHeight = canvas.height;
+
 // Chicken class is a subclass of MovableObject
 // It is used to create the chicken enemy in the game
 export class Chicken extends MovableObject {
   height = 80; // height of the chicken
   width = 80; // width of the chicken
-  y = 360; // y position of the chicken
+  y = canvasHeight - this.height - 50; // y position of the chicken
   energy = 2; // energy of the chicken
   // Array of image paths for the chicken walking animation
   IMAGES_WALK = [

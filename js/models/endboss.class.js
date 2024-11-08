@@ -4,6 +4,11 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+// Reference to the canvas element
+const canvas = document.getElementById("canvas");
+const canvasHeight = canvas.height;
+const canvasWidth = canvas.width;
+
 // Create a variable to store the startAlert value
 let startAlert = 0; // set the initial value of the startAlert variable to
 
@@ -31,7 +36,7 @@ export function checkCharacterCollision(colliding, enemy) {
 export class Endboss extends MovableObject {
   height = 400; // height of the end boss
   width = 350; // width of the end boss
-  y = 50; // y position of the end boss
+  y = canvasHeight - this.height - 25; // y position of the end boss
   energy = 10; // energy of the chicken
 
   // Array of images for the end boss walk animation
@@ -79,7 +84,7 @@ export class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK); // load all images of the end boss attack animation
     this.loadImages(this.IMAGES_HURT); // load all images of the end boss hurt animation
     this.loadImages(this.IMAGES_DEAD); // load all images of the end boss dying animation
-    this.x = 2600; // set the x position of the end boss
+    this.x = canvasWidth * 2.5; // set the x position of the end boss
     this.animate(); // animate the end boss
   }
 

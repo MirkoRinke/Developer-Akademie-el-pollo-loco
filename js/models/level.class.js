@@ -1,3 +1,8 @@
+// Reference to the canvas element
+const canvas = document.getElementById("canvas");
+const canvasHeight = canvas.height;
+const canvasWidth = canvas.width;
+
 // The Level class is used to store all the information about a level, such as the enemies, clouds, and background objects.
 export class Level {
   enemies; // An array of enemy objects
@@ -5,7 +10,7 @@ export class Level {
   coins; // An array of coin objects
   clouds; // An array of cloud objects
   backgroundObjects; // An array of background objects
-  level_end_x = 2250; // The x-coordinate of the end of the level
+  level_end_x = canvasWidth * 2.5; // The x-coordinate of the end of the level
 
   constructor(enemies, salsaBottles, coins, clouds, backgroundObjects) {
     // The constructor takes in an array of enemies, clouds, and background objects

@@ -4,14 +4,20 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+// Load the resetAlert function from the endboss.class.js file
 import { resetAlert } from "./endboss.class.js";
+
+// Reference to the canvas element
+const canvas = document.getElementById("canvas");
+const canvasHeight = canvas.height;
+const canvasWidth = canvas.width;
 
 // Character class is a subclass of MovableObject
 // It is used to create the main character of the game
 export class Character extends MovableObject {
   height = 300; // height of the character
   width = 200; // width of the character
-  y = 150; // y position of the character
+  y = canvasHeight - this.height - 50; // y position of the character
   speed = 10; // speed of the character
   energy = 10000; //! energy of the character
   // Arrays of image paths for different animations of the character walking.
@@ -65,7 +71,7 @@ export class Character extends MovableObject {
   // Check the character position and reset the alert if the character is out of the screen
   checkCharacterPosition() {
     setStoppableInterval(() => {
-      if (this.x > 2000) {
+      if (this.x > canvasWidth * 1.8) {
         resetAlert();
       }
     }, 200);

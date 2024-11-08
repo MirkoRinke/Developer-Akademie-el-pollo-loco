@@ -7,6 +7,11 @@ import { Coins } from "../models/coins.class.js";
 import { Cloud } from "../models/cloud.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
+
+// Reference to the canvas element
+const canvas = document.getElementById("canvas");
+const canvasWidth = canvas.width;
+
 let currentChickens = 4;
 let currentChickensSmall = 4;
 let currentSalsaBottles = 10;
@@ -56,7 +61,7 @@ const backgroundLayers = [
 const backgroundObjects = [];
 for (let i = -1; i <= currentBackgroundObjects; i++) {
   backgroundLayers.forEach((layer) => {
-    backgroundObjects.push(new BackgroundObjects(layer, 719 * i));
+    backgroundObjects.push(new BackgroundObjects(layer, (canvasWidth - 1) * i));
   });
 }
 

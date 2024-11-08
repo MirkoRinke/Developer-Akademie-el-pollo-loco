@@ -5,7 +5,7 @@ import { MovableObject } from "./movable-object-class.js";
 import { setStoppableInterval } from "../script.js";
 
 // Create a variable to store the startAlert value
-export let startAlert = 0; // set the initial value of the startAlert variable to
+let startAlert = 0; // set the initial value of the startAlert variable to
 
 // Create a variable to store the alertInterval value for the end boss
 let firstContact = false; // set the initial value of the alertInterval variable to true

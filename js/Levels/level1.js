@@ -2,6 +2,7 @@
 import { Chicken } from "../models/chicken.class.js";
 import { Endboss } from "../models/endboss.class.js";
 import { SalsaBottles } from "../models/salsa_bottles.class.js";
+import { Coins } from "../models/coins.class.js";
 import { Cloud } from "../models/cloud.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
@@ -21,6 +22,7 @@ export const level1 = new Level(
     new SalsaBottles(),
     new SalsaBottles(),
   ],
+  [new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins()],
   [new Cloud()],
   [
     new BackgroundObjects("../../assets/images/background/layers/air.png", -719),

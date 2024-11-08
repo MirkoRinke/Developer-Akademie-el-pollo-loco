@@ -23,6 +23,7 @@ export class World {
   salsaBottlesBar = new SalsaBottlesBar(); // Create a new salsa bottles bar object
   throwableObjects = []; // Array to store throwable objects
   salsaBottles = []; // Array to store salsa bottles
+  coins = []; // Array to store coins
   currentBottles = 0; // Current number of salsa bottles
 
   constructor(canvas, keyboard) {
@@ -124,7 +125,7 @@ export class World {
         }
         this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
         checkCharacterCollision(true, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
-        return; // Return
+        return;
       }
       this.throwableObjects.forEach((throwableObject) => {
         // For each throwable object in the throwableObjects array
@@ -158,6 +159,7 @@ export class World {
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
 
     this.addObjectsToMap(this.level.salsaBottles); // Add the salsa bottles to the map
+    this.addObjectsToMap(this.level.coins); // Add the coins to the map
 
     this.addToMap(this.character); // Add the character to the map
     this.addObjectsToMap(this.level.enemies); // Add the enemies to the map

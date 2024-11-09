@@ -119,51 +119,68 @@ export class World {
 
   // Method to check for collisions in the game world
   checkCollisions() {
+    this.checkCollisionsEnemy(); // Call the checkCollisionsEnemy method to check for collisions with enemies
+    this.checkCollisionsThrowableObjects(); // Call the checkCollisionsThrowableObjects method to check for collisions with throwable objects
+    this.checkCollisionsSalasBottles(); // Call the checkCollisionsSalasBottles method to check for collisions with salsa bottles
+    this.checkCollisionsCoins(); // Call the checkCollisionsCoins method to check for collisions with coins
+  }
+
+  checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
-      // For each enemy in the enemies array of the level object
+      // Für jeden Feind im enemies-Array des Level-Objekts
       if (this.character.isColliding(enemy) && enemy.energy > 0) {
-        // If the character is colliding with the enemy and the enemy energy is greater than 0
+        // Wenn der Charakter mit dem Feind kollidiert und die Energie des Feindes größer als 0 ist
         if (this.character.isAbove(enemy)) {
-          // Check if the character is above the enemy
-          enemy.hit(4); // Call the hit method of the enemy object
-          // this.character.jump(); // Make the character jump after hitting the enemy
+          // Überprüfen, ob der Charakter über dem Feind ist
+          enemy.hit(4); // Rufe die hit-Methode des Feindobjekts auf
         } else if (enemy.constructor.name === "Endboss") {
-          this.character.hit(4); // Call the hit method of the character object with a multiplier of 4
+          this.character.hit(4); // Rufe die hit-Methode des Charakterobjekts mit einem Multiplikator von 4 auf
         } else {
-          this.character.hit(); // Call the hit method of the character object
+          this.character.hit(); // Rufe die hit-Methode des Charakterobjekts auf
         }
-        this.statusBarHealth.setPercentage(this.character.energy); // Set the character energy in the status bar
-        checkCharacterCollision(true, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
+        this.statusBarHealth.setPercentage(this.character.energy); // Setze die Energie des Charakters in der Statusleiste
+        checkCharacterCollision(true, enemy.constructor.name); // Rufe die checkCharacterCollision-Funktion mit dem Wert true auf
         return;
       }
-      this.throwableObjects.forEach((throwableObject) => {
-        // For each throwable object in the throwableObjects array
+      checkCharacterCollision(false, enemy.constructor.name); // Rufe die checkCharacterCollision-Funktion mit dem Wert false auf
+    });
+  }
+
+  checkCollisionsThrowableObjects() {
+    this.throwableObjects.forEach((throwableObject) => {
+      // Für jedes Wurfobjekt im throwableObjects-Array
+      this.level.enemies.forEach((enemy) => {
         if (throwableObject.isColliding(enemy)) {
           if (enemy.constructor.name === "Endboss") {
-            enemy.hit(1); // Call the hit method of the enemy object with a multiplier of 4
-            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10); // Set the end boss energy in the status bar
-          } else enemy.hit(); // Call the hit method of the enemy object
+            enemy.hit(1); // Rufe die hit-Methode des Feindobjekts mit einem Multiplikator von 1 auf
+            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10); // Setze die Energie des Endbosses in der Statusleiste
+          } else {
+            enemy.hit(); // Rufe die hit-Methode des Feindobjekts auf
+          }
         }
       });
-      this.level.salsaBottles.forEach((salsaBottle) => {
-        // For each salsa bottle in the salsa bottles array of the level object
-        // Check if the character is colliding with the salsa bottle
-        if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
-          this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Remove the salsa bottle from the salsa bottles array of the level object
-          this.currentBottles++; // Increase the current number of bottles by 1
-          this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
-        }
-      });
-      this.level.coins.forEach((coin) => {
-        // For each coin in the coins array of the level object
-        // Check if the character is colliding with the coin
-        if (this.character.isColliding(coin) && this.currentCoins < 10) {
-          this.level.coins.splice(this.level.coins.indexOf(coin), 1); // Remove the coin from the coins array of the level object
-          this.currentCoins++; // Increase the current number of coins by 1
-          this.coinsBar.setPercentage(this.currentCoins * 10); // Set the percentage of the coins bar
-        }
-      });
-      checkCharacterCollision(false, enemy.constructor.name); // Call the checkCharacterCollision function with the value true
+    });
+  }
+
+  checkCollisionsSalasBottles() {
+    this.level.salsaBottles.forEach((salsaBottle) => {
+      // Für jede Salsa-Flasche im salsaBottles-Array des Level-Objekts
+      if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
+        this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Entferne die Salsa-Flasche aus dem salsaBottles-Array des Level-Objekts
+        this.currentBottles++; // Erhöhe die aktuelle Anzahl der Flaschen um 1
+        this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Setze den Prozentsatz der Salsa-Flaschen-Leiste
+      }
+    });
+  }
+
+  checkCollisionsCoins() {
+    this.level.coins.forEach((coin) => {
+      // Für jede Münze im coins-Array des Level-Objekts
+      if (this.character.isColliding(coin) && this.currentCoins < 10) {
+        this.level.coins.splice(this.level.coins.indexOf(coin), 1); // Entferne die Münze aus dem coins-Array des Level-Objekts
+        this.currentCoins++; // Erhöhe die aktuelle Anzahl der Münzen um 1
+        this.coinsBar.setPercentage(this.currentCoins * 10); // Setze den Prozentsatz der Münzleiste
+      }
     });
   }
 

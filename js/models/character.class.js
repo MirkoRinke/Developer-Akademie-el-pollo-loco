@@ -103,7 +103,7 @@ export class Character extends MovableObject {
       if (this.canMoveRight()) this.characterMoveRight(); // check if the character can move right and move the character right
       if (this.canMoveLeft()) this.characterMoveLeft(); // check if the character can move left and move the character left
       if (this.canJump()) this.jump(); // check if the character can jump and make the character jump
-      this.world.camera_x = -this.x + 100; // set the camera x position to follow the character
+      if (this.x < canvasWidth * 1.8) this.world.camera_x = -this.x + 100; // set the camera x position to follow the character
     }, 1000 / 60);
   }
 

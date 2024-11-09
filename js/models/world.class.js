@@ -5,6 +5,7 @@ import { StatusBarHealth } from "./status-bar-health.class.js";
 import { SalsaBottlesBar } from "./salsa-bottles-bar.class.js";
 import { CoinsBar } from "./coins-bar.class.js";
 import { StatusBarEndbossHealth } from "./status-bar-endboss-health.class.js";
+import { VendingMachine } from "./vending-machine.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
@@ -25,6 +26,7 @@ export class World {
   salsaBottlesBar = new SalsaBottlesBar(); // Create a new salsa bottles bar object
   coinsBar = new CoinsBar(); // Create a new coins bar object
   statusBarEndbossHealth = new StatusBarEndbossHealth(); // Create a new status bar endboss health object
+  vendingMachine = new VendingMachine(); // Create a new vending machine object
   throwableObjects = []; // Array to store throwable objects
   salsaBottles = []; // Array to store salsa bottles
   coins = []; // Array to store coins
@@ -82,9 +84,9 @@ export class World {
       // For each enemy in the enemies array of the level object
       if (enemy.isDead()) {
         enemy.speed = 0; // Set the speed of the enemy to 0 if the enemy is dead
-        setTimeout(() => {
-          this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
-        }, 2000);
+        // setTimeout(() => {
+        //   this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
+        // }, 4000);
         // If the enemy is an endboss, call the gameOver method
         if (enemy.constructor.name === "Endboss") this.gameOver();
         return true; // Return true
@@ -189,6 +191,7 @@ export class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas
     this.ctx.translate(this.camera_x, 0); // Translate the context of the canvas to the camera x-coordinate
     this.addObjectsToMap(this.level.backgroundObjects); // Add the background objects to the map
+    this.addToMap(this.vendingMachine); // Add the vending machine to the map
 
     this.ctx.translate(-this.camera_x, 0); // Translate the context of the canvas to the negative of the camera x-coordinate
     this.addToMap(this.statusBarHealth); // Add the status bar to the map

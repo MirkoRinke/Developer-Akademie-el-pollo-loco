@@ -122,11 +122,7 @@ export class World {
   }
 
   playKillSounds() {
-    console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
-    setTimeout(() => {
-      this.rampageCount = 0; // Set the rampage count to 0
-    }, 2000);
-    console.log("Rampage count: ", this.rampageCount); // Log the rampage count to the console
+    setTimeout(() => (this.rampageCount = 0), 2000);
     this.rampage(); // Call the rampage method to play the rampage sound
     this.firstBlood(); // Call the firstBlood method to play the first blood sound
     this.doubleKill(); // Call the doubleKill method to play the double kill sound
@@ -134,7 +130,6 @@ export class World {
     this.killStreak(); // Call the killStreak method to play the kill streak sound
     this.dominating(); // Call the dominating method to play the dominating sound
     if (this.playOnlyOnce) this.playOnlyOnce = false; // Set the playOnlyOnce variable to false
-    console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
   }
 
   rampage() {

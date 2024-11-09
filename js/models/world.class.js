@@ -14,6 +14,9 @@ import { setStoppableInterval, stopGame } from "../script.js";
 // import the checkCharacterCollision function from the endboss.class.js file
 import { checkCharacterCollision } from "./endboss.class.js";
 
+// Load the sounds from the script.js file
+import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound } from "../sounds.js";
+
 // World class is used to create the game world
 export class World {
   character = new Character(); // Create a new character object
@@ -32,6 +35,10 @@ export class World {
   coins = []; // Array to store coins
   currentBottles = 0; // Current number of salsa bottles
   currentCoins = 0; // Current number of coins
+  deadEnemyCount = 0; // Number of dead enemies
+  rampageCount = 0; // Number of rampages
+
+  playOnlyOnce = true; // Set the playOnlyOnce variable to true
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // Get the context of the canvas
@@ -49,12 +56,10 @@ export class World {
 
   // Method to run the game loops for the game world
   run() {
-    setStoppableInterval(() => {
-      this.checkCollisions(); // Call the checkCollisions method to check for collisions
-      this.checkThrowableObjects(); // Call the checkThrowableObjects method to check for throwable objects
-      this.checkCharacterIsDead(); // Call the checkCharacterIsDead method to check if the character is dead
-      this.checkEnemyIsDead(); // Call the checkEnemyIsDead method to check if the enemy is dead
-    }, 1); // Run the game loops every 1 millisecond
+    setStoppableInterval(() => this.checkCollisions(), 1);
+    setStoppableInterval(() => this.checkThrowableObjects(), 1);
+    setStoppableInterval(() => this.checkCharacterIsDead(), 1);
+    setStoppableInterval(() => this.checkEnemyIsDead(), 250);
   }
 
   // Method to check if the character is dead
@@ -84,10 +89,8 @@ export class World {
       // For each enemy in the enemies array of the level object
       if (enemy.isDead()) {
         enemy.speed = 0; // Set the speed of the enemy to 0 if the enemy is dead
-        // setTimeout(() => {
-        //   this.removeDeadEnemies(); // Call the removeDeadEnemies method after 1 second
-        // }, 4000);
-        // If the enemy is an endboss, call the gameOver method
+        this.removeDeadEnemies(); // Call the removeDeadEnemies method to remove dead enemies from the game world
+        this.playKillSounds(); // Call the playKillSounds method to play the kill sounds
         if (enemy.constructor.name === "Endboss") this.gameOver();
         return true; // Return true
       }
@@ -98,11 +101,96 @@ export class World {
   removeDeadEnemies() {
     this.level.enemies.forEach((enemy) => {
       // For each enemy in the enemies array of the level object
-      if (enemy.isDead()) {
-        // If the enemy is dead
+      if (enemy.isDead() && enemy.constructor.name !== "Endboss") {
+        this.deadEnemyCount++; // Increase the dead enemy count by 1
+        this.rampageCount++; // Increase the rampage count by 1
+        // If the enemy is dead, remove the enemy from the enemies array of the level object
         this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1); // Remove the enemy from the enemies array
       }
     });
+  }
+
+  playKillSounds() {
+    console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
+    setTimeout(() => {
+      this.rampageCount = 0; // Set the rampage count to 0
+    }, 2000);
+    console.log("Rampage count: ", this.rampageCount); // Log the rampage count to the console
+    this.rampage(); // Call the rampage method to play the rampage sound
+    this.firstBlood(); // Call the firstBlood method to play the first blood sound
+    this.doubleKill(); // Call the doubleKill method to play the double kill sound
+    this.tripleKill(); // Call the tripleKill method to play the triple kill sound
+    this.killStreak(); // Call the killStreak method to play the kill streak sound
+    this.dominating(); // Call the dominating method to play the dominating sound
+    if (this.playOnlyOnce) this.playOnlyOnce = false; // Set the playOnlyOnce variable to false
+    console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
+  }
+
+  playSound(sound) {
+    if (sound.paused) {
+      sound.play();
+    }
+  }
+
+  rampage() {
+    if (this.rampageCount >= 6) {
+      this.stopKillSounds(); // Call the stopKillSounds method to stop the kill sounds
+      this.playSound(rampage_sound); // Play the rampage sound if the rampage count is less than 6
+    }
+  }
+
+  firstBlood() {
+    if (this.deadEnemyCount == 1 || this.playOnlyOnce) {
+      if (this.playOnlyOnce) {
+        // Play the first blood sound if the dead enemy count is 1
+        this.playSound(first_blood_sound);
+        this.stopKillSounds("first_blood");
+      } else {
+        this.playSound(chicken_death_sound);
+      }
+      this.deadEnemyCount = 0; // Set t-he dead enemy count to 0
+    }
+  }
+
+  doubleKill() {
+    if (this.deadEnemyCount == 2 && !this.playOnlyOnce) {
+      this.stopKillSounds("double_kill");
+      this.playSound(double_kill_sound); // Play the double kill sound if the dead enemy count is 2
+      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+    }
+  }
+
+  tripleKill() {
+    if (this.deadEnemyCount == 3 && !this.playOnlyOnce) {
+      this.stopKillSounds("triple_kill");
+      this.playSound(triple_kill_sound); // Play the triple kill sound if the dead enemy count is 3
+      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+    }
+  }
+
+  killStreak() {
+    if (this.deadEnemyCount >= 4 && this.deadEnemyCount < 6 && !this.playOnlyOnce) {
+      this.stopKillSounds("kill_streak");
+      this.playSound(kill_streak_sound);
+      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+    }
+  }
+
+  dominating() {
+    if (this.level.enemies.length == 1 && this.level.enemies[0].constructor.name === "Endboss" && this.level.enemies[0].energy > 0) {
+      this.stopKillSounds("dominating"); // Call the stopKillSounds method to stop the kill sounds
+      this.playSound(dominating_sound); // Play the dominating sound if the enemy is the endboss
+    }
+  }
+
+  stopKillSounds(sound = null) {
+    if (!first_blood_sound.paused && sound !== "first_blood") first_blood_sound.pause();
+    if (!double_kill_sound.paused && sound !== "double_kill") double_kill_sound.pause();
+    if (!triple_kill_sound.paused && sound !== "triple_kill") triple_kill_sound.pause();
+    if (!kill_streak_sound.paused && sound !== "kill_streak") kill_streak_sound.pause();
+    if (!rampage_sound.paused && sound !== "rampage") rampage_sound.pause();
+    if (!killshot_sound.paused && sound !== "killshot") killshot_sound.pause();
+    if (!dominating_sound.paused && sound !== "dominating") dominating_sound.pause();
   }
 
   // Method to check for throwable objects in the game world

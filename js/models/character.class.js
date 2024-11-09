@@ -2,10 +2,12 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval, userInteracted } from "../script.js";
 
 // Load the resetAlert function from the endboss.class.js file
 import { resetAlert } from "./endboss.class.js";
+
+import { hurt_sound, snoring_sound, walking_sound } from "../sounds.js";
 
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");
@@ -20,6 +22,35 @@ export class Character extends MovableObject {
   y = canvasHeight - this.height - 50; // y position of the character
   speed = 10; // speed of the character
   energy = 10000; //! energy of the character
+  idle_time = 0; // idle time of the character
+
+  // Arrays of image paths for different animations of the character idling.
+  IMAGES_IDLE = [
+    "../../assets/images/player/pepe/1_idle/idle/I-1.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-2.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-3.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-4.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-5.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-6.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-7.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-8.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-9.png",
+    "../../assets/images/player/pepe/1_idle/idle/I-10.png",
+  ];
+
+  IMAGES_IDLE_LONG = [
+    "../../assets/images/player/pepe/1_idle//long_idle/I-11.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-12.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-13.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-14.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-15.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-16.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-17.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-18.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-19.png",
+    "../../assets/images/player/pepe/1_idle//long_idle/I-20.png",
+  ];
+
   // Arrays of image paths for different animations of the character walking.
   IMAGES_WALK = [
     "../../assets/images/player/pepe/2_walk/W-21.png",
@@ -55,9 +86,10 @@ export class Character extends MovableObject {
   // Arrays of image paths for different animations of the character being hurt.
   IMAGES_HURT = ["../../assets/images/player/pepe/4_hurt/H-41.png", "../../assets/images/player/pepe/4_hurt/H-42.png", "../../assets/images/player/pepe/4_hurt/H-43.png"];
   world; // world object
-  walking_sound = new Audio("../../assets/sounds/sfx/running.mp3"); // sound for walking
   constructor() {
     super().loadImage("../../assets/images/player/pepe/2_walk/W-21.png"); // load the image of the character using the loadImage method from the MovableObject class
+    this.loadImages(this.IMAGES_IDLE); // load the images for the idle animation
+    this.loadImages(this.IMAGES_IDLE_LONG); // load the images for the long idle animation
     this.loadImages(this.IMAGES_WALK); // load the images for the walking animation
     this.loadImages(this.IMAGES_JUMP); // load the images for the jumping animation
     this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
@@ -99,7 +131,7 @@ export class Character extends MovableObject {
   // Manage the character movement by checking if the character can move right, left
   manageCharacterMovement() {
     setStoppableInterval(() => {
-      this.walking_sound.pause();
+      walking_sound.pause(); // pause the walking sound
       if (this.canMoveRight()) this.characterMoveRight(); // check if the character can move right and move the character right
       if (this.canMoveLeft()) this.characterMoveLeft(); // check if the character can move left and move the character left
       if (this.canJump()) this.jump(); // check if the character can jump and make the character jump
@@ -109,25 +141,67 @@ export class Character extends MovableObject {
 
   // Animate the character by playing different animations based on the character's state
   characterAnimation() {
-    let deadAnimation = false; // set deadAnimation to false
-    setStoppableInterval(() => {
-      if (deadAnimation) {
-        this.playAnimation(this.IMAGES_REMOVE_CHARACTER);
-      } else if (this.isDead() && !deadAnimation) {
-        // check if the character is dead and play the dying animation
-        this.playAnimation(this.IMAGES_DEAD);
-        deadAnimation = true;
-      } else if (this.isHurt()) {
-        // check if the character is hurt and play the being hurt animation
-        this.playAnimation(this.IMAGES_HURT);
-      } else if (this.isAboveGround()) {
-        // check if the character is above the ground and play the jumping animation
-        this.playAnimation(this.IMAGES_JUMP);
-      } else if (this.playerMoving()) {
-        // check if the character is moving right or left and play the walking animation
-        this.playAnimation(this.IMAGES_WALK);
+    setStoppableInterval(this.checkDeadAnimation.bind(this), 100);
+    setStoppableInterval(this.checkHurtAnimation.bind(this), 200);
+    setStoppableInterval(this.checkJumpAnimation.bind(this), 250);
+    setStoppableInterval(this.checkWalkAnimation.bind(this), 100);
+    setStoppableInterval(this.checkIdleAnimation.bind(this), 250);
+  }
+
+  checkDeadAnimation() {
+    if (this.deadAnimation) {
+      this.playAnimation(this.IMAGES_REMOVE_CHARACTER);
+    } else if (this.isDead() && !this.deadAnimation) {
+      // check if the character is dead and play the dying animation
+      this.playAnimation(this.IMAGES_DEAD);
+      this.deadAnimation = true;
+      snoring_sound.pause();
+    }
+  }
+
+  checkHurtAnimation() {
+    if (this.isHurt()) {
+      // check if the character is hurt and play the being hurt animation
+      this.playAnimation(this.IMAGES_HURT);
+      hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
+      if (userInteracted) hurt_sound.play(); //! set < 10000 temporarily
+      snoring_sound.pause();
+    }
+  }
+
+  checkJumpAnimation() {
+    if (this.isAboveGround()) {
+      // check if the character is above the ground and play the jumping animation
+      this.playAnimation(this.IMAGES_JUMP);
+      this.idle_time = new Date().getTime();
+      snoring_sound.pause();
+    }
+  }
+
+  checkWalkAnimation() {
+    if (this.playerMoving() && !this.isAboveGround()) {
+      // check if the character is moving right or left and play the walking animation
+      this.playAnimation(this.IMAGES_WALK);
+      this.idle_time = new Date().getTime();
+      snoring_sound.pause();
+    }
+  }
+
+  checkIdleAnimation() {
+    if (!this.isDead() && !this.isHurt() && !this.isAboveGround() && !this.playerMoving()) {
+      // play the default image of the character
+      this.playAnimation(this.IMAGES_IDLE);
+
+      if (new Date().getTime() - this.idle_time > 15000 && this.idle_time !== 0) {
+        this.playSnoringSound();
+        this.playAnimation(this.IMAGES_IDLE_LONG);
       }
-    }, 50);
+    }
+  }
+
+  playSnoringSound() {
+    snoring_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.1
+    snoring_sound.play();
   }
 
   playerMoving() {
@@ -143,7 +217,8 @@ export class Character extends MovableObject {
   characterMoveRight() {
     if (!this.isDead()) {
       this.moveRight();
-      this.walking_sound.play();
+      walking_sound.play();
+      snoring_sound.pause();
       this.otherDirection = false;
     }
   }
@@ -157,7 +232,8 @@ export class Character extends MovableObject {
   characterMoveLeft() {
     if (!this.isDead()) {
       this.moveLeft();
-      this.walking_sound.play();
+      walking_sound.play();
+      snoring_sound.pause();
       this.otherDirection = true;
     }
   }

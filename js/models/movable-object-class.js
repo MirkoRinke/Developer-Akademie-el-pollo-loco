@@ -4,6 +4,9 @@ import { DrawableObject } from "./drawable-object.class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+// import the jump_sound from the script.js file
+import { jump_sound } from "../sounds.js";
+
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
@@ -109,5 +112,7 @@ export class MovableObject extends DrawableObject {
   // The jump method will be used to make the object jump in the air
   jump() {
     this.speedY = 30;
+    jump_sound.volume = 0.1;
+    jump_sound.play();
   }
 }

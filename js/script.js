@@ -7,6 +7,7 @@ import { Keyboard } from "./models/keyboard.class.js";
 let canvas; // canvas element
 let world; // world object
 let keyboard = new Keyboard(); // keyboard object to handle key presses
+export let userInteracted = false;
 
 // Function to set a stoppable interval
 export function setStoppableInterval(callback, delay) {
@@ -16,6 +17,14 @@ export function setStoppableInterval(callback, delay) {
     intervalId.push(Id);
   }, 0);
 }
+
+document.addEventListener(
+  "click",
+  () => {
+    userInteracted = true;
+  },
+  { once: true }
+);
 
 // Function to stop the game by clearing all intervals
 export function stopGame() {

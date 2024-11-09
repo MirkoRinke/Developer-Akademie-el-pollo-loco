@@ -1,6 +1,6 @@
 // Load Chicken, Endboss, Cloud , BackgroundObjects and Level class from models folder
 import { Chicken } from "../models/chicken.class.js";
-import { ChickenSmall } from "../models/chicken_small.class.js";
+import { ChickenSmall } from "../models/chicken-small.class.js";
 import { Endboss } from "../models/endboss.class.js";
 import { SalsaBottles } from "../models/salsa_bottles.class.js";
 import { Coins } from "../models/coins.class.js";

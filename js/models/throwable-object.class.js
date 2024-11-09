@@ -4,6 +4,8 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+import { characterDirection } from "./character.class.js";
+
 // ThrowableObject class extends MovableObject class
 // ThrowableObject class is used to create throwable objects
 export class ThrowableObject extends MovableObject {
@@ -20,8 +22,10 @@ export class ThrowableObject extends MovableObject {
   throw() {
     this.speedY = 30; // Set the speed of the throwable object in the y-direction
     this.applyGravity(); // Call the applyGravity method to apply gravity to the throwable object
+    const throwDirection = characterDirection;
     setStoppableInterval(() => {
-      this.x += 10; // Move the throwable object in the x-direction
+      if (throwDirection === "right") this.x += 10; // Move the throwable object in the x-direction
+      if (throwDirection === "left") this.x -= 10; // Move the throwable object in the x-direction
     }, 25);
   }
 }

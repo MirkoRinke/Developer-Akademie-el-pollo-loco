@@ -14,6 +14,7 @@ const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 const canvasWidth = canvas.width;
 export let characterPostion = 0;
+export let characterDirection = "right";
 
 // Character class is a subclass of MovableObject
 // It is used to create the main character of the game
@@ -165,7 +166,7 @@ export class Character extends MovableObject {
     if (this.isHurt()) {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
-      hurt_sound.volume = 1; //! set the volume temporarily to 0 normal volume is 0.2
+      hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
       if (userInteracted) playSound(hurt_sound); //! set < 10000 temporarily
       snoring_sound.pause();
     }
@@ -221,6 +222,7 @@ export class Character extends MovableObject {
       playSound(walking_sound);
       snoring_sound.pause();
       this.otherDirection = false;
+      characterDirection = "right";
     }
   }
 
@@ -236,6 +238,7 @@ export class Character extends MovableObject {
       playSound(walking_sound);
       snoring_sound.pause();
       this.otherDirection = true;
+      characterDirection = "left";
     }
   }
 

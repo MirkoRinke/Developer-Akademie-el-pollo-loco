@@ -2,7 +2,7 @@
 import { DrawableObject } from "./drawable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval, playSound } from "../script.js";
 
 // import the jump_sound from the script.js file
 import { jump_sound } from "../sounds.js";
@@ -113,6 +113,6 @@ export class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 30;
     jump_sound.volume = 0.1;
-    jump_sound.play();
+    playSound(jump_sound);
   }
 }

@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval, userInteracted } from "../script.js";
+import { setStoppableInterval, userInteracted, playSound } from "../script.js";
 
 // Load the resetAlert function from the endboss.class.js file
 import { resetAlert } from "./endboss.class.js";
@@ -13,6 +13,7 @@ import { hurt_sound, snoring_sound, walking_sound } from "../sounds.js";
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 const canvasWidth = canvas.width;
+export let characterPostion = 0;
 
 // Character class is a subclass of MovableObject
 // It is used to create the main character of the game
@@ -103,6 +104,7 @@ export class Character extends MovableObject {
   // Check the character position and reset the alert if the character is out of the screen
   checkCharacterPosition() {
     setStoppableInterval(() => {
+      characterPostion = this.x;
       if (this.x > canvasWidth * 1.8) {
         resetAlert();
       }
@@ -163,8 +165,8 @@ export class Character extends MovableObject {
     if (this.isHurt()) {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
-      hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
-      if (userInteracted) hurt_sound.play(); //! set < 10000 temporarily
+      hurt_sound.volume = 1; //! set the volume temporarily to 0 normal volume is 0.2
+      if (userInteracted) playSound(hurt_sound); //! set < 10000 temporarily
       snoring_sound.pause();
     }
   }
@@ -191,7 +193,6 @@ export class Character extends MovableObject {
     if (!this.isDead() && !this.isHurt() && !this.isAboveGround() && !this.playerMoving()) {
       // play the default image of the character
       this.playAnimation(this.IMAGES_IDLE);
-
       if (new Date().getTime() - this.idle_time > 15000 && this.idle_time !== 0) {
         this.playSnoringSound();
         this.playAnimation(this.IMAGES_IDLE_LONG);
@@ -201,7 +202,7 @@ export class Character extends MovableObject {
 
   playSnoringSound() {
     snoring_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.1
-    snoring_sound.play();
+    playSound(snoring_sound);
   }
 
   playerMoving() {
@@ -217,7 +218,7 @@ export class Character extends MovableObject {
   characterMoveRight() {
     if (!this.isDead()) {
       this.moveRight();
-      walking_sound.play();
+      playSound(walking_sound);
       snoring_sound.pause();
       this.otherDirection = false;
     }
@@ -232,7 +233,7 @@ export class Character extends MovableObject {
   characterMoveLeft() {
     if (!this.isDead()) {
       this.moveLeft();
-      walking_sound.play();
+      playSound(walking_sound);
       snoring_sound.pause();
       this.otherDirection = true;
     }

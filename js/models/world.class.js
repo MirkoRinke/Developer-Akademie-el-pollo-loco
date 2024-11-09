@@ -9,7 +9,7 @@ import { VendingMachine } from "./vending-machine.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval, stopGame } from "../script.js";
+import { setStoppableInterval, stopGame, playSound } from "../script.js";
 
 // import the checkCharacterCollision function from the endboss.class.js file
 import { checkCharacterCollision } from "./endboss.class.js";
@@ -60,6 +60,8 @@ export class World {
     setStoppableInterval(() => this.checkThrowableObjects(), 1);
     setStoppableInterval(() => this.checkCharacterIsDead(), 1);
     setStoppableInterval(() => this.checkEnemyIsDead(), 250);
+
+    setStoppableInterval(() => this.deleteEnemy(), 250);
   }
 
   // Method to check if the character is dead
@@ -110,6 +112,15 @@ export class World {
     });
   }
 
+  deleteEnemy() {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.x < 0) {
+        this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+        if (this.level.enemies.length === 1) this.dominating();
+      }
+    });
+  }
+
   playKillSounds() {
     console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
     setTimeout(() => {
@@ -126,16 +137,10 @@ export class World {
     console.log("Dead enemy count: ", this.deadEnemyCount); // Log the dead enemy count to the console
   }
 
-  playSound(sound) {
-    if (sound.paused) {
-      sound.play();
-    }
-  }
-
   rampage() {
     if (this.rampageCount >= 6) {
       this.stopKillSounds(); // Call the stopKillSounds method to stop the kill sounds
-      this.playSound(rampage_sound); // Play the rampage sound if the rampage count is less than 6
+      playSound(rampage_sound); // Play the rampage sound if the rampage count is less than 6
     }
   }
 
@@ -143,10 +148,10 @@ export class World {
     if (this.deadEnemyCount == 1 || this.playOnlyOnce) {
       if (this.playOnlyOnce) {
         // Play the first blood sound if the dead enemy count is 1
-        this.playSound(first_blood_sound);
+        playSound(first_blood_sound);
         this.stopKillSounds("first_blood");
       } else {
-        this.playSound(chicken_death_sound);
+        playSound(chicken_death_sound);
       }
       this.deadEnemyCount = 0; // Set t-he dead enemy count to 0
     }
@@ -155,7 +160,7 @@ export class World {
   doubleKill() {
     if (this.deadEnemyCount == 2 && !this.playOnlyOnce) {
       this.stopKillSounds("double_kill");
-      this.playSound(double_kill_sound); // Play the double kill sound if the dead enemy count is 2
+      playSound(double_kill_sound); // Play the double kill sound if the dead enemy count is 2
       this.deadEnemyCount = 0; // Set the dead enemy count to 0
     }
   }
@@ -163,7 +168,7 @@ export class World {
   tripleKill() {
     if (this.deadEnemyCount == 3 && !this.playOnlyOnce) {
       this.stopKillSounds("triple_kill");
-      this.playSound(triple_kill_sound); // Play the triple kill sound if the dead enemy count is 3
+      playSound(triple_kill_sound); // Play the triple kill sound if the dead enemy count is 3
       this.deadEnemyCount = 0; // Set the dead enemy count to 0
     }
   }
@@ -171,7 +176,7 @@ export class World {
   killStreak() {
     if (this.deadEnemyCount >= 4 && this.deadEnemyCount < 6 && !this.playOnlyOnce) {
       this.stopKillSounds("kill_streak");
-      this.playSound(kill_streak_sound);
+      playSound(kill_streak_sound);
       this.deadEnemyCount = 0; // Set the dead enemy count to 0
     }
   }
@@ -179,7 +184,7 @@ export class World {
   dominating() {
     if (this.level.enemies.length == 1 && this.level.enemies[0].constructor.name === "Endboss" && this.level.enemies[0].energy > 0) {
       this.stopKillSounds("dominating"); // Call the stopKillSounds method to stop the kill sounds
-      this.playSound(dominating_sound); // Play the dominating sound if the enemy is the endboss
+      playSound(dominating_sound); // Play the dominating sound if the enemy is the endboss
     }
   }
 

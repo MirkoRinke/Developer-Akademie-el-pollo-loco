@@ -26,6 +26,12 @@ document.addEventListener(
   { once: true }
 );
 
+export function playSound(sound) {
+  if (sound.paused) {
+    sound.play();
+  }
+}
+
 // Function to stop the game by clearing all intervals
 export function stopGame() {
   intervalId.forEach((Id) => {

@@ -4,6 +4,8 @@ import { MovableObject } from "./movable-object-class.js";
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../script.js";
 
+import { characterPostion } from "../models/character.class.js";
+
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
@@ -97,7 +99,15 @@ export class Endboss extends MovableObject {
   // Manage the end boss movement by moving the end boss to the left
   manageEndbossMovement() {
     setStoppableInterval(() => {
-      if (firstContact) this.x -= this.speed * 5;
+      if (firstContact) {
+        if (this.x > characterPostion) {
+          this.x -= this.speed * 5; // Bewegt sich nach links
+          this.otherDirection = false;
+        } else {
+          this.x += this.speed * 5; // Bewegt sich nach rechts
+          this.otherDirection = true;
+        }
+      }
     }, 1000 / 60);
   }
 

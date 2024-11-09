@@ -10,7 +10,7 @@ export class Coins extends MovableObject {
 
   constructor() {
     super().loadImage("../../assets/images/items/coin/coin_2.png"); // Load the image of the throwable object (salsa bottle)
-    this.x = 200 + Math.random() * (canvasWidth * 2.5); // set the x position of the chicken to a random value
-    this.y = canvasHeight / 2.5 + Math.random() * 200; // set the y position of the chicken to a random value
+    this.x = 200 + Math.random() * (canvasWidth * 2.2); // set the x position of the chicken to a random value
+    this.y = canvasHeight / 2.3 + Math.random() * 200; // set the y position of the chicken to a random value
   }
 }

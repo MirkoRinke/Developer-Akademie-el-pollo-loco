@@ -65,9 +65,7 @@ export class World {
 
   // Method to check if the character is dead
   checkCharacterIsDead() {
-    if (this.character.isDead()) {
-      this.gameOver();
-    }
+    if (this.character.isDead()) this.gameOver();
   }
 
   // Method to stop the game when the character is dead
@@ -87,13 +85,10 @@ export class World {
   // Method to check if the enemy is dead
   checkEnemyIsDead() {
     this.level.enemies.forEach((enemy) => {
-      // For each enemy in the enemies array of the level object
       if (enemy.isDead()) {
-        enemy.speed = 0; // Set the speed of the enemy to 0 if the enemy is dead
-        this.removeDeadEnemies(); // Call the removeDeadEnemies method to remove dead enemies from the game world
-        this.playKillSounds(); // Call the playKillSounds method to play the kill sounds
+        (enemy.speed = 0), this.removeDeadEnemies(), this.playKillSounds();
         if (enemy.constructor.name === "Endboss") this.gameOver();
-        return true; // Return true
+        return true;
       }
     });
   }
@@ -101,16 +96,13 @@ export class World {
   // Method to remove dead enemies from the game world
   removeDeadEnemies() {
     this.level.enemies.forEach((enemy) => {
-      // For each enemy in the enemies array of the level object
       if (enemy.isDead() && enemy.constructor.name !== "Endboss") {
-        this.deadEnemyCount++; // Increase the dead enemy count by 1
-        this.rampageCount++; // Increase the rampage count by 1
-        // If the enemy is dead, remove the enemy from the enemies array of the level object
-        this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1); // Remove the enemy from the enemies array
+        this.deadEnemyCount++, this.rampageCount++, this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
       }
     });
   }
 
+  // Method to delete enemies from the game world
   deleteEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (enemy.x < 0) {
@@ -120,68 +112,56 @@ export class World {
     });
   }
 
+  // Method to play kill sounds in the game world
   playKillSounds() {
     setTimeout(() => (this.rampageCount = 0), 2000);
-    this.rampage(); // Call the rampage method to play the rampage sound
-    this.firstBlood(); // Call the firstBlood method to play the first blood sound
-    this.doubleKill(); // Call the doubleKill method to play the double kill sound
-    this.tripleKill(); // Call the tripleKill method to play the triple kill sound
-    this.killStreak(); // Call the killStreak method to play the kill streak sound
-    this.dominating(); // Call the dominating method to play the dominating sound
-    if (this.playOnlyOnce) this.playOnlyOnce = false; // Set the playOnlyOnce variable to false
+    this.rampage(), this.firstBlood(), this.doubleKill(), this.tripleKill(), this.killStreak(), this.dominating();
+    if (this.playOnlyOnce) this.playOnlyOnce = false;
   }
 
+  // Method to play the rampage sound in the game world
   rampage() {
     if (this.rampageCount >= 6) {
-      this.stopKillSounds(); // Call the stopKillSounds method to stop the kill sounds
-      playSound(rampage_sound); // Play the rampage sound if the rampage count is less than 6
+      this.stopKillSounds(), playSound(rampage_sound);
     }
   }
 
+  // Method to play the first blood sound in the game world
   firstBlood() {
     if (this.deadEnemyCount == 1 || this.playOnlyOnce) {
-      if (this.playOnlyOnce) {
-        // Play the first blood sound if the dead enemy count is 1
-        playSound(first_blood_sound);
-        this.stopKillSounds("first_blood");
-      } else {
-        playSound(chicken_death_sound);
-      }
-      this.deadEnemyCount = 0; // Set t-he dead enemy count to 0
+      this.playOnlyOnce ? playSound(first_blood_sound) : playSound(chicken_death_sound), this.stopKillSounds("first_blood"), (this.deadEnemyCount = 0);
     }
   }
 
+  // Method to play the double kill sound in the game world
   doubleKill() {
     if (this.deadEnemyCount == 2 && !this.playOnlyOnce) {
-      this.stopKillSounds("double_kill");
-      playSound(double_kill_sound); // Play the double kill sound if the dead enemy count is 2
-      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+      this.stopKillSounds("double_kill"), playSound(double_kill_sound), (this.deadEnemyCount = 0);
     }
   }
 
+  // Method to play the triple kill sound in the game world
   tripleKill() {
     if (this.deadEnemyCount == 3 && !this.playOnlyOnce) {
-      this.stopKillSounds("triple_kill");
-      playSound(triple_kill_sound); // Play the triple kill sound if the dead enemy count is 3
-      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+      this.stopKillSounds("triple_kill"), playSound(triple_kill_sound), (this.deadEnemyCount = 0);
     }
   }
 
+  // Method to play the kill streak sound in the game world
   killStreak() {
     if (this.deadEnemyCount >= 4 && this.deadEnemyCount < 6 && !this.playOnlyOnce) {
-      this.stopKillSounds("kill_streak");
-      playSound(kill_streak_sound);
-      this.deadEnemyCount = 0; // Set the dead enemy count to 0
+      this.stopKillSounds("kill_streak"), playSound(kill_streak_sound), (this.deadEnemyCount = 0);
     }
   }
 
+  // Method to play the dominating sound in the game world
   dominating() {
     if (this.level.enemies.length == 1 && this.level.enemies[0].constructor.name === "Endboss" && this.level.enemies[0].energy > 0) {
-      this.stopKillSounds("dominating"); // Call the stopKillSounds method to stop the kill sounds
-      playSound(dominating_sound); // Play the dominating sound if the enemy is the endboss
+      this.stopKillSounds("dominating"), playSound(dominating_sound);
     }
   }
 
+  // Method to stop the kill sounds in the game world
   stopKillSounds(sound = null) {
     if (!first_blood_sound.paused && sound !== "first_blood") first_blood_sound.pause();
     if (!double_kill_sound.paused && sound !== "double_kill") double_kill_sound.pause();
@@ -194,76 +174,61 @@ export class World {
 
   // Method to check for throwable objects in the game world
   checkThrowableObjects() {
-    const currentTime = new Date().getTime(); // Get the current time
-    if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
+    const currentTime = new Date().getTime();
+    if (currentTime - this.lastHit < 1000) return;
     if (this.keyboard.THRO && this.currentBottles > 0) {
-      // If the D key is pressed on the keyboard
-      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); // Create a new throwable object (bottle)
-      this.throwableObjects.push(bottle); // Add the throwable object to the throwableObjects array of the world object
-      this.currentBottles--; // Decrease the current number of bottles by 1
-      this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Set the percentage of the salsa bottles bar
-      this.lastHit = currentTime; // Set the time of the last hit to the current time
+      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+      this.throwableObjects.push(bottle), this.currentBottles--, this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
+      this.lastHit = currentTime;
     }
   }
 
   // Method to check for collisions in the game world
   checkCollisions() {
-    this.checkCollisionsEnemy(); // Call the checkCollisionsEnemy method to check for collisions with enemies
-    this.checkCollisionsThrowableObjects(); // Call the checkCollisionsThrowableObjects method to check for collisions with throwable objects
-    this.checkCollisionsSalasBottles(); // Call the checkCollisionsSalasBottles method to check for collisions with salsa bottles
-    this.checkCollisionsCoins(); // Call the checkCollisionsCoins method to check for collisions with coins
+    this.checkCollisionsEnemy(), this.checkCollisionsThrowableObjects(), this.checkCollisionsSalasBottles(), this.checkCollisionsCoins();
   }
 
+  // Method to check for collisions with enemies in the game world
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && enemy.energy > 0) {
-        if (this.character.isAbove(enemy)) {
-          enemy.hit(4);
-        } else if (enemy.constructor.name === "Endboss") {
-          this.character.hit(4);
-        } else {
-          this.character.hit();
-        }
-        this.statusBarHealth.setPercentage(this.character.energy);
-        checkCharacterCollision(true, enemy.constructor.name);
+        if (this.character.isAbove(enemy)) enemy.hit(4);
+        if (enemy.constructor.name === "Endboss") this.character.hit(4);
+        else this.character.hit(), this.statusBarHealth.setPercentage(this.character.energy), checkCharacterCollision(true, enemy.constructor.name);
         return;
       }
       checkCharacterCollision(false, enemy.constructor.name);
     });
   }
 
+  // Method to check for collisions with throwable objects in the game world
   checkCollisionsThrowableObjects() {
     this.throwableObjects.forEach((throwableObject) => {
       this.level.enemies.forEach((enemy) => {
         if (throwableObject.isColliding(enemy)) {
-          if (enemy.constructor.name === "Endboss") {
-            enemy.hit(1);
-            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10);
-          } else {
-            enemy.hit();
-          }
+          if (enemy.constructor.name === "Endboss") enemy.hit(1), this.statusBarEndbossHealth.setPercentage(enemy.energy * 10);
+          else enemy.hit();
         }
       });
     });
   }
 
+  // Method to check for collisions with salsa bottles in the game world
   checkCollisionsSalasBottles() {
     this.level.salsaBottles.forEach((salsaBottle) => {
       if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
         this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1);
-        this.currentBottles++;
-        this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
+        this.currentBottles++, this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       }
     });
   }
 
+  // Method to check for collisions with coins in the game world
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && this.currentCoins < 10) {
         this.level.coins.splice(this.level.coins.indexOf(coin), 1);
-        this.currentCoins++;
-        playSound(coin_sound);
-        this.coinsBar.setPercentage(this.currentCoins * 10);
+        this.currentCoins++, playSound(coin_sound), this.coinsBar.setPercentage(this.currentCoins * 10);
       }
     });
   }
@@ -296,10 +261,7 @@ export class World {
 
   // Method to add objects to the map of the game world
   addObjectsToMap(objects) {
-    objects.forEach((object) => {
-      // For each object in the objects array
-      this.addToMap(object); // Add the object to the map
-    });
+    objects.forEach((object) => this.addToMap(object));
   }
 
   // Method to add an object to the map of the game world

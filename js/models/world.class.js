@@ -163,13 +163,13 @@ export class World {
 
   // Method to stop the kill sounds in the game world
   stopKillSounds(sound = null) {
-    if (!first_blood_sound.paused && sound !== "first_blood") first_blood_sound.pause();
-    if (!double_kill_sound.paused && sound !== "double_kill") double_kill_sound.pause();
-    if (!triple_kill_sound.paused && sound !== "triple_kill") triple_kill_sound.pause();
-    if (!kill_streak_sound.paused && sound !== "kill_streak") kill_streak_sound.pause();
-    if (!rampage_sound.paused && sound !== "rampage") rampage_sound.pause();
-    if (!killshot_sound.paused && sound !== "killshot") killshot_sound.pause();
-    if (!dominating_sound.paused && sound !== "dominating") dominating_sound.pause();
+    if (!first_blood_sound.paused && sound !== "first_blood") first_blood_sound.pause(), (first_blood_sound.currentTime = 0);
+    if (!double_kill_sound.paused && sound !== "double_kill") double_kill_sound.pause(), (double_kill_sound.currentTime = 0);
+    if (!triple_kill_sound.paused && sound !== "triple_kill") triple_kill_sound.pause(), (triple_kill_sound.currentTime = 0);
+    if (!kill_streak_sound.paused && sound !== "kill_streak") kill_streak_sound.pause(), (kill_streak_sound.currentTime = 0);
+    if (!rampage_sound.paused && sound !== "rampage") rampage_sound.pause(), (rampage_sound.currentTime = 0);
+    if (!killshot_sound.paused && sound !== "killshot") killshot_sound.pause(), (killshot_sound.currentTime = 0);
+    if (!dominating_sound.paused && sound !== "dominating") dominating_sound.pause(), (dominating_sound.currentTime = 0);
   }
 
   // Method to check for throwable objects in the game world

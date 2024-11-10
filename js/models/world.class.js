@@ -8,6 +8,8 @@ import { StatusBarEndbossHealth } from "./status-bar-endboss-health.class.js";
 import { VendingMachine } from "./vending-machine.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
+import { SalsaBottles } from "../models/salsa_bottles.class.js";
+
 // import the setStoppableInterval function from the script.js file
 import { setStoppableInterval, stopGame, playSound } from "../game.js";
 
@@ -15,19 +17,7 @@ import { setStoppableInterval, stopGame, playSound } from "../game.js";
 import { checkCharacterCollision } from "./endboss.class.js";
 
 // Load the sounds from the script.js file
-import {
-  first_blood_sound,
-  double_kill_sound,
-  triple_kill_sound,
-  rampage_sound,
-  killshot_sound,
-  dominating_sound,
-  kill_streak_sound,
-  chicken_death_sound,
-  coin_sound,
-  win_sound,
-  game_over_sound,
-} from "../sounds.js";
+import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound, win_sound, game_over_sound } from "../sounds.js";
 
 // World class is used to create the game world
 export class World {
@@ -73,6 +63,18 @@ export class World {
     setStoppableInterval(() => this.checkCharacterIsDead(), 250);
     setStoppableInterval(() => this.checkEnemyIsDead(), 250);
     setStoppableInterval(() => this.deleteEnemy(), 250);
+    setStoppableInterval(() => this.checkAndSpawnSalsaBottles(), 1000);
+  }
+
+  // Method to check and spawn salsa bottles
+  checkAndSpawnSalsaBottles() {
+    if (this.currentCoins >= 5) {
+      for (let i = 0; i < 50; i++) {
+        this.level.salsaBottles.push(new SalsaBottles());
+      }
+      this.currentCoins -= 5;
+      this.coinsBar.setPercentage(this.currentCoins * 10);
+    }
   }
 
   // Method to check if the character is dead

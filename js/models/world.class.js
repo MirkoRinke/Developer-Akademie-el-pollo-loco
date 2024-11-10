@@ -15,7 +15,7 @@ import { setStoppableInterval, stopGame, playSound } from "../script.js";
 import { checkCharacterCollision } from "./endboss.class.js";
 
 // Load the sounds from the script.js file
-import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound } from "../sounds.js";
+import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound, win_sound } from "../sounds.js";
 
 // World class is used to create the game world
 export class World {
@@ -73,13 +73,14 @@ export class World {
     console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
     setTimeout(() => {
       // stopGame(); //! Call the stopGame function to stop the game
-      this.removeAllEnemies(); //! Call the removeAllEnemies function to remove all enemies from the game
-    }, 2000);
+      playSound(win_sound); //! Play the win sound when the game is over
+      this.removeAllEnemies();
+    }, 1000);
   }
 
   // Method to remove all enemies from the game world
   removeAllEnemies() {
-    this.level.enemies = []; //! Set the enemies array of the level object to an empty array
+    this.level.enemies = [];
   }
 
   // Method to check if the enemy is dead
@@ -191,13 +192,16 @@ export class World {
   // Method to check for collisions with enemies in the game world
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && enemy.energy > 0) {
-        if (this.character.isAbove(enemy)) enemy.hit(4);
-        if (enemy.constructor.name === "Endboss") this.character.hit(4);
-        else this.character.hit(), this.statusBarHealth.setPercentage(this.character.energy), checkCharacterCollision(true, enemy.constructor.name);
+      if (!this.character.isColliding(enemy) || enemy.energy <= 0) {
+        checkCharacterCollision(false, enemy.constructor.name);
         return;
       }
-      checkCharacterCollision(false, enemy.constructor.name);
+      if (this.character.isAbove(enemy)) enemy.hit(4);
+      else {
+        this.character.hit(enemy.constructor.name === "Endboss" ? 4 : 1);
+        checkCharacterCollision(true, enemy.constructor.name);
+        this.statusBarHealth.setPercentage(this.character.energy);
+      }
     });
   }
 

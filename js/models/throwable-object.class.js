@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval } from "../game.js";
 
 import { characterDirection } from "./character.class.js";
 

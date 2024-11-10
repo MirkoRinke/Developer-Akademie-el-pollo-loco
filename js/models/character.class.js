@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval, playSound } from "../script.js";
+import { setStoppableInterval, playSound } from "../game.js";
 
 // Load the resetAlert function from the endboss.class.js file
 import { resetAlert } from "./endboss.class.js";

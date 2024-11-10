@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval } from "../game.js";
 
 // Cloud class is a subclass of MovableObject
 // It is used to create the cloud background in the game

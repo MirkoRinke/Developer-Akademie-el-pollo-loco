@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval } from "../game.js";
 
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");

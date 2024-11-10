@@ -9,7 +9,7 @@ import { VendingMachine } from "./vending-machine.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval, stopGame, playSound } from "../script.js";
+import { setStoppableInterval, stopGame, playSound } from "../game.js";
 
 // import the checkCharacterCollision function from the endboss.class.js file
 import { checkCharacterCollision } from "./endboss.class.js";

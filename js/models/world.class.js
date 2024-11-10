@@ -96,16 +96,14 @@ export class World {
   gameOver(isPlayerDead = false) {
     if (isPlayerDead && !this.isGameOver) {
       console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
-      stopGame(); //! Call the stopGame function to stop the game
+      setTimeout(() => stopGame(), 500); // Stop the game after 500 milliseconds
       this.isGameOver = true; // Set the gameOver variable to true
       playSound(game_over_sound);
     } else if (!this.isGameOver) {
       console.log("Gewonnen!"); //! Log "Game Over!" to the console when the game is over (character is dead)
       playSound(win_sound); //! Play the win sound when the game is over
       this.isGameOver = true; // Set the gameOver variable to true
-      setTimeout(() => {
-        this.removeAllEnemies();
-      }, 1000);
+      setTimeout(() => this.removeAllEnemies(), 1000);
     }
   }
 

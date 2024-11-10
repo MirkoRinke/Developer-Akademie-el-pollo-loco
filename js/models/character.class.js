@@ -134,7 +134,6 @@ export class Character extends MovableObject {
   // Manage the character movement by checking if the character can move right, left
   manageCharacterMovement() {
     setStoppableInterval(() => {
-      walking_sound.pause(); // pause the walking sound
       if (this.canMoveRight()) this.characterMoveRight(); // check if the character can move right and move the character right
       if (this.canMoveLeft()) this.characterMoveLeft(); // check if the character can move left and move the character left
       if (this.canJump()) this.jump(); // check if the character can jump and make the character jump
@@ -158,7 +157,6 @@ export class Character extends MovableObject {
       // check if the character is dead and play the dying animation
       this.playAnimation(this.IMAGES_DEAD);
       this.deadAnimation = true;
-      snoring_sound.pause();
     }
   }
 
@@ -168,7 +166,6 @@ export class Character extends MovableObject {
       this.playAnimation(this.IMAGES_HURT);
       hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
       playSound(hurt_sound);
-      snoring_sound.pause();
     }
   }
 
@@ -177,7 +174,6 @@ export class Character extends MovableObject {
       // check if the character is above the ground and play the jumping animation
       this.playAnimation(this.IMAGES_JUMP);
       this.idle_time = new Date().getTime();
-      snoring_sound.pause();
     }
   }
 
@@ -186,7 +182,6 @@ export class Character extends MovableObject {
       // check if the character is moving right or left and play the walking animation
       this.playAnimation(this.IMAGES_WALK);
       this.idle_time = new Date().getTime();
-      snoring_sound.pause();
     }
   }
 
@@ -220,7 +215,6 @@ export class Character extends MovableObject {
     if (!this.isDead()) {
       this.moveRight();
       playSound(walking_sound);
-      snoring_sound.pause();
       this.otherDirection = false;
       characterDirection = "right";
     }
@@ -236,7 +230,6 @@ export class Character extends MovableObject {
     if (!this.isDead()) {
       this.moveLeft();
       playSound(walking_sound);
-      snoring_sound.pause();
       this.otherDirection = true;
       characterDirection = "left";
     }

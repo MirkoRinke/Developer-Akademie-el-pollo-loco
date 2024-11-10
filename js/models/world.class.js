@@ -143,54 +143,43 @@ export class World {
   // Method to play the rampage sound in the game world
   rampage() {
     if (this.rampageCount >= 6) {
-      this.stopKillSounds(), playSound(rampage_sound);
+      playSound(rampage_sound);
     }
   }
 
   // Method to play the first blood sound in the game world
   firstBlood() {
     if (this.deadEnemyCount == 1 || this.playOnlyOnce) {
-      this.playOnlyOnce ? playSound(first_blood_sound) : playSound(chicken_death_sound), this.stopKillSounds("first_blood"), (this.deadEnemyCount = 0);
+      this.playOnlyOnce ? playSound(first_blood_sound) : playSound(chicken_death_sound), (this.deadEnemyCount = 0);
     }
   }
 
   // Method to play the double kill sound in the game world
   doubleKill() {
     if (this.deadEnemyCount == 2 && !this.playOnlyOnce) {
-      this.stopKillSounds("double_kill"), playSound(double_kill_sound), (this.deadEnemyCount = 0);
+      playSound(double_kill_sound), (this.deadEnemyCount = 0);
     }
   }
 
   // Method to play the triple kill sound in the game world
   tripleKill() {
     if (this.deadEnemyCount == 3 && !this.playOnlyOnce) {
-      this.stopKillSounds("triple_kill"), playSound(triple_kill_sound), (this.deadEnemyCount = 0);
+      playSound(triple_kill_sound), (this.deadEnemyCount = 0);
     }
   }
 
   // Method to play the kill streak sound in the game world
   killStreak() {
     if (this.deadEnemyCount >= 4 && this.deadEnemyCount < 6 && !this.playOnlyOnce) {
-      this.stopKillSounds("kill_streak"), playSound(kill_streak_sound), (this.deadEnemyCount = 0);
+      playSound(kill_streak_sound), (this.deadEnemyCount = 0);
     }
   }
 
   // Method to play the dominating sound in the game world
   dominating() {
     if (this.level.enemies.length == 1 && this.level.enemies[0].constructor.name === "Endboss" && this.level.enemies[0].energy > 0) {
-      this.stopKillSounds("dominating"), playSound(dominating_sound);
+      playSound(dominating_sound);
     }
-  }
-
-  // Method to stop the kill sounds in the game world
-  stopKillSounds(sound = null) {
-    if (!first_blood_sound.paused && sound !== "first_blood") first_blood_sound.pause(), (first_blood_sound.currentTime = 0);
-    if (!double_kill_sound.paused && sound !== "double_kill") double_kill_sound.pause(), (double_kill_sound.currentTime = 0);
-    if (!triple_kill_sound.paused && sound !== "triple_kill") triple_kill_sound.pause(), (triple_kill_sound.currentTime = 0);
-    if (!kill_streak_sound.paused && sound !== "kill_streak") kill_streak_sound.pause(), (kill_streak_sound.currentTime = 0);
-    if (!rampage_sound.paused && sound !== "rampage") rampage_sound.pause(), (rampage_sound.currentTime = 0);
-    if (!killshot_sound.paused && sound !== "killshot") killshot_sound.pause(), (killshot_sound.currentTime = 0);
-    if (!dominating_sound.paused && sound !== "dominating") dominating_sound.pause(), (dominating_sound.currentTime = 0);
   }
 
   // Method to check for throwable objects in the game world

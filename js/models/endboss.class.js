@@ -2,7 +2,9 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval } from "../script.js";
+import { setStoppableInterval, playSound } from "../script.js";
+
+import { chicken_attack_sound, chicken_sound, fight_sound } from "../sounds.js";
 
 import { characterPostion } from "../models/character.class.js";
 
@@ -116,14 +118,17 @@ export class Endboss extends MovableObject {
     setStoppableInterval(() => {
       if (startAlert <= 10) {
         this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
+        if (firstContact && startAlert < 1) playSound(fight_sound); // play the chicken sound
         startAlert++; // increment the startAlert variable by 1
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
-        this.y = 150; // set the y position of the end boss to 0
+        this.y = canvasHeight - this.height; // set the y position of the end boss to 0
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT); // play the hurt animation if the chicken is hurt
+        playSound(chicken_sound); // play the chicken sound
       } else if (isColliding) {
         this.playAnimation(this.IMAGES_ATTACK); // play the attack animation if the chicken is attacking
+        playSound(chicken_attack_sound); // play the chicken attack sound
       } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
     }, 200);
   }

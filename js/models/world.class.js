@@ -197,7 +197,7 @@ export class World {
   checkThrowableObjects() {
     const currentTime = new Date().getTime(); // Get the current time
     if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
-    if (this.keyboard.D && this.currentBottles > 0) {
+    if (this.keyboard.THRO && this.currentBottles > 0) {
       // If the D key is pressed on the keyboard
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100); // Create a new throwable object (bottle)
       this.throwableObjects.push(bottle); // Add the throwable object to the throwableObjects array of the world object

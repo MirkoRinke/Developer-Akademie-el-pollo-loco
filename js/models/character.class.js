@@ -244,6 +244,6 @@ export class Character extends MovableObject {
 
   // Check the character can jump or not by checking the SPACE key is pressed and the character is not above the ground
   canJump() {
-    return this.world.keyboard.SPACE && !this.isAboveGround();
+    return this.world.keyboard.JUMP && !this.isAboveGround();
   }
 }

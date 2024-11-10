@@ -4,6 +4,7 @@ export let bottle_looting_sound = new Audio("../../assets/sounds/sfx/bottle-loot
 export let chicken_attack_sound = new Audio("../../assets/sounds/sfx/chicken-attack.mp3"); // sound for the chicken attack
 export let chicken_death_sound = new Audio("../../assets/sounds/sfx/chicken-death.mp3"); // sound for the death of a chicken
 export let chicken_sound = new Audio("../../assets/sounds/sfx/chicken.mp3"); // sound for the chicken
+export let fight_sound = new Audio("../../assets/sounds/sfx/fight.mp3"); // sound for fighting
 
 export let coin_sound = new Audio("../../assets/sounds/sfx/coin.mp3"); // sound for the coin
 

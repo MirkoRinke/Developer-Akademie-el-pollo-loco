@@ -7,6 +7,8 @@ import { Keyboard } from "./models/keyboard.class.js";
 let canvas; // canvas element
 let world; // world object
 let keyboard = new Keyboard(); // keyboard object to handle key presses
+let allSounds = []; // array to store all sounds
+let muteSounds = false; // variable to mute all sounds
 export let userInteracted = false;
 
 // Function to set a stoppable interval
@@ -26,11 +28,23 @@ document.addEventListener(
   { once: true }
 );
 
+// Function to play a sound
 export function playSound(sound) {
-  if (sound.paused) {
-    sound.play();
-  }
+  if (muteSounds) return;
+  sound.play();
+  allSounds.push(sound);
 }
+
+// Function to stop all sounds
+export function toggleAllSounds() {
+  allSounds.forEach((sound) => {
+    sound.pause();
+    sound.currentTime = 0;
+  });
+  allSounds = [];
+  muteSounds = !muteSounds;
+}
+window.toggleAllSounds = toggleAllSounds; //! make the stopAllSounds function available globally temporarily
 
 // Function to stop the game by clearing all intervals
 export function stopGame() {
@@ -49,20 +63,20 @@ init(); // call the init function
 
 // Event listeners to handle key presses
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") keyboard.RIGHT = true; // set RIGHT to true if the right arrow key is pressed
-  if (e.key === "ArrowLeft") keyboard.LEFT = true; // set LEFT to true if the left arrow key is pressed
-  if (e.key === "ArrowUp") keyboard.UP = true; // set UP to true if the up arrow key is pressed
-  if (e.key === "ArrowDown") keyboard.DOWN = true; // set DOWN to true if the down arrow key is pressed
-  if (e.key === " ") keyboard.SPACE = true; // set SPACE to true if the space key is pressed
-  if (e.key === "d") keyboard.D = true; // set D to true if the d key is pressed
+  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = true; // set RIGHT to true if the right arrow key is pressed
+  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = true; // set LEFT to true if the left arrow key is pressed
+  if (e.key === "w" || e.key == "ArrowUp") keyboard.UP = true; // set UP to true if the up arrow key is pressed
+  if (e.key === "s" || e.key == "ArrowDown") keyboard.DOWN = true; // set DOWN to true if the down arrow key is pressed
+  if (e.key === " ") keyboard.JUMP = true; // set JUMP to true if the space key is pressed
+  if (e.key === "f") keyboard.THRO = true; // set D to true if the d key is pressed
 });
 
 // Event listeners to handle key releases
 document.addEventListener("keyup", (e) => {
-  if (e.key === "ArrowRight") keyboard.RIGHT = false; // set RIGHT to false if the right arrow key is released
-  if (e.key === "ArrowLeft") keyboard.LEFT = false; // set LEFT to false if the left arrow key is released
-  if (e.key === "ArrowUp") keyboard.UP = false; // set UP to false if the up arrow key is released
-  if (e.key === "ArrowDown") keyboard.DOWN = false; // set DOWN to false if the down arrow key is released
-  if (e.key === " ") keyboard.SPACE = false; // set SPACE to false if the space key is released
-  if (e.key === "d") keyboard.D = false; // set D to false if the d key is released
+  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = false; // set RIGHT to false if the right arrow key is released
+  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = false; // set LEFT to false if the left arrow key is released
+  if (e.key === "w" || e.key == "ArrowUp") keyboard.UP = false; // set UP to false if the up arrow key is released
+  if (e.key === "s" || e.key == "ArrowDown") keyboard.DOWN = false; // set DOWN to false if the down arrow key is released
+  if (e.key === " ") keyboard.JUMP = false; // set JUMP to false if the space key is released
+  if (e.key === "f") keyboard.THRO = false; // set D to false if the d key is released
 });

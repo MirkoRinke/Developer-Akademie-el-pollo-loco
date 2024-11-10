@@ -15,7 +15,19 @@ import { setStoppableInterval, stopGame, playSound } from "../script.js";
 import { checkCharacterCollision } from "./endboss.class.js";
 
 // Load the sounds from the script.js file
-import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound, win_sound } from "../sounds.js";
+import {
+  first_blood_sound,
+  double_kill_sound,
+  triple_kill_sound,
+  rampage_sound,
+  killshot_sound,
+  dominating_sound,
+  kill_streak_sound,
+  chicken_death_sound,
+  coin_sound,
+  win_sound,
+  game_over_sound,
+} from "../sounds.js";
 
 // World class is used to create the game world
 export class World {
@@ -37,6 +49,7 @@ export class World {
   currentCoins = 0; // Current number of coins
   deadEnemyCount = 0; // Number of dead enemies
   rampageCount = 0; // Number of rampages
+  isGameOver = false; // Game over variable
 
   playOnlyOnce = true; // Set the playOnlyOnce variable to true
 
@@ -65,22 +78,7 @@ export class World {
 
   // Method to check if the character is dead
   checkCharacterIsDead() {
-    if (this.character.isDead()) this.gameOver();
-  }
-
-  // Method to stop the game when the character is dead
-  gameOver() {
-    console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
-    setTimeout(() => {
-      // stopGame(); //! Call the stopGame function to stop the game
-      playSound(win_sound); //! Play the win sound when the game is over
-      this.removeAllEnemies();
-    }, 1000);
-  }
-
-  // Method to remove all enemies from the game world
-  removeAllEnemies() {
-    this.level.enemies = [];
+    if (this.character.isDead()) this.gameOver(true);
   }
 
   // Method to check if the enemy is dead
@@ -92,6 +90,28 @@ export class World {
         return true;
       }
     });
+  }
+
+  // Method to stop the game when the character is dead
+  gameOver(isPlayerDead = false) {
+    if (isPlayerDead && !this.isGameOver) {
+      console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
+      stopGame(); //! Call the stopGame function to stop the game
+      this.isGameOver = true; // Set the gameOver variable to true
+      playSound(game_over_sound);
+    } else if (!this.isGameOver) {
+      console.log("Gewonnen!"); //! Log "Game Over!" to the console when the game is over (character is dead)
+      playSound(win_sound); //! Play the win sound when the game is over
+      this.isGameOver = true; // Set the gameOver variable to true
+      setTimeout(() => {
+        this.removeAllEnemies();
+      }, 1000);
+    }
+  }
+
+  // Method to remove all enemies from the game world
+  removeAllEnemies() {
+    this.level.enemies = [];
   }
 
   // Method to remove dead enemies from the game world

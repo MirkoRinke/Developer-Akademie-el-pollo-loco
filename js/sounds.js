@@ -14,6 +14,7 @@ export let snoring_sound = new Audio("../../assets/sounds/sfx/snoring.mp3"); // 
 export let walking_sound = new Audio("../../assets/sounds/sfx/walking.mp3"); // sound for walking
 
 export let win_sound = new Audio("../../assets/sounds/sfx/win.mp3"); // sound for winning
+export let game_over_sound = new Audio("../../assets/sounds/sfx/game-over.mp3"); // sound for game over
 
 export let dominating_sound = new Audio("../../assets/sounds/sfx/killing_sounds/dominating.mp3"); // sound for dominating
 export let double_kill_sound = new Audio("../../assets/sounds/sfx/killing_sounds/double-kill.mp3"); // sound for double kill

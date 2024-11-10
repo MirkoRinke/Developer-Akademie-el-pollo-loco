@@ -11,6 +11,17 @@ let allSounds = []; // array to store all sounds
 let muteSounds = false; // variable to mute all sounds
 export let userInteracted = false;
 
+const setUserInteracted = () => {
+  userInteracted = true;
+  ["click", "keydown", "mousemove", "touchstart"].forEach((event) => {
+    document.removeEventListener(event, setUserInteracted);
+  });
+};
+
+["click", "keydown", "mousemove", "touchstart"].forEach((event) => {
+  document.addEventListener(event, setUserInteracted, { once: true });
+});
+
 // Function to set a stoppable interval
 export function setStoppableInterval(callback, delay) {
   setTimeout(() => {
@@ -19,14 +30,6 @@ export function setStoppableInterval(callback, delay) {
     intervalId.push(Id);
   }, 0);
 }
-
-document.addEventListener(
-  "click",
-  () => {
-    userInteracted = true;
-  },
-  { once: true }
-);
 
 // Function to play a sound
 export function playSound(sound) {

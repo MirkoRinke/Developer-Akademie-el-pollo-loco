@@ -23,7 +23,7 @@ export class Character extends MovableObject {
   width = 200; // width of the character
   y = canvasHeight - this.height - 50; // y position of the character
   speed = 10; // speed of the character
-  energy = 10000; //! energy of the character
+  energy = 100; //! energy of the character
   idle_time = 0; // idle time of the character
 
   // Arrays of image paths for different animations of the character idling.
@@ -167,7 +167,7 @@ export class Character extends MovableObject {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
       hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
-      playSound(hurt_sound); //! set < 10000 temporarily
+      playSound(hurt_sound);
       snoring_sound.pause();
     }
   }

@@ -13,12 +13,12 @@ export let userInteracted = false;
 
 const setUserInteracted = () => {
   userInteracted = true;
-  ["click", "keydown", "mousemove", "touchstart"].forEach((event) => {
+  ["click", "keydown", "touchstart"].forEach((event) => {
     document.removeEventListener(event, setUserInteracted);
   });
 };
 
-["click", "keydown", "mousemove", "touchstart"].forEach((event) => {
+["click", "keydown", "touchstart"].forEach((event) => {
   document.addEventListener(event, setUserInteracted, { once: true });
 });
 
@@ -33,9 +33,11 @@ export function setStoppableInterval(callback, delay) {
 
 // Function to play a sound
 export function playSound(sound) {
-  if (muteSounds) return;
-  if (userInteracted) sound.play();
-  allSounds.push(sound);
+  if (userInteracted === true) {
+    if (muteSounds) return;
+    sound.play();
+    allSounds.push(sound);
+  }
 }
 
 // Function to stop all sounds

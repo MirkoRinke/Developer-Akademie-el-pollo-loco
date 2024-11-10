@@ -11,10 +11,21 @@ import { CoinsBar } from "./coins-bar.class.js";
 import { StatusBarEndbossHealth } from "./status-bar-endboss-health.class.js";
 import { VendingMachine } from "./vending-machine.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
-import { SalsaBottles } from "../models/salsa_bottles.class.js";
 import { setStoppableInterval, stopGame, playSound } from "../game.js";
 import { checkCharacterCollision } from "./endboss.class.js";
-import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound, win_sound, game_over_sound } from "../sounds.js";
+import {
+  first_blood_sound,
+  double_kill_sound,
+  triple_kill_sound,
+  rampage_sound,
+  dominating_sound,
+  kill_streak_sound,
+  chicken_death_sound,
+  coin_sound,
+  win_sound,
+  game_over_sound,
+  bottle_looting_sound,
+} from "../sounds.js";
 
 export class World {
   character = new Character();
@@ -101,6 +112,8 @@ export class World {
         this.currentBottles++;
       }
       this.currentCoins -= 5;
+      bottle_looting_sound.volume = 0.1;
+      playSound(bottle_looting_sound);
       this.coinsBar.setPercentage(this.currentCoins * 10);
       this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
     }
@@ -342,6 +355,8 @@ export class World {
     this.level.salsaBottles.forEach((salsaBottle) => {
       if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
         this.currentBottles++;
+        bottle_looting_sound.volume = 0.1;
+        playSound(bottle_looting_sound);
         this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1);
         this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       }

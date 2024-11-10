@@ -50,7 +50,6 @@ export class World {
   deadEnemyCount = 0; // Number of dead enemies
   rampageCount = 0; // Number of rampages
   isGameOver = false; // Game over variable
-
   playOnlyOnce = true; // Set the playOnlyOnce variable to true
 
   constructor(canvas, keyboard) {
@@ -71,7 +70,7 @@ export class World {
   run() {
     setStoppableInterval(() => this.checkCollisions(), 1);
     setStoppableInterval(() => this.checkThrowableObjects(), 1);
-    setStoppableInterval(() => this.checkCharacterIsDead(), 1);
+    setStoppableInterval(() => this.checkCharacterIsDead(), 250);
     setStoppableInterval(() => this.checkEnemyIsDead(), 250);
     setStoppableInterval(() => this.deleteEnemy(), 250);
   }
@@ -95,14 +94,14 @@ export class World {
   // Method to stop the game when the character is dead
   gameOver(isPlayerDead = false) {
     if (isPlayerDead && !this.isGameOver) {
+      this.isGameOver = true; // Set the gameOver variable to true
       console.log("Game Over!"); //! Log "Game Over!" to the console when the game is over (character is dead)
       setTimeout(() => stopGame(), 500); // Stop the game after 500 milliseconds
-      this.isGameOver = true; // Set the gameOver variable to true
       playSound(game_over_sound);
     } else if (!this.isGameOver) {
+      this.isGameOver = true; // Set the gameOver variable to true
       console.log("Gewonnen!"); //! Log "Game Over!" to the console when the game is over (character is dead)
       playSound(win_sound); //! Play the win sound when the game is over
-      this.isGameOver = true; // Set the gameOver variable to true
       setTimeout(() => this.removeAllEnemies(), 1000);
     }
   }
@@ -228,8 +227,9 @@ export class World {
   checkCollisionsSalasBottles() {
     this.level.salsaBottles.forEach((salsaBottle) => {
       if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
+        this.currentBottles++;
         this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1);
-        this.currentBottles++, this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
+        this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       }
     });
   }
@@ -238,8 +238,10 @@ export class World {
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && this.currentCoins < 10) {
+        playSound(coin_sound);
+        this.currentCoins++;
         this.level.coins.splice(this.level.coins.indexOf(coin), 1);
-        this.currentCoins++, playSound(coin_sound), this.coinsBar.setPercentage(this.currentCoins * 10);
+        this.coinsBar.setPercentage(this.currentCoins * 10);
       }
     });
   }

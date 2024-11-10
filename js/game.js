@@ -62,7 +62,6 @@ export async function startGame() {
   canvas = document.getElementById("canvas"); // get the canvas element
   world = new World(canvas, keyboard); // create a new world object
 }
-startGame(); // call the init function
 
 // Event listeners to handle key presses
 document.addEventListener("keydown", (e) => {

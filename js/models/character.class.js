@@ -2,7 +2,7 @@
 import { MovableObject } from "./movable-object-class.js";
 
 // import the setStoppableInterval function from the script.js file
-import { setStoppableInterval, userInteracted, playSound } from "../script.js";
+import { setStoppableInterval, playSound } from "../script.js";
 
 // Load the resetAlert function from the endboss.class.js file
 import { resetAlert } from "./endboss.class.js";
@@ -167,7 +167,7 @@ export class Character extends MovableObject {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
       hurt_sound.volume = 0; //! set the volume temporarily to 0 normal volume is 0.2
-      if (userInteracted) playSound(hurt_sound); //! set < 10000 temporarily
+      playSound(hurt_sound); //! set < 10000 temporarily
       snoring_sound.pause();
     }
   }

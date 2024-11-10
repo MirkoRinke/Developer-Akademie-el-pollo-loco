@@ -31,7 +31,7 @@ document.addEventListener(
 // Function to play a sound
 export function playSound(sound) {
   if (muteSounds) return;
-  sound.play();
+  if (userInteracted) sound.play();
   allSounds.push(sound);
 }
 

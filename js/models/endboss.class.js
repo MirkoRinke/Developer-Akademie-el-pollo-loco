@@ -102,12 +102,17 @@ export class Endboss extends MovableObject {
   manageEndbossMovement() {
     setStoppableInterval(() => {
       if (firstContact) {
-        if (this.x > characterPostion) {
-          this.x -= this.speed * 5; // Bewegt sich nach links
-          this.otherDirection = false;
+        const distance = Math.abs(this.x - characterPostion);
+        if (distance > this.speed * 5) {
+          if (this.x > characterPostion) {
+            this.x -= this.speed * 5;
+            this.otherDirection = false;
+          } else {
+            this.x += this.speed * 5;
+            this.otherDirection = true;
+          }
         } else {
-          this.x += this.speed * 5; // Bewegt sich nach rechts
-          this.otherDirection = true;
+          this.x = characterPostion;
         }
       }
     }, 1000 / 60);

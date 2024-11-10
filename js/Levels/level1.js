@@ -5,6 +5,7 @@ import { Endboss } from "../models/endboss.class.js";
 import { SalsaBottles } from "../models/salsa_bottles.class.js";
 import { Coins } from "../models/coins.class.js";
 import { Cloud } from "../models/cloud.class.js";
+import { VendingMachine } from "../models/vending-machine.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
 
@@ -12,9 +13,9 @@ import { Level } from "../models/level.class.js";
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.width;
 
-let currentEndboss = 1;
-let currentChickens = 10;
-let currentChickensSmall = 20;
+let currentEndboss = 0;
+let currentChickens = 0;
+let currentChickensSmall = 0;
 let currentSalsaBottles = 10;
 let currentCoins = 10;
 let currentClouds = 10;
@@ -73,4 +74,4 @@ for (let i = -1; i <= currentBackgroundObjects; i++) {
 }
 
 // Create a new Level with Chicken, Endboss, Cloud and BackgroundObjects
-export const level1 = new Level([...chickens, ...chickensSmall, ...endboss], [...salsaBottles], [...coins], [...clouds], backgroundObjects);
+export const level1 = new Level([...chickens, ...chickensSmall, ...endboss], [...salsaBottles], [...coins], [...clouds], [new VendingMachine()], backgroundObjects);

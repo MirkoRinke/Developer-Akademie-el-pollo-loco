@@ -26,12 +26,13 @@ export class DrawableObject {
       this.constructor.name === "Chicken" ||
       this.constructor.name === "ChickenSmall" ||
       this.constructor.name === "ThrowableObject" ||
-      this.constructor.name === "SalsaBottles"
+      this.constructor.name === "SalsaBottles" ||
+      this.constructor.name === "VendingMachine"
     ) {
       // Check if the object is a character or a chicken
       ctx.beginPath(); // Start drawing
-      ctx.lineWidth = "5"; // Set the line width
-      ctx.strokeStyle = "transparent"; // Set the line color
+      ctx.lineWidth = "2"; // Set the line width
+      ctx.strokeStyle = "transparent"; // Set the line color transparent
       ctx.rect(this.x, this.y, this.width, this.height); // Draw the rectangle around the object
       ctx.stroke(); // Finish drawing
     }

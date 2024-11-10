@@ -79,7 +79,15 @@ export class World {
     setStoppableInterval(() => this.checkCharacterIsDead(), 250);
     setStoppableInterval(() => this.checkEnemyIsDead(), 250);
     setStoppableInterval(() => this.deleteEnemy(), 250);
-    setStoppableInterval(() => this.checkAndSpawnSalsaBottles(), 1000);
+    // setStoppableInterval(() => this.checkAndSpawnSalsaBottles(), 1000);
+  }
+
+  checkCollisionsVendingMachine() {
+    this.level.vendingMachine.forEach((machine) => {
+      if (this.character.isColliding(machine)) {
+        this.checkAndSpawnSalsaBottles();
+      }
+    });
   }
 
   /**
@@ -88,12 +96,13 @@ export class World {
    * Also updates the coinsBar percentage based on the remaining coins.
    */
   checkAndSpawnSalsaBottles() {
-    if (this.currentCoins >= 5) {
-      for (let i = 0; i < 50; i++) {
-        this.level.salsaBottles.push(new SalsaBottles());
+    if (this.currentCoins >= 5 && this.currentBottles == 0) {
+      for (let i = 0; i <= 4; i++) {
+        this.currentBottles++;
       }
       this.currentCoins -= 5;
       this.coinsBar.setPercentage(this.currentCoins * 10);
+      this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
     }
   }
 
@@ -277,7 +286,7 @@ export class World {
    * salsa bottles, and coins.
    */
   checkCollisions() {
-    this.checkCollisionsEnemy(), this.checkCollisionsThrowableObjects(), this.checkCollisionsSalasBottles(), this.checkCollisionsCoins();
+    this.checkCollisionsEnemy(), this.checkCollisionsThrowableObjects(), this.checkCollisionsSalasBottles(), this.checkCollisionsCoins(), this.checkCollisionsVendingMachine();
   }
 
   /**

@@ -15,7 +15,7 @@ import { setStoppableInterval, stopGame, playSound } from "../script.js";
 import { checkCharacterCollision } from "./endboss.class.js";
 
 // Load the sounds from the script.js file
-import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound } from "../sounds.js";
+import { first_blood_sound, double_kill_sound, triple_kill_sound, rampage_sound, killshot_sound, dominating_sound, kill_streak_sound, chicken_death_sound, coin_sound } from "../sounds.js";
 
 // World class is used to create the game world
 export class World {
@@ -60,7 +60,6 @@ export class World {
     setStoppableInterval(() => this.checkThrowableObjects(), 1);
     setStoppableInterval(() => this.checkCharacterIsDead(), 1);
     setStoppableInterval(() => this.checkEnemyIsDead(), 250);
-
     setStoppableInterval(() => this.deleteEnemy(), 250);
   }
 
@@ -217,35 +216,31 @@ export class World {
 
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
-      // Für jeden Feind im enemies-Array des Level-Objekts
       if (this.character.isColliding(enemy) && enemy.energy > 0) {
-        // Wenn der Charakter mit dem Feind kollidiert und die Energie des Feindes größer als 0 ist
         if (this.character.isAbove(enemy)) {
-          // Überprüfen, ob der Charakter über dem Feind ist
-          enemy.hit(4); // Rufe die hit-Methode des Feindobjekts auf
+          enemy.hit(4);
         } else if (enemy.constructor.name === "Endboss") {
-          this.character.hit(4); // Rufe die hit-Methode des Charakterobjekts mit einem Multiplikator von 4 auf
+          this.character.hit(4);
         } else {
-          this.character.hit(); // Rufe die hit-Methode des Charakterobjekts auf
+          this.character.hit();
         }
-        this.statusBarHealth.setPercentage(this.character.energy); // Setze die Energie des Charakters in der Statusleiste
-        checkCharacterCollision(true, enemy.constructor.name); // Rufe die checkCharacterCollision-Funktion mit dem Wert true auf
+        this.statusBarHealth.setPercentage(this.character.energy);
+        checkCharacterCollision(true, enemy.constructor.name);
         return;
       }
-      checkCharacterCollision(false, enemy.constructor.name); // Rufe die checkCharacterCollision-Funktion mit dem Wert false auf
+      checkCharacterCollision(false, enemy.constructor.name);
     });
   }
 
   checkCollisionsThrowableObjects() {
     this.throwableObjects.forEach((throwableObject) => {
-      // Für jedes Wurfobjekt im throwableObjects-Array
       this.level.enemies.forEach((enemy) => {
         if (throwableObject.isColliding(enemy)) {
           if (enemy.constructor.name === "Endboss") {
-            enemy.hit(1); // Rufe die hit-Methode des Feindobjekts mit einem Multiplikator von 1 auf
-            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10); // Setze die Energie des Endbosses in der Statusleiste
+            enemy.hit(1);
+            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10);
           } else {
-            enemy.hit(); // Rufe die hit-Methode des Feindobjekts auf
+            enemy.hit();
           }
         }
       });
@@ -254,22 +249,21 @@ export class World {
 
   checkCollisionsSalasBottles() {
     this.level.salsaBottles.forEach((salsaBottle) => {
-      // Für jede Salsa-Flasche im salsaBottles-Array des Level-Objekts
       if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
-        this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1); // Entferne die Salsa-Flasche aus dem salsaBottles-Array des Level-Objekts
-        this.currentBottles++; // Erhöhe die aktuelle Anzahl der Flaschen um 1
-        this.salsaBottlesBar.setPercentage(this.currentBottles * 20); // Setze den Prozentsatz der Salsa-Flaschen-Leiste
+        this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1);
+        this.currentBottles++;
+        this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       }
     });
   }
 
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
-      // Für jede Münze im coins-Array des Level-Objekts
       if (this.character.isColliding(coin) && this.currentCoins < 10) {
-        this.level.coins.splice(this.level.coins.indexOf(coin), 1); // Entferne die Münze aus dem coins-Array des Level-Objekts
-        this.currentCoins++; // Erhöhe die aktuelle Anzahl der Münzen um 1
-        this.coinsBar.setPercentage(this.currentCoins * 10); // Setze den Prozentsatz der Münzleiste
+        this.level.coins.splice(this.level.coins.indexOf(coin), 1);
+        this.currentCoins++;
+        playSound(coin_sound);
+        this.coinsBar.setPercentage(this.currentCoins * 10);
       }
     });
   }

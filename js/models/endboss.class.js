@@ -30,6 +30,11 @@ export function resetAlert() {
   firstContact = true; // set the alertInterval variable to false
 }
 
+// Function to set the first contact with the end boss
+export function resetFirstContact() {
+  firstContact = false;
+}
+
 // Function to check character collision with the end boss
 export function checkCharacterCollision(colliding, enemy) {
   if (enemy === "Endboss") isColliding = colliding;

@@ -1,7 +1,7 @@
 // Load Chicken, Endboss, Cloud , BackgroundObjects and Level class from models folder
 import { Chicken } from "../models/chicken.class.js";
 import { ChickenSmall } from "../models/chicken-small.class.js";
-import { Endboss } from "../models/endboss.class.js";
+import { Endboss, resetFirstContact } from "../models/endboss.class.js";
 import { SalsaBottles } from "../models/salsa_bottles.class.js";
 import { Coins } from "../models/coins.class.js";
 import { Cloud } from "../models/cloud.class.js";
@@ -23,22 +23,22 @@ export let cloudsSpeed = 3;
 let currentBackgroundObjects = 4;
 export let level1;
 
-const endboss = [];
-const chickens = [];
-const chickensSmall = [];
-const salsaBottles = [];
-const coins = [];
-const clouds = [];
 const backgroundLayers = [
   "../../assets/images/background/layers/air.png",
   "../../assets/images/background/layers/3_third_layer/full.png",
   "../../assets/images/background/layers/2_second_layer/full.png",
   "../../assets/images/background/layers/1_first_layer/full.png",
 ];
-const backgroundObjects = [];
+let endboss = [],
+  chickens = [],
+  chickensSmall = [],
+  salsaBottles = [],
+  coins = [],
+  clouds = [],
+  backgroundObjects = [];
 
 export function initLevel1() {
-  console.log("updateLevel1");
+  resetFirstContact();
   createEndboss();
   createChickens();
   createChickensSmall();
@@ -51,6 +51,7 @@ export function initLevel1() {
 
 // Create X Endboss objects
 function createEndboss() {
+  endboss = [];
   for (let i = 0; i < currentEndboss; i++) {
     endboss.push(new Endboss());
   }
@@ -58,6 +59,7 @@ function createEndboss() {
 
 // Create X Chicken objects
 function createChickens() {
+  chickens = [];
   for (let i = 0; i < currentChickens; i++) {
     chickens.push(new Chicken());
   }
@@ -65,6 +67,7 @@ function createChickens() {
 
 // Create X ChickenSmall objects
 function createChickensSmall() {
+  chickensSmall = [];
   for (let i = 0; i < currentChickensSmall; i++) {
     chickensSmall.push(new ChickenSmall());
   }
@@ -72,6 +75,7 @@ function createChickensSmall() {
 
 // Create X SalsaBottles objects
 function createSalsaBottles() {
+  salsaBottles = [];
   for (let i = 0; i < currentSalsaBottles; i++) {
     salsaBottles.push(new SalsaBottles());
   }
@@ -79,6 +83,7 @@ function createSalsaBottles() {
 
 // Create X Coins objects
 function createCoins() {
+  coins = [];
   for (let i = 0; i < currentCoins; i++) {
     coins.push(new Coins());
   }
@@ -86,6 +91,7 @@ function createCoins() {
 
 // Create X Cloud objects
 function createClouds() {
+  clouds = [];
   for (let i = 0; i < currentClouds; i++) {
     clouds.push(new Cloud());
   }
@@ -93,6 +99,7 @@ function createClouds() {
 
 // Create X BackgroundObjects objects
 function createBackgroundObjects() {
+  backgroundObjects = [];
   for (let i = -1; i <= currentBackgroundObjects; i++) {
     backgroundLayers.forEach((layer) => {
       backgroundObjects.push(new BackgroundObjects(layer, (canvasWidth - 1) * i));

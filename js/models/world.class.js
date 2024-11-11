@@ -89,9 +89,8 @@ export class World {
     setStoppableInterval(() => this.checkCollisions(), 1);
     setStoppableInterval(() => this.checkThrowableObjects(), 1);
     setStoppableInterval(() => this.checkCharacterIsDead(), 250);
-    setStoppableInterval(() => this.checkEnemyIsDead(), 250);
+    setStoppableInterval(() => this.checkEndbossIsDead(), 250);
     setStoppableInterval(() => this.deleteEnemy(), 250);
-    // setStoppableInterval(() => this.checkAndSpawnSalsaBottles(), 1000);
   }
 
   checkCollisionsVendingMachine() {
@@ -103,9 +102,9 @@ export class World {
   }
 
   /**
-   * Checks if the current number of coins is greater than or equal to 5.
-   * If true, spawns 50 new SalsaBottles and deducts 5 coins from the currentCoins.
-   * Also updates the coinsBar percentage based on the remaining coins.
+   * Checks if the current number of coins is sufficient to spawn salsa bottles.
+   * If there are at least 5 coins and no bottles, spawns 5 salsa bottles,
+   * deducts 5 coins, plays a sound, and updates the UI bars for coins and bottles.
    */
   checkAndSpawnSalsaBottles() {
     if (this.currentCoins >= 5 && this.currentBottles == 0) {
@@ -134,12 +133,13 @@ export class World {
    *
    * @returns {boolean} - Returns true if an enemy is dead, otherwise undefined.
    */
-  checkEnemyIsDead() {
+  checkEndbossIsDead() {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead()) {
         (enemy.speed = 0), this.removeDeadEnemies(), this.playKillSounds();
         if (enemy.constructor.name === "Endboss") {
-          this.gameOver();
+          setTimeout(() => this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1), 2000);
+          setTimeout(() => this.gameOver(), 3000);
         }
         return true;
       }
@@ -164,35 +164,35 @@ export class World {
 
   gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
+    this.resetGameWorld();
     stopGame();
-    this.removeAllEnemies();
     playSound(game_over_sound);
     gameOverScreenRef.style.display = "block";
-    // setTimeout(() => {
-    //   gameOverScreenRef.style.display = "none";
-    //   startScreenRef.style.display = "block";
-    // }, 3000);
-    setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
+    setTimeout(() => {
+      gameOverScreenRef.style.display = "none";
+      startScreenRef.style.display = "block";
+    }, 3000);
   }
 
   gameOverEndbossDead(winScreenRef, startScreenRef) {
     this.isGameOver = true;
+    this.resetGameWorld();
     stopGame();
-    this.removeAllEnemies();
     playSound(win_sound);
     winScreenRef.style.display = "block";
-    // setTimeout(() => {
-    //   winScreenRef.style.display = "none";
-    //   startScreenRef.style.display = "block";
-    // }, 3000);
-    setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
+    setTimeout(() => {
+      winScreenRef.style.display = "none";
+      startScreenRef.style.display = "block";
+    }, 3000);
   }
 
   /**
    * Removes all enemies from the current level.
    */
-  removeAllEnemies() {
+  resetGameWorld() {
     this.level.enemies = [];
+    this.level.salsaBottles = [];
+    this.level.coins = [];
   }
 
   /**

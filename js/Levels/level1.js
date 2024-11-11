@@ -21,57 +21,81 @@ let currentCoins = 10;
 let currentClouds = 10;
 export let cloudsSpeed = 3;
 let currentBackgroundObjects = 4;
+export let level1;
 
 const endboss = [];
-for (let i = 0; i < currentEndboss; i++) {
-  endboss.push(new Endboss());
-}
-
-// Create X Chicken and 4 ChickenSmall objects
 const chickens = [];
-for (let i = 0; i < currentChickens; i++) {
-  chickens.push(new Chicken());
-}
-
-// Create X ChickenSmall objects
 const chickensSmall = [];
-for (let i = 0; i < currentChickensSmall; i++) {
-  chickensSmall.push(new ChickenSmall());
-}
-
-// Create X SalsaBottles objects
 const salsaBottles = [];
-for (let i = 0; i < currentSalsaBottles; i++) {
-  salsaBottles.push(new SalsaBottles());
-}
-
-// Create X Coins objects
 const coins = [];
-for (let i = 0; i < currentCoins; i++) {
-  coins.push(new Coins());
-}
-
-// Create X Cloud objects
 const clouds = [];
-for (let i = 0; i < currentClouds; i++) {
-  clouds.push(new Cloud());
-}
-
-// Create BackgroundObjects
 const backgroundLayers = [
   "../../assets/images/background/layers/air.png",
   "../../assets/images/background/layers/3_third_layer/full.png",
   "../../assets/images/background/layers/2_second_layer/full.png",
   "../../assets/images/background/layers/1_first_layer/full.png",
 ];
-
-// Create X BackgroundObjects objects
 const backgroundObjects = [];
-for (let i = -1; i <= currentBackgroundObjects; i++) {
-  backgroundLayers.forEach((layer) => {
-    backgroundObjects.push(new BackgroundObjects(layer, (canvasWidth - 1) * i));
-  });
+
+export function updateLevel1() {
+  console.log("updateLevel1");
+  createEndboss();
+  createChickens();
+  createChickensSmall();
+  createSalsaBottles();
+  createCoins();
+  createClouds();
+  createBackgroundObjects();
+  level1 = new Level([...chickens, ...chickensSmall, ...endboss], [...salsaBottles], [...coins], [...clouds], [new VendingMachine()], backgroundObjects);
 }
 
-// Create a new Level with Chicken, Endboss, Cloud and BackgroundObjects
-export const level1 = new Level([...chickens, ...chickensSmall, ...endboss], [...salsaBottles], [...coins], [...clouds], [new VendingMachine()], backgroundObjects);
+// Create X Endboss objects
+function createEndboss() {
+  for (let i = 0; i < currentEndboss; i++) {
+    endboss.push(new Endboss());
+  }
+}
+
+// Create X Chicken objects
+function createChickens() {
+  for (let i = 0; i < currentChickens; i++) {
+    chickens.push(new Chicken());
+  }
+}
+
+// Create X ChickenSmall objects
+function createChickensSmall() {
+  for (let i = 0; i < currentChickensSmall; i++) {
+    chickensSmall.push(new ChickenSmall());
+  }
+}
+
+// Create X SalsaBottles objects
+function createSalsaBottles() {
+  for (let i = 0; i < currentSalsaBottles; i++) {
+    salsaBottles.push(new SalsaBottles());
+  }
+}
+
+// Create X Coins objects
+function createCoins() {
+  for (let i = 0; i < currentCoins; i++) {
+    coins.push(new Coins());
+  }
+}
+
+// Create X Cloud objects
+function createClouds() {
+  for (let i = 0; i < currentClouds; i++) {
+    clouds.push(new Cloud());
+  }
+}
+
+// Create X BackgroundObjects objects
+function createBackgroundObjects() {
+  for (let i = -1; i <= currentBackgroundObjects; i++) {
+    backgroundLayers.forEach((layer) => {
+      backgroundObjects.push(new BackgroundObjects(layer, (canvasWidth - 1) * i));
+    });
+  }
+}

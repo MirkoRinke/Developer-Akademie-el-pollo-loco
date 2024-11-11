@@ -95,9 +95,7 @@ export class World {
 
   checkCollisionsVendingMachine() {
     this.level.vendingMachine.forEach((machine) => {
-      if (this.character.isColliding(machine)) {
-        this.checkAndSpawnSalsaBottles();
-      }
+      if (this.character.isColliding(machine)) this.checkAndSpawnSalsaBottles();
     });
   }
 
@@ -108,9 +106,7 @@ export class World {
    */
   checkAndSpawnSalsaBottles() {
     if (this.currentCoins >= 5 && this.currentBottles == 0) {
-      for (let i = 0; i <= 4; i++) {
-        this.currentBottles++;
-      }
+      this.currentBottles += 5;
       this.currentCoins -= 5;
       bottle_looting_sound.volume = 0.1;
       playSound(bottle_looting_sound);
@@ -164,7 +160,7 @@ export class World {
 
   gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
-    this.resetGameWorld();
+    // this.resetGameWorld();
     stopGame();
     playSound(game_over_sound);
     gameOverScreenRef.style.display = "block";
@@ -176,7 +172,7 @@ export class World {
 
   gameOverEndbossDead(winScreenRef, startScreenRef) {
     this.isGameOver = true;
-    this.resetGameWorld();
+    // this.resetGameWorld();
     stopGame();
     playSound(win_sound);
     winScreenRef.style.display = "block";
@@ -189,11 +185,11 @@ export class World {
   /**
    * Removes all enemies from the current level.
    */
-  resetGameWorld() {
-    this.level.enemies = [];
-    this.level.salsaBottles = [];
-    this.level.coins = [];
-  }
+  // resetGameWorld() {
+  //   this.level.enemies = [];
+  //   this.level.salsaBottles = [];
+  //   this.level.coins = [];
+  // }
 
   /**
    * Removes dead enemies from the level's enemies array.
@@ -240,9 +236,7 @@ export class World {
    * @method rampage
    */
   rampage() {
-    if (this.rampageCount >= 6) {
-      playSound(rampage_sound);
-    }
+    if (this.rampageCount >= 6) playSound(rampage_sound);
   }
 
   /**

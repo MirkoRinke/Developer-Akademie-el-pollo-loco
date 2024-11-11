@@ -150,16 +150,20 @@ export class World {
    * @param {boolean} [isPlayerDead=false] - Indicates whether the player is dead.
    */
   gameOver(isPlayerDead = false) {
+    const gameOverScreenRef = document.getElementById("game_over_screen");
+    const winScreenRef = document.getElementById("win_screen");
     if (isPlayerDead && !this.isGameOver) {
       this.isGameOver = true;
-      console.log("Game Over!");
-      setTimeout(() => stopGame(), 500);
+      stopGame();
       playSound(game_over_sound);
+      gameOverScreenRef.style.display = "block";
+      setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
     } else if (!this.isGameOver) {
       this.isGameOver = true;
-      console.log("Gewonnen!");
+      stopGame();
       playSound(win_sound);
-      setTimeout(() => this.removeAllEnemies(), 1000);
+      winScreenRef.style.display = "block";
+      setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
     }
   }
 

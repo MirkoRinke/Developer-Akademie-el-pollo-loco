@@ -60,10 +60,11 @@ export function stopGame() {
 window.stopGame = stopGame; //! make the stopGame function available globally temporarily
 
 // Initialize the world object
-export async function startGame() {
+export async function loadGameWorld() {
   canvas = document.getElementById("canvas"); // get the canvas element
   world = new World(canvas, keyboard); // create a new world object
 }
+window.loadGameWorld = loadGameWorld; // make the startGame function available globally temporarily
 
 // Event listeners to handle key presses
 document.addEventListener("keydown", (e) => {

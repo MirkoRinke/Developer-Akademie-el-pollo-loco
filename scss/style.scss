@@ -1,12 +1,82 @@
 body {
+  background-image: url("../assets/images/landing_page/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+
+.main-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(71, 71, 71);
-  color: white;
-}
 
-#canvas {
-  background-color: rgb(0, 0, 0);
+  .el-pollo-loco-logo {
+    height: 150px;
+    width: 150px;
+  }
+
+  .canvas-container {
+    position: relative;
+    .start_screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("../assets/images/landing_page/bg_canvas.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .game_over_screen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("../assets/images/landing_page/bg_canvas_game_over.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .win_screen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("../assets/images/landing_page/bg_canvas_win.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .canvas {
+      background-color: rgb(0, 0, 0);
+      box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+  }
+
+  .nav_bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .start_button {
+      height: 100px;
+      width: 200px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

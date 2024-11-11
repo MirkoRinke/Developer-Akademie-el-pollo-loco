@@ -25,6 +25,7 @@ import {
   win_sound,
   game_over_sound,
   bottle_looting_sound,
+  bottle_break_sound,
 } from "../sounds.js";
 
 export class World {
@@ -290,6 +291,7 @@ export class World {
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle), this.currentBottles--, this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       this.lastHit = currentTime;
+      setTimeout(() => playSound(bottle_break_sound), 1100);
     }
   }
 

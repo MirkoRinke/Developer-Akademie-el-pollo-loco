@@ -52,7 +52,6 @@ export class World {
 
   /**
    * Creates an instance of the World class.
-   *
    * @constructor
    * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
    * @param {Object} keyboard - The keyboard input handler.
@@ -76,7 +75,6 @@ export class World {
 
   /**
    * Starts the main game loop by setting up various intervals to check for game events.
-   *
    * The following intervals are set:
    * - Every 1 millisecond: Checks for collisions.
    * - Every 1 millisecond: Checks for throwable objects.
@@ -106,8 +104,7 @@ export class World {
    */
   checkAndSpawnSalsaBottles() {
     if (this.currentCoins >= 5 && this.currentBottles == 0) {
-      this.currentBottles += 5;
-      this.currentCoins -= 5;
+      (this.currentBottles += 5), (this.currentCoins -= 5);
       bottle_looting_sound.volume = 0.1;
       playSound(bottle_looting_sound);
       this.coinsBar.setPercentage(this.currentCoins * 10);
@@ -126,7 +123,6 @@ export class World {
    * Checks if any enemies in the level are dead. If an enemy is dead, it stops the enemy's movement,
    * removes the dead enemies from the level, and plays kill sounds. If the dead enemy is the Endboss,
    * it triggers the game over sequence.
-   *
    * @returns {boolean} - Returns true if an enemy is dead, otherwise undefined.
    */
   checkEndbossIsDead() {
@@ -144,52 +140,45 @@ export class World {
 
   /**
    * Handles the game over logic.
-   *
    * @param {boolean} [isPlayerDead=false] - Indicates whether the player is dead.
    */
   gameOver(isPlayerDead = false) {
     const gameOverScreenRef = document.getElementById("game_over_screen");
     const winScreenRef = document.getElementById("win_screen");
     const startScreenRef = document.getElementById("start_screen");
-    if (isPlayerDead && !this.isGameOver) {
-      this.gameOverPlayerDead(gameOverScreenRef, startScreenRef);
-    } else if (!this.isGameOver) {
-      this.gameOverEndbossDead(winScreenRef, startScreenRef);
+    if (!this.isGameOver) {
+      isPlayerDead ? this.gameOverPlayerDead(gameOverScreenRef, startScreenRef) : this.gameOverEndbossDead(winScreenRef, startScreenRef);
     }
   }
 
+  /**
+   * Ends the game when the player is dead and displays the game over screen.
+   *
+   * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
+   * @param {HTMLElement} startScreenRef - Reference to the start screen element.
+   */
   gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
-    // this.resetGameWorld();
     stopGame();
     playSound(game_over_sound);
     gameOverScreenRef.style.display = "block";
-    setTimeout(() => {
-      gameOverScreenRef.style.display = "none";
-      startScreenRef.style.display = "block";
-    }, 3000);
-  }
-
-  gameOverEndbossDead(winScreenRef, startScreenRef) {
-    this.isGameOver = true;
-    // this.resetGameWorld();
-    stopGame();
-    playSound(win_sound);
-    winScreenRef.style.display = "block";
-    setTimeout(() => {
-      winScreenRef.style.display = "none";
-      startScreenRef.style.display = "block";
-    }, 3000);
+    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 3000);
   }
 
   /**
-   * Removes all enemies from the current level.
+   * Handles the game over scenario when the player is dead.
+   * This function sets the game over state, stops the game, plays the game over sound,
+   * displays the game over screen, and then switches back to the start screen after a delay.
+   * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
+   * @param {HTMLElement} startScreenRef - Reference to the start screen element.
    */
-  // resetGameWorld() {
-  //   this.level.enemies = [];
-  //   this.level.salsaBottles = [];
-  //   this.level.coins = [];
-  // }
+  gameOverEndbossDead(winScreenRef, startScreenRef) {
+    this.isGameOver = true;
+    stopGame();
+    playSound(win_sound);
+    winScreenRef.style.display = "block";
+    setTimeout(() => ((winScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 3000);
+  }
 
   /**
    * Removes dead enemies from the level's enemies array.
@@ -219,7 +208,6 @@ export class World {
 
   /**
    * Plays various kill sounds and resets the rampage count after a delay.
-   *
    * This method triggers multiple sound effects related to different kill streaks
    * such as rampage, first blood, double kill, triple kill, kill streak, and dominating.
    * It also ensures that the sounds are played only once by resetting the `playOnlyOnce` flag.
@@ -232,7 +220,6 @@ export class World {
 
   /**
    * Triggers a rampage sound if the rampage count is 6 or more.
-   *
    * @method rampage
    */
   rampage() {
@@ -253,7 +240,6 @@ export class World {
   /**
    * Checks if two enemies have been killed and plays a double kill sound if true.
    * Resets the dead enemy count after playing the sound.
-   *
    * @method doubleKill
    * @memberof World
    */
@@ -326,13 +312,11 @@ export class World {
   /**
    * Checks for collisions between the character and enemies in the level.
    * If the character collides with an enemy, appropriate actions are taken based on the type of enemy.
-   *
    * - If the character is above the enemy, the enemy is hit with a damage of 4.
    * - If the character collides with the enemy from the side, the character is hit with damage:
    *   - 4 if the enemy is an Endboss
    *   - 1 if the enemy is any other type
    * - Updates the character's health status bar after a collision.
-   *
    * @method checkCollisionsEnemy
    */
   checkCollisionsEnemy() {
@@ -430,7 +414,6 @@ export class World {
 
   /**
    * Adds multiple objects to the map.
-   *
    * @param {Array} objects - An array of objects to be added to the map.
    */
   addObjectsToMap(objects) {
@@ -441,7 +424,6 @@ export class World {
    * Adds a movable object to the map, drawing it on the provided context.
    * If the object is facing the other direction, it flips the image before drawing
    * and flips it back after drawing.
-   *
    * @param {Object} movableObject - The object to be added to the map.
    * @param {boolean} movableObject.otherDirection - Indicates if the object is facing the other direction.
    * @param {function} movableObject.draw - Method to draw the object on the canvas context.
@@ -456,11 +438,9 @@ export class World {
 
   /**
    * Flips the given movable object's image horizontally.
-   *
    * This method saves the current state of the canvas context, translates the context
    * to the width of the movable object, scales the context horizontally by -1 to flip
    * the image, and then adjusts the x-coordinate of the movable object to reflect the flip.
-   *
    * @param {Object} movableObject - The object to be flipped.
    * @param {number} movableObject.width - The width of the movable object.
    * @param {number} movableObject.x - The x-coordinate of the movable object.
@@ -474,7 +454,6 @@ export class World {
 
   /**
    * Flips the image of the given movable object back to its original orientation.
-   *
    * @param {Object} movableObject - The object whose image is to be flipped.
    * @param {number} movableObject.x - The x-coordinate of the movable object.
    */

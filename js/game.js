@@ -3,6 +3,7 @@ let intervalId = []; // variable to store the interval ID
 // Load World and Keyboard classes from the models folder
 import { World } from "./models/world.class.js";
 import { Keyboard } from "./models/keyboard.class.js";
+import { updateLevel1 } from "./Levels/level1.js";
 
 let canvas; // canvas element
 let world; // world object
@@ -57,14 +58,13 @@ export function stopGame() {
     clearInterval(Id);
   });
 }
-window.stopGame = stopGame; //! make the stopGame function available globally temporarily
 
 // Initialize the world object
 export async function loadGameWorld() {
+  updateLevel1(); // call the updateLevel1 function to update the level
   canvas = document.getElementById("canvas"); // get the canvas element
   world = new World(canvas, keyboard); // create a new world object
 }
-window.loadGameWorld = loadGameWorld; // make the startGame function available globally temporarily
 
 // Event listeners to handle key presses
 document.addEventListener("keydown", (e) => {

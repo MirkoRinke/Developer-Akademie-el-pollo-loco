@@ -138,7 +138,9 @@ export class World {
     this.level.enemies.forEach((enemy) => {
       if (enemy.isDead()) {
         (enemy.speed = 0), this.removeDeadEnemies(), this.playKillSounds();
-        if (enemy.constructor.name === "Endboss") this.gameOver();
+        if (enemy.constructor.name === "Endboss") {
+          this.gameOver();
+        }
         return true;
       }
     });
@@ -154,34 +156,36 @@ export class World {
     const winScreenRef = document.getElementById("win_screen");
     const startScreenRef = document.getElementById("start_screen");
     if (isPlayerDead && !this.isGameOver) {
-      this.gameOverPlayerDead(gameOverScreenRef, winScreenRef, startScreenRef);
+      this.gameOverPlayerDead(gameOverScreenRef, startScreenRef);
     } else if (!this.isGameOver) {
-      this.gameOverEndbossDead(gameOverScreenRef, winScreenRef, startScreenRef);
+      this.gameOverEndbossDead(winScreenRef, startScreenRef);
     }
   }
 
-  gameOverPlayerDead(gameOverScreenRef, winScreenRef, startScreenRef) {
+  gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
     stopGame();
+    this.removeAllEnemies();
     playSound(game_over_sound);
     gameOverScreenRef.style.display = "block";
-    setTimeout(() => {
-      winScreenRef.style.display = "none";
-      startScreenRef.style.display = "block";
-    }, 3000);
-    // setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
+    // setTimeout(() => {
+    //   gameOverScreenRef.style.display = "none";
+    //   startScreenRef.style.display = "block";
+    // }, 3000);
+    setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
   }
 
-  gameOverEndbossDead(gameOverScreenRef, winScreenRef, startScreenRef) {
+  gameOverEndbossDead(winScreenRef, startScreenRef) {
     this.isGameOver = true;
     stopGame();
+    this.removeAllEnemies();
     playSound(win_sound);
     winScreenRef.style.display = "block";
-    setTimeout(() => {
-      winScreenRef.style.display = "none";
-      startScreenRef.style.display = "block";
-    }, 3000);
-    // setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
+    // setTimeout(() => {
+    //   winScreenRef.style.display = "none";
+    //   startScreenRef.style.display = "block";
+    // }, 3000);
+    setTimeout(() => (window.location.href = "index.html"), 3000); // Temporary solution to redirect to start screen
   }
 
   /**

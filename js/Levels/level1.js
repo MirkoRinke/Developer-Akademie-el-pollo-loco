@@ -37,7 +37,7 @@ const backgroundLayers = [
 ];
 const backgroundObjects = [];
 
-export function updateLevel1() {
+export function initLevel1() {
   console.log("updateLevel1");
   createEndboss();
   createChickens();

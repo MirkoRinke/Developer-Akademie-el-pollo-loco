@@ -25,6 +25,7 @@ const setUserInteracted = () => {
 
 // Function to set a stoppable interval
 export function setStoppableInterval(callback, delay) {
+  //! Only fix for the interval issue
   setTimeout(() => {
     // set a timeout to delay the execution of the interval by 0 milliseconds to allow the game to start
     let Id = setInterval(callback, delay);

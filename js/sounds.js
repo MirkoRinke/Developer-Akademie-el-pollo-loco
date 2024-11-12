@@ -1,3 +1,5 @@
+export let bg_sound = new Audio("../../assets/sounds/music/bg-music.mp3"); // background music
+
 export let bottle_break_sound = new Audio("../../assets/sounds/sfx/bottle-break.mp3"); // sound for breaking a bottle
 export let bottle_looting_sound = new Audio("../../assets/sounds/sfx/bottle-looting.mp3"); // sound for looting a bottle
 

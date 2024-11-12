@@ -1,0 +1,10 @@
+# Ordner ignorieren
+.vscode/
+node_modules/
+docs/
+
+# Dateien ignorieren
+jsdoc.json
+package-lock.json
+package.json
+

@@ -13,9 +13,9 @@ import { Level } from "../models/level.class.js";
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.width;
 
-let currentEndboss = 1;
-let currentChickens = 10;
-let currentChickensSmall = 20;
+let currentEndboss = 0;
+let currentChickens = 0;
+let currentChickensSmall = 0;
 let currentSalsaBottles = 10;
 let currentCoins = 10;
 let currentClouds = 10;

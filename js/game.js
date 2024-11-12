@@ -4,6 +4,7 @@ let intervalId = []; // variable to store the interval ID
 import { World } from "./models/world.class.js";
 import { Keyboard } from "./models/keyboard.class.js";
 import { initLevel1 } from "./Levels/level1.js";
+import { bg_sound } from "./sounds.js";
 
 let canvas; // canvas element
 let world; // world object
@@ -45,12 +46,17 @@ export function playSound(sound, volume = 0.5) {
 
 // Function to stop all sounds
 export function toggleAllSounds() {
+  const muteSoundRef = document.getElementById("mute_sound");
+  const unmuteSoundRef = document.getElementById("unmute_sound");
+  muteSoundRef.style.display = muteSounds ? "block" : "none";
+  unmuteSoundRef.style.display = muteSounds ? "none" : "block";
   allSounds.forEach((sound) => {
     sound.pause();
     sound.currentTime = 0;
   });
   allSounds = [];
   muteSounds = !muteSounds;
+  if (!muteSounds) playSound(bg_sound, 0.05);
 }
 window.toggleAllSounds = toggleAllSounds; //! make the stopAllSounds function available globally temporarily
 

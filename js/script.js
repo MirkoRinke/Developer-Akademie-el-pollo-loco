@@ -1,4 +1,14 @@
-import { loadGameWorld } from "./game.js";
+import { loadGameWorld, playSound } from "./game.js";
+import { bg_sound } from "./sounds.js";
+
+function playBgSound() {
+  setTimeout(() => playSound(bg_sound, 0.05), 1); // play the background music
+}
+
+document.addEventListener("click", function playOnFirstClick() {
+  playBgSound();
+  document.removeEventListener("click", playOnFirstClick);
+});
 
 function startGame() {
   const startScreenRef = document.getElementById("start_screen");

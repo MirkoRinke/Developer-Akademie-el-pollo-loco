@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-image: url("../assets/images/landing_page/bg.png");
   background-color: rgb(244, 183, 124);
@@ -21,10 +27,22 @@ body {
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@mixin buttonStyle {
+  background-color: rgb(245, 199, 149);
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1));
+  border: 4px solid rgb(194, 104, 70);
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+}
+
+@mixin displayFlexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main_content {
@@ -46,9 +64,7 @@ body {
 
   .canvas_container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayFlexCenter;
 
     @media screen and (max-width: 1000px) and (orientation: portrait) {
       display: none;
@@ -94,6 +110,14 @@ body {
       background-repeat: no-repeat;
     }
 
+    .canvas {
+      display: block;
+      background-color: rgb(0, 0, 0);
+      box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.5);
+      max-height: 100dvh;
+      max-width: 100%;
+    }
+
     .game_control {
       display: none;
       position: absolute;
@@ -135,19 +159,28 @@ body {
       }
     }
 
-    .canvas {
-      display: block;
-      background-color: rgb(0, 0, 0);
-      box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.5);
-      max-height: 100dvh;
-      max-width: 100%;
+    .request_fullscreen {
+      @include buttonStyle;
+      @include displayFlexCenter;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1;
+
+      & svg {
+        height: 80%;
+        width: 80%;
+        fill: rgb(0, 0, 0);
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 
   .control_description {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayFlexCenter;
     gap: 20px;
     width: 1280px;
     width: 100%;
@@ -158,9 +191,7 @@ body {
     }
 
     .description {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include displayFlexCenter;
       gap: 10px;
       color: black;
       font-weight: bold;
@@ -171,14 +202,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 4px solid rgb(194, 104, 70);
-        border-radius: 10px;
-        background-color: rgb(245, 199, 149);
-        height: 40px;
-        width: 40px;
-        color: black;
-        font-weight: bold;
-        font-size: 18px;
+        @include buttonStyle;
       }
     }
   }

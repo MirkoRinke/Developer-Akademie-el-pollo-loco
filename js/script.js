@@ -29,3 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+function toggleFullscreen() {
+  const canvas = document.getElementById("canvas");
+  canvas.requestFullscreen();
+}
+
+window.toggleFullscreen = toggleFullscreen; // make the toggleFullscreen function available globally temporarily

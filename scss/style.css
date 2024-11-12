@@ -54,6 +54,9 @@ body {
   width: 100px;
   margin-block: 25px;
 }
+.main_content .el_pollo_loco_logo:hover {
+  cursor: pointer;
+}
 @media (max-width: 1000px) {
   .main_content .el_pollo_loco_logo {
     justify-content: center;

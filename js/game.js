@@ -35,10 +35,11 @@ export function setStoppableInterval(callback, delay) {
 }
 
 // Function to play a sound
-export function playSound(sound, volume = 0.5) {
+export function playSound(sound, volume = 0.5, loop = false) {
   if (userInteracted === true) {
     if (muteSounds) return;
     sound.volume = volume;
+    sound.loop = loop;
     sound.play();
     allSounds.push(sound);
   }
@@ -56,7 +57,7 @@ export function toggleAllSounds() {
   });
   allSounds = [];
   muteSounds = !muteSounds;
-  if (!muteSounds) playSound(bg_sound, 0.05);
+  if (!muteSounds) playSound(bg_sound, 0.05, true);
 }
 window.toggleAllSounds = toggleAllSounds; //! make the stopAllSounds function available globally temporarily
 

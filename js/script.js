@@ -2,7 +2,7 @@ import { loadGameWorld, playSound } from "./game.js";
 import { bg_sound } from "./sounds.js";
 
 function playBgSound() {
-  setTimeout(() => playSound(bg_sound, 0.05), 1); // play the background music
+  setTimeout(() => playSound(bg_sound, 0.05, true), 1); // play the background music
 }
 
 document.addEventListener("click", function playOnFirstClick() {

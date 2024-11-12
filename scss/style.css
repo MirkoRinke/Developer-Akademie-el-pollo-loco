@@ -225,12 +225,7 @@ body {
   top: 10px;
   right: 50%;
   transform: translateX(50%);
-  z-index: 9999;
-}
-@media (max-width: 1000px) {
-  .main_content .canvas_container .toggleSound {
-    display: none;
-  }
+  z-index: 10;
 }
 .main_content .canvas_container .toggleSound .unmute_sound {
   display: none;

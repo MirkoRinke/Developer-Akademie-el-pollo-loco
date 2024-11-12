@@ -214,11 +214,7 @@ body {
       top: 10px;
       right: 50%;
       transform: translateX(50%);
-      z-index: 9999;
-
-      @media (max-width: 1000px) {
-        display: none;
-      }
+      z-index: 10;
 
       .unmute_sound {
         display: none;

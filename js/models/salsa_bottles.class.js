@@ -3,6 +3,7 @@ import { MovableObject } from "./movable-object-class.js";
 // Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
+const canvasWidth = canvas.width;
 
 export class SalsaBottles extends MovableObject {
   height = 60; // height of the throwable object (salsa bottle)
@@ -11,6 +12,6 @@ export class SalsaBottles extends MovableObject {
 
   constructor() {
     super().loadImage("../../assets/images/items/salsa_bottle/1_salsa_bottle_on_ground.png"); // Load the image of the throwable object (salsa bottle)
-    this.x = 200 + Math.random() * 1800; // Set the x position of the throwable object (salsa bottle) to a random value
+    this.x = 200 + Math.random() * (canvasWidth * 2); // Set the x position of the throwable object (salsa bottle) to a random value
   }
 }

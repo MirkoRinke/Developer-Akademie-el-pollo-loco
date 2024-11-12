@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Sour Gummy";
+  src: url("../assets/fonts/SourGummy-VariableFont_wdth,wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+}
+@font-face {
+  font-family: "Sour Gummy";
+  src: url("../assets/fonts/SourGummy-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 100 900;
+}
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +24,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   color: white;
+  font-family: "Sour Gummy", sans-serif;
 }
 @media screen and (max-width: 1000px) and (orientation: portrait) {
   body {
@@ -82,6 +95,7 @@ body {
   background-image: url("../assets/images/landing_page/bg_canvas_game_over.png");
   background-size: cover;
   background-repeat: no-repeat;
+  z-index: 2;
 }
 .main_content .canvas_container .win_screen {
   display: none;
@@ -93,6 +107,7 @@ body {
   background-image: url("../assets/images/landing_page/bg_canvas_win.png");
   background-size: cover;
   background-repeat: no-repeat;
+  z-index: 2;
 }
 .main_content .canvas_container .canvas {
   display: block;
@@ -173,6 +188,11 @@ body {
   bottom: 10px;
   right: 10px;
   z-index: 1;
+}
+@media (max-width: 1000px) {
+  .main_content .canvas_container .request_fullscreen {
+    display: none;
+  }
 }
 .main_content .canvas_container .request_fullscreen svg {
   height: 80%;

@@ -10,3 +10,22 @@ function startGame() {
   loadGameWorld();
 }
 window.startGame = startGame; // make the startGame function available globally temporarily
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = [
+    { id: "move-left", key: "ArrowLeft" },
+    { id: "move-right", key: "ArrowRight" },
+    { id: "jump", key: " " },
+    { id: "throw", key: "f" },
+  ];
+
+  buttons.forEach(({ id, key }) => {
+    const button = document.getElementById(id);
+    button.addEventListener("touchstart", () => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key }));
+    });
+    button.addEventListener("touchend", () => {
+      document.dispatchEvent(new KeyboardEvent("keyup", { key }));
+    });
+  });
+});

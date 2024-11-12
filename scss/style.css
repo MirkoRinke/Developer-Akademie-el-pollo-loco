@@ -34,16 +34,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 .main-content .el-pollo-loco-logo {
-  height: 150px;
-  width: 150px;
-  margin-bottom: 50px;
+  height: 100px;
+  width: 100px;
+  margin-block: 25px;
 }
 @media (max-width: 1200px) {
   .main-content .el-pollo-loco-logo {
+    justify-content: center;
     display: none;
   }
 }
@@ -97,10 +97,10 @@ body {
 .main-content .canvas-container .game-control {
   display: none;
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   justify-content: space-between;
   width: 100%;
-  padding-inline: 50px;
+  padding-inline: 10px;
 }
 @media (max-width: 1000px) {
   .main-content .canvas-container .game-control {
@@ -115,36 +115,36 @@ body {
 .main-content .canvas-container .game-control .controls_left .move-left,
 .main-content .canvas-container .game-control .controls_left .move-right,
 .main-content .canvas-container .game-control .controls_left .jump,
-.main-content .canvas-container .game-control .controls_left .attack,
+.main-content .canvas-container .game-control .controls_left .throw,
 .main-content .canvas-container .game-control .controls_right .move-left,
 .main-content .canvas-container .game-control .controls_right .move-right,
 .main-content .canvas-container .game-control .controls_right .jump,
-.main-content .canvas-container .game-control .controls_right .attack {
+.main-content .canvas-container .game-control .controls_right .throw {
   border: 4px solid rgb(194, 104, 70);
   border-radius: 50%;
   background-color: rgb(245, 199, 149);
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
 }
 .main-content .canvas-container .game-control .controls_left .move-left svg,
 .main-content .canvas-container .game-control .controls_left .move-right svg,
 .main-content .canvas-container .game-control .controls_left .jump svg,
-.main-content .canvas-container .game-control .controls_left .attack svg,
+.main-content .canvas-container .game-control .controls_left .throw svg,
 .main-content .canvas-container .game-control .controls_right .move-left svg,
 .main-content .canvas-container .game-control .controls_right .move-right svg,
 .main-content .canvas-container .game-control .controls_right .jump svg,
-.main-content .canvas-container .game-control .controls_right .attack svg {
+.main-content .canvas-container .game-control .controls_right .throw svg {
   height: 100%;
   width: 100%;
 }
 .main-content .canvas-container .game-control .controls_left .move-left img,
 .main-content .canvas-container .game-control .controls_left .move-right img,
 .main-content .canvas-container .game-control .controls_left .jump img,
-.main-content .canvas-container .game-control .controls_left .attack img,
+.main-content .canvas-container .game-control .controls_left .throw img,
 .main-content .canvas-container .game-control .controls_right .move-left img,
 .main-content .canvas-container .game-control .controls_right .move-right img,
 .main-content .canvas-container .game-control .controls_right .jump img,
-.main-content .canvas-container .game-control .controls_right .attack img {
+.main-content .canvas-container .game-control .controls_right .throw img {
   height: 100%;
   width: 100%;
   transform: rotate(10deg);

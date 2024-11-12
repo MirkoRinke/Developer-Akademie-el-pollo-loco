@@ -72,8 +72,6 @@ export async function loadGameWorld() {
 document.addEventListener("keydown", (e) => {
   if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = true; // set RIGHT to true if the right arrow key is pressed
   if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = true; // set LEFT to true if the left arrow key is pressed
-  if (e.key === "w" || e.key == "ArrowUp") keyboard.UP = true; // set UP to true if the up arrow key is pressed
-  if (e.key === "s" || e.key == "ArrowDown") keyboard.DOWN = true; // set DOWN to true if the down arrow key is pressed
   if (e.key === " ") keyboard.JUMP = true; // set JUMP to true if the space key is pressed
   if (e.key === "f") keyboard.THRO = true; // set D to true if the d key is pressed
 });
@@ -82,8 +80,6 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keyup", (e) => {
   if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = false; // set RIGHT to false if the right arrow key is released
   if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = false; // set LEFT to false if the left arrow key is released
-  if (e.key === "w" || e.key == "ArrowUp") keyboard.UP = false; // set UP to false if the up arrow key is released
-  if (e.key === "s" || e.key == "ArrowDown") keyboard.DOWN = false; // set DOWN to false if the down arrow key is released
   if (e.key === " ") keyboard.JUMP = false; // set JUMP to false if the space key is released
   if (e.key === "f") keyboard.THRO = false; // set D to false if the d key is released
 });

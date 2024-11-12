@@ -31,15 +31,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
 
   .el-pollo-loco-logo {
-    height: 150px;
-    width: 150px;
-    margin-bottom: 50px;
+    height: 100px;
+    width: 100px;
+    margin-block: 25px;
 
     @media (max-width: 1200px) {
+      justify-content: center;
       display: none;
     }
   }
@@ -97,10 +97,10 @@ body {
     .game-control {
       display: none;
       position: absolute;
-      bottom: 10px;
+      bottom: 5px;
       justify-content: space-between;
       width: 100%;
-      padding-inline: 50px;
+      padding-inline: 10px;
 
       @media (max-width: 1000px) {
         display: flex;
@@ -114,12 +114,12 @@ body {
         .move-left,
         .move-right,
         .jump,
-        .attack {
+        .throw {
           border: 4px solid rgb(194, 104, 70);
           border-radius: 50%;
           background-color: rgb(245, 199, 149);
-          height: 40px;
-          width: 40px;
+          height: 50px;
+          width: 50px;
 
           & svg {
             height: 100%;

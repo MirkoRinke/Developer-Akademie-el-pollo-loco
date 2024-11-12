@@ -16,10 +16,31 @@
         <div id="game_over_screen" class="game_over_screen"></div>
         <div id="win_screen" class="win_screen"></div>
         <canvas id="canvas" class="canvas" width="1280" height="720"></canvas>
+        <nav class="game-control">
+          <div class="controls_left">
+            <button class="move-left">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+              </svg>
+            </button>
+            <button class="move-right">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+              </svg>
+            </button>
+          </div>
+          <div class="controls_right">
+            <button class="jump">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z" />
+              </svg>
+            </button>
+            <button class="attack">
+              <img src="./assets/images/items/salsa_bottle/salsa_bottle.png" alt="Salsa Bottle" />
+            </button>
+          </div>
+        </nav>
       </div>
-      <nav class="nav_bar">
-        <!-- <img onclick="startGame()" class="start_button" src="./assets/images/landing_page/start_game.png" alt="Start Game" /> -->
-      </nav>
     </main>
   </body>
 </html>

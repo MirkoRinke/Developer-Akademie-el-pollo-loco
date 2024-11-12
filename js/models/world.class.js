@@ -1,6 +1,5 @@
 /**
  * Importing necessary classes and functions for the World class.
- *
  * @module WorldDependencies
  */
 import { Character } from "./character.class.js";
@@ -10,6 +9,7 @@ import { SalsaBottlesBar } from "./salsa-bottles-bar.class.js";
 import { CoinsBar } from "./coins-bar.class.js";
 import { StatusBarEndbossHealth } from "./status-bar-endboss-health.class.js";
 import { VendingMachine } from "./vending-machine.class.js";
+import { DangerShield } from "./danger_shield.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 import { setStoppableInterval, stopGame, playSound } from "../game.js";
 import { checkCharacterCollision } from "./endboss.class.js";
@@ -40,6 +40,7 @@ export class World {
   coinsBar = new CoinsBar();
   statusBarEndbossHealth = new StatusBarEndbossHealth();
   vendingMachine = new VendingMachine();
+  dangerShield = new DangerShield();
   throwableObjects = [];
   salsaBottles = [];
   coins = [];
@@ -394,6 +395,7 @@ export class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.vendingMachine);
+    this.addToMap(this.dangerShield);
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBarHealth);
     this.addToMap(this.salsaBottlesBar);

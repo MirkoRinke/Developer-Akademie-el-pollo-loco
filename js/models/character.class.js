@@ -106,7 +106,7 @@ export class Character extends MovableObject {
   checkCharacterPosition() {
     setStoppableInterval(() => {
       characterPostion = this.x;
-      if (this.x > canvasWidth * 1.8) {
+      if (this.x > canvasWidth * 1.7) {
         resetAlert();
       }
     }, 200);

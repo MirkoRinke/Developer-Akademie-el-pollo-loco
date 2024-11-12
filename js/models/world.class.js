@@ -159,10 +159,10 @@ export class World {
    */
   gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
-    stopGame();
+    setTimeout(() => stopGame(), 100);
     playSound(game_over_sound);
-    gameOverScreenRef.style.display = "block";
-    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 3000);
+    setTimeout(() => (gameOverScreenRef.style.display = "block"), 12000);
+    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 16000);
   }
 
   /**
@@ -327,7 +327,7 @@ export class World {
       }
       if (this.character.isAbove(enemy)) enemy.hit(4);
       else {
-        this.character.hit(enemy.constructor.name === "Endboss" ? 4 : 1);
+        this.character.hit(enemy.constructor.name === "Endboss" ? 10 : 2); //! 10 damage for Endboss, 5 for other enemies
         checkCharacterCollision(true, enemy.constructor.name);
         this.statusBarHealth.setPercentage(this.character.energy);
       }

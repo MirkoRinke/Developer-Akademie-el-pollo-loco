@@ -105,8 +105,7 @@ export class World {
   checkAndSpawnSalsaBottles() {
     if (this.currentCoins >= 5 && this.currentBottles == 0) {
       (this.currentBottles += 5), (this.currentCoins -= 5);
-      bottle_looting_sound.volume = 0.1;
-      playSound(bottle_looting_sound);
+      playSound(bottle_looting_sound, 0.1);
       this.coinsBar.setPercentage(this.currentCoins * 10);
       this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
     }
@@ -296,7 +295,7 @@ export class World {
       let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle), this.currentBottles--, this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       this.lastHit = currentTime;
-      setTimeout(() => playSound(bottle_break_sound), 1100);
+      setTimeout(() => playSound(bottle_break_sound, 0.1), 1100);
     }
   }
 
@@ -360,8 +359,7 @@ export class World {
     this.level.salsaBottles.forEach((salsaBottle) => {
       if (this.character.isColliding(salsaBottle) && this.currentBottles < 5) {
         this.currentBottles++;
-        bottle_looting_sound.volume = 0.1;
-        playSound(bottle_looting_sound);
+        playSound(bottle_looting_sound, 0.1);
         this.level.salsaBottles.splice(this.level.salsaBottles.indexOf(salsaBottle), 1);
         this.salsaBottlesBar.setPercentage(this.currentBottles * 20);
       }

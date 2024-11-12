@@ -34,9 +34,10 @@ export function setStoppableInterval(callback, delay) {
 }
 
 // Function to play a sound
-export function playSound(sound) {
+export function playSound(sound, volume = 0.5) {
   if (userInteracted === true) {
     if (muteSounds) return;
+    sound.volume = volume;
     sound.play();
     allSounds.push(sound);
   }

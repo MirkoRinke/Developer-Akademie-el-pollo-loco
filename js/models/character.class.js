@@ -164,8 +164,7 @@ export class Character extends MovableObject {
     if (this.isHurt()) {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
-      hurt_sound.volume = 0.1; //! set the volume temporarily to 0 normal volume is 0.2
-      playSound(hurt_sound);
+      playSound(hurt_sound, 0.1);
     }
   }
 
@@ -197,8 +196,7 @@ export class Character extends MovableObject {
   }
 
   playSnoringSound() {
-    snoring_sound.volume = 0.1; //! set the volume temporarily to 0 normal volume is 0.1
-    playSound(snoring_sound);
+    playSound(snoring_sound, 0.1);
   }
 
   playerMoving() {

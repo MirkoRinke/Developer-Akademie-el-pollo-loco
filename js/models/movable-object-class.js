@@ -112,7 +112,6 @@ export class MovableObject extends DrawableObject {
   // The jump method will be used to make the object jump in the air
   jump() {
     this.speedY = 30;
-    jump_sound.volume = 0.1;
-    playSound(jump_sound);
+    playSound(jump_sound, 0.1);
   }
 }

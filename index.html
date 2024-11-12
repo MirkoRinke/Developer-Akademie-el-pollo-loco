@@ -9,21 +9,21 @@
     <link rel="stylesheet" href="./scss/style.css" />
   </head>
   <body>
-    <main class="main-content">
-      <img class="el-pollo-loco-logo" src="./assets/images/landing_page/el_pollo_loco.png" alt="El Pollo Loco" />
-      <div class="canvas-container">
+    <main class="main_content">
+      <img class="el_pollo_loco_logo" src="./assets/images/landing_page/el_pollo_loco.png" alt="El Pollo Loco" />
+      <div class="canvas_container">
         <div onclick="startGame()" id="start_screen" class="start_screen"></div>
         <div id="game_over_screen" class="game_over_screen"></div>
         <div id="win_screen" class="win_screen"></div>
         <canvas id="canvas" class="canvas" width="1280" height="720"></canvas>
-        <nav class="game-control">
+        <nav class="game_control">
           <div class="controls_left">
-            <button id="move-left" class="move-left">
+            <button id="move_left" class="move_left">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                 <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
               </svg>
             </button>
-            <button id="move-right" class="move-right">
+            <button id="move_right" class="move_right">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                 <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
               </svg>
@@ -40,6 +40,32 @@
             </button>
           </div>
         </nav>
+      </div>
+      <div class="control_description">
+        <div class="description">
+          <span class="control_button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+              <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+            </svg>
+          </span>
+          <p>Bewegt den Spieler nach links</p>
+        </div>
+        <div class="description">
+          <span class="control_button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+              <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+            </svg>
+          </span>
+          <p>Bewegt den Spieler nach rechts</p>
+        </div>
+        <div class="description">
+          <span class="control_button">[ ]</span>
+          <p>Lässt den Spieler springen</p>
+        </div>
+        <div class="description">
+          <span class="control_button">F</span>
+          <p>Wirft eine Salsa-Flasche</p>
+        </div>
       </div>
     </main>
   </body>

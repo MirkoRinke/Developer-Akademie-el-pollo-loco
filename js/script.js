@@ -13,8 +13,8 @@ window.startGame = startGame; // make the startGame function available globally 
 
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = [
-    { id: "move-left", key: "ArrowLeft" },
-    { id: "move-right", key: "ArrowRight" },
+    { id: "move_left", key: "ArrowLeft" },
+    { id: "move_right", key: "ArrowRight" },
     { id: "jump", key: " " },
     { id: "throw", key: "f" },
   ];

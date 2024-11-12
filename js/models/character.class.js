@@ -213,6 +213,7 @@ export class Character extends MovableObject {
     if (!this.isDead()) {
       this.moveRight();
       snoring_sound.pause();
+      snoring_sound.currentTime = 0;
       playSound(walking_sound);
       this.otherDirection = false;
       characterDirection = "right";
@@ -229,6 +230,7 @@ export class Character extends MovableObject {
     if (!this.isDead()) {
       this.moveLeft();
       snoring_sound.pause();
+      snoring_sound.currentTime = 0;
       playSound(walking_sound);
       this.otherDirection = true;
       characterDirection = "left";

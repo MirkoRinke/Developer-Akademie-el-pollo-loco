@@ -113,6 +113,7 @@ export class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 30;
     snoring_sound.pause();
+    snoring_sound.currentTime = 0;
     playSound(jump_sound, 0.1);
   }
 }

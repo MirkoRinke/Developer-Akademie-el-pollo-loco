@@ -104,8 +104,8 @@ export class World {
    * deducts 5 coins, plays a sound, and updates the UI bars for coins and bottles.
    */
   checkAndSpawnSalsaBottles() {
-    if (this.currentCoins >= 5 && this.currentBottles == 0) {
-      (this.currentBottles += 5), (this.currentCoins -= 5);
+    if (this.currentCoins >= 1 && this.currentBottles <= 4) {
+      (this.currentBottles += 1), (this.currentCoins -= 1);
       playSound(bottle_looting_sound, 0.1);
       this.coinsBar.setPercentage(this.currentCoins * 10);
       this.salsaBottlesBar.setPercentage(this.currentBottles * 20);

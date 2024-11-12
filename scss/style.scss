@@ -1,24 +1,58 @@
 body {
   background-image: url("../assets/images/landing_page/bg.png");
+  background-color: rgb(244, 183, 124);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position: center;
   color: white;
+
+  @media screen and (max-width: 1000px) and (orientation: portrait) {
+    background-image: url("../assets/images/landing_page/rotate_device.jpg");
+    background-position: 50% 30%;
+  }
+
+  @media screen and (max-width: 800px) and (orientation: portrait) {
+    background-position: center;
+  }
+
+  @media screen and (max-width: 400px) and (orientation: portrait) {
+    background-size: 100% 100%;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 100vh;
 
   .el-pollo-loco-logo {
     height: 150px;
     width: 150px;
+    margin-bottom: 50px;
+
+    @media (max-width: 1000px) {
+      display: none;
+      justify-content: center;
+    }
   }
 
   .canvas-container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 1000px) and (orientation: portrait) {
+      display: none;
+    }
 
     .start_screen {
       position: absolute;
@@ -29,7 +63,6 @@ body {
       background-image: url("../assets/images/landing_page/bg_canvas.png");
       background-size: cover;
       background-repeat: no-repeat;
-      background-size: auto;
 
       &:hover {
         cursor: pointer;
@@ -46,7 +79,6 @@ body {
       background-image: url("../assets/images/landing_page/bg_canvas_game_over.png");
       background-size: cover;
       background-repeat: no-repeat;
-      background-size: auto;
     }
 
     .win_screen {
@@ -59,13 +91,14 @@ body {
       background-image: url("../assets/images/landing_page/bg_canvas_win.png");
       background-size: cover;
       background-repeat: no-repeat;
-      background-size: auto;
     }
 
     .canvas {
+      display: block;
       background-color: rgb(0, 0, 0);
       box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.5);
-      margin-bottom: 20px;
+      max-height: 100dvh;
+      max-width: 100%;
     }
   }
 

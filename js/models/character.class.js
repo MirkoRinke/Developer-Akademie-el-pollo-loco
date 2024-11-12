@@ -164,6 +164,8 @@ export class Character extends MovableObject {
     if (this.isHurt()) {
       // check if the character is hurt and play the being hurt animation
       this.playAnimation(this.IMAGES_HURT);
+      snoring_sound.pause();
+      snoring_sound.currentTime = 0;
       playSound(hurt_sound, 0.1);
     }
   }

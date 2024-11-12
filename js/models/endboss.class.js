@@ -47,6 +47,7 @@ export class Endboss extends MovableObject {
   width = 350; // width of the end boss
   y = canvasHeight - this.height - 25; // y position of the end boss
   energy = 10; // energy of the chicken
+  multiplier = 20; // multiplier for the speed of the end boss
 
   // Array of images for the end boss walk animation
   IMAGES_ALERT = [
@@ -108,12 +109,12 @@ export class Endboss extends MovableObject {
     setStoppableInterval(() => {
       if (firstContact) {
         const distance = Math.abs(this.x - characterPostion);
-        if (distance > this.speed * 5) {
+        if (distance > this.speed * this.multiplier) {
           if (this.x > characterPostion) {
-            this.x -= this.speed * 5;
+            this.x -= this.speed * this.multiplier;
             this.otherDirection = false;
           } else {
-            this.x += this.speed * 5;
+            this.x += this.speed * this.multiplier;
             this.otherDirection = true;
           }
         } else {

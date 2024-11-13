@@ -25,7 +25,7 @@ export class Coins extends MovableObject {
     super().loadImage("../../assets/images/items/coin/coin_1.png");
     this.loadImages(this.IMAGES_ROTATE);
     this.x = 200 + Math.random() * (canvasWidth * 2);
-    this.y = canvasHeight / 2.4 + Math.random() * 250;
+    this.y = canvasHeight / 2.3 + Math.random() * 100;
     this.animate();
   }
 

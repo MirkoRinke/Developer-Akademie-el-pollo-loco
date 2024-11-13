@@ -1,20 +1,32 @@
-// Load the MovableObject class from the movable-object-class.js file
+/**
+ * @module "background-object.class.js"
+ */
+
+/**
+ * Import the MovableObject class from the movable-object-class.js module.
+ */
 import { MovableObject } from "./movable-object-class.js";
 
-// Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
-// BackgroundObjects class is a subclass of MovableObject
-// It is used to create background objects
+/**
+ * Class representing a background object in the game.
+ * @extends MovableObject
+ */
 export class BackgroundObjects extends MovableObject {
-  width = canvasWidth; // width of the background object
-  height = canvasHeight; // height of the background object
+  width = canvasWidth;
+  height = canvasHeight;
+
+  /**
+   * Creates an instance of BackgroundObject.
+   * @param {string} imagePath - The path to the image file.
+   * @param {number} x - The x-coordinate position of the background object.
+   */
   constructor(imagePath, x) {
-    // constructor takes the path to the image and the x position of the object
-    super().loadImage(imagePath); // load the image from the path using the loadImage method from the MovableObject class
-    this.x = x; // set the x position of the object
-    this.y = canvasHeight - this.height; // set the y position of the object
+    super().loadImage(imagePath);
+    this.x = x;
+    this.y = canvasHeight - this.height;
   }
 }

@@ -32,6 +32,9 @@ import {
   bottle_break_sound,
 } from "../sounds.js";
 
+/**
+ * Represents the game world.
+ */
 export class World {
   character = new Character();
   level = level1;

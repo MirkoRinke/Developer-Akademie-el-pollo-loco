@@ -1,4 +1,10 @@
-// Load Chicken, Endboss, Cloud , BackgroundObjects and Level class from models folder
+/**
+ * @module "level1.js"
+ */
+
+/**
+ * Import various game objects and classes for level 1.
+ */
 import { Chicken } from "../models/chicken.class.js";
 import { ChickenSmall } from "../models/chicken-small.class.js";
 import { Endboss, resetFirstContact } from "../models/endboss.class.js";
@@ -9,7 +15,6 @@ import { VendingMachine } from "../models/vending-machine.class.js";
 import { BackgroundObjects } from "../models/background-object.class.js";
 import { Level } from "../models/level.class.js";
 
-// Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.width;
 
@@ -29,6 +34,7 @@ const backgroundLayers = [
   "../../assets/images/background/layers/2_second_layer/full.png",
   "../../assets/images/background/layers/1_first_layer/full.png",
 ];
+
 let endboss = [],
   chickens = [],
   chickensSmall = [],
@@ -37,6 +43,10 @@ let endboss = [],
   clouds = [],
   backgroundObjects = [];
 
+/**
+ * Initializes level 1 by resetting the first contact, creating game entities such as endboss, chickens, salsa bottles, coins, clouds, and background objects,
+ * and then constructs a new Level instance with these entities.
+ */
 export function initLevel1() {
   resetFirstContact();
   createEndboss();
@@ -49,7 +59,10 @@ export function initLevel1() {
   level1 = new Level([...chickens, ...chickensSmall, ...endboss], [...salsaBottles], [...coins], [...clouds], [new VendingMachine()], backgroundObjects);
 }
 
-// Create X Endboss objects
+/**
+ * Creates an array of Endboss instances and assigns it to the global `endboss` variable.
+ * The number of Endboss instances created is determined by the `currentEndboss` variable.
+ */
 function createEndboss() {
   endboss = [];
   for (let i = 0; i < currentEndboss; i++) {
@@ -57,7 +70,10 @@ function createEndboss() {
   }
 }
 
-// Create X Chicken objects
+/**
+ * Creates an array of Chicken objects and assigns it to the global `chickens` variable.
+ * The number of Chicken objects created is determined by the `currentChickens` variable.
+ */
 function createChickens() {
   chickens = [];
   for (let i = 0; i < currentChickens; i++) {
@@ -65,7 +81,10 @@ function createChickens() {
   }
 }
 
-// Create X ChickenSmall objects
+/**
+ * Creates an array of small chickens and populates it with instances of ChickenSmall.
+ * The number of chickens created is determined by the value of currentChickensSmall.
+ */
 function createChickensSmall() {
   chickensSmall = [];
   for (let i = 0; i < currentChickensSmall; i++) {
@@ -73,7 +92,10 @@ function createChickensSmall() {
   }
 }
 
-// Create X SalsaBottles objects
+/**
+ * Creates an array of SalsaBottles instances.
+ * Initializes the array and populates it with the current number of salsa bottles.
+ */
 function createSalsaBottles() {
   salsaBottles = [];
   for (let i = 0; i < currentSalsaBottles; i++) {
@@ -81,7 +103,10 @@ function createSalsaBottles() {
   }
 }
 
-// Create X Coins objects
+/**
+ * Creates an array of coin objects and assigns it to the global `coins` variable.
+ * The number of coins created is determined by the `currentCoins` variable.
+ */
 function createCoins() {
   coins = [];
   for (let i = 0; i < currentCoins; i++) {
@@ -89,7 +114,10 @@ function createCoins() {
   }
 }
 
-// Create X Cloud objects
+/**
+ * Creates an array of cloud objects and populates it with a specified number of clouds.
+ * The number of clouds is determined by the value of the `currentClouds` variable.
+ */
 function createClouds() {
   clouds = [];
   for (let i = 0; i < currentClouds; i++) {
@@ -97,7 +125,11 @@ function createClouds() {
   }
 }
 
-// Create X BackgroundObjects objects
+/**
+ * Creates and populates the backgroundObjects array with instances of BackgroundObjects.
+ * Iterates through the backgroundLayers and adds new BackgroundObjects to the array
+ * based on the currentBackgroundObjects count and canvasWidth.
+ */
 function createBackgroundObjects() {
   backgroundObjects = [];
   for (let i = -1; i <= currentBackgroundObjects; i++) {

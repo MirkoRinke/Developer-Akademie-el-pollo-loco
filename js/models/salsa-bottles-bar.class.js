@@ -1,10 +1,17 @@
-// Load the parent class StatusBar from status-bar.class.js
+/**
+ * @module "salsa-bottles-bar.class.js"
+ */
+
+/**
+ * Import the StatusBar class from the status-bar.class.js module.
+ */
 import { StatusBar } from "./status-bar.class.js";
 
-// Create SalsaBottlesBar class that extends StatusBar
-// This class represents the salsa bottles bar in the games
+/**
+ * Represents a status bar for salsa bottles.
+ * @extends StatusBar
+ */
 export class SalsaBottlesBar extends StatusBar {
-  // Create an array of images for the salsa bottles bar
   IMAGES = [
     "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
     "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
@@ -14,10 +21,14 @@ export class SalsaBottlesBar extends StatusBar {
     "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
   ];
 
+  /**
+   * Creates an instance of the SalsaBottlesBar class.
+   * Initializes the object by loading images, setting the y-coordinate, and setting the initial percentage.
+   */
   constructor() {
-    super(); // Call the super method of the parent class
-    this.loadImages(this.IMAGES); // Load images for the salsa bottles bar
-    this.y = 50; // Set y position
-    this.setPercentage(0); // Set percentage to 0
+    super();
+    this.loadImages(this.IMAGES);
+    this.y = 50;
+    this.setPercentage(0);
   }
 }

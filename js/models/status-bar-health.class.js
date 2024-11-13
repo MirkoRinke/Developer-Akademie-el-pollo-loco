@@ -1,10 +1,17 @@
-// Load the parent class StatusBar from status-bar.class.js
+/**
+ * @module "status-bar-health.class.js"
+ */
+
+/**
+ * Import the StatusBar class from the status-bar.class.js module.
+ */
 import { StatusBar } from "./status-bar.class.js";
 
-// Create StatusBarHealth class that extends StatusBar
-// This class represents the health status bar in the game
+/**
+ * Class representing the health status bar.
+ * @extends StatusBar
+ */
 export class StatusBarHealth extends StatusBar {
-  // Create an array of images for the status bar health
   IMAGES = [
     "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/0.png",
     "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/20.png",
@@ -14,13 +21,23 @@ export class StatusBarHealth extends StatusBar {
     "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/100.png",
   ];
 
+  /**
+   * Creates an instance of the StatusBarHealth class.
+   * Initializes the health status bar with default values.
+   * Loads the images and sets the initial health percentage to 100%.
+   */
   constructor() {
-    super(); // Call the constructor of the parent class
-    this.loadImages(this.IMAGES); // Load the images for the status bar from the IMAGES array
-    this.y = 0; // Set the y position of the status bar to 0
-    this.setPercentage(100); // Set the percentage of the status bar to 100
+    super();
+    this.loadImages(this.IMAGES);
+    this.y = 0;
+    this.setPercentage(100);
   }
 
+  /**
+   * Determines the image index based on the current health percentage.
+   *
+   * @returns {number} The image index corresponding to the health percentage.
+   */
   resolveImageIndex() {
     if (this.percentage === 100) {
       return 5;

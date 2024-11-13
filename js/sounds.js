@@ -1,4 +1,8 @@
 /**
+ * @module "sounds.js"
+ */
+
+/**
  * Background music sound.
  * @type {Audio}
  */

@@ -8,10 +8,11 @@ const canvasWidth = canvas.width;
 export class SalsaBottles extends MovableObject {
   height = 60; // height of the throwable object (salsa bottle)
   width = 60; // width of the throwable object  (salsa bottle)
-  y = canvasHeight - this.height - 50; // y position of the throwable object (salsa bottle)
+  y = canvasHeight - this.height - 60; // y position of the throwable object (salsa bottle)
 
   constructor() {
     super().loadImage("../../assets/images/items/salsa_bottle/1_salsa_bottle_on_ground.png"); // Load the image of the throwable object (salsa bottle)
-    this.x = 200 + Math.random() * (canvasWidth * 2); // Set the x position of the throwable object (salsa bottle) to a random value
+    this.x = 200 + Math.random() * (canvasWidth * 1.5); // Set the x position of the throwable object (salsa bottle) to a random value
+    this.y = this.y + Math.random() * 40; // Set the y position of the throwable object (salsa bottle) to a random value
   }
 }

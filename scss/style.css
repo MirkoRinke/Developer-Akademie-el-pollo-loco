@@ -47,7 +47,39 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   height: 100vh;
+}
+.main_content .privacy_policy {
+  position: absolute;
+  top: -30px;
+  left: 45px;
+  height: 180px;
+  width: 180px;
+}
+.main_content .privacy_policy:hover {
+  cursor: pointer;
+}
+@media (max-width: 1000px) {
+  .main_content .privacy_policy {
+    display: none;
+  }
+}
+.main_content .imprint {
+  position: absolute;
+  top: -18px;
+  right: 45px;
+  height: 180px;
+  width: 180px;
+  transform: rotate(8deg);
+}
+.main_content .imprint:hover {
+  cursor: pointer;
+}
+@media (max-width: 1000px) {
+  .main_content .imprint {
+    display: none;
+  }
 }
 .main_content .el_pollo_loco_logo {
   height: 100px;
@@ -59,7 +91,6 @@ body {
 }
 @media (max-width: 1000px) {
   .main_content .el_pollo_loco_logo {
-    justify-content: center;
     display: none;
   }
 }
@@ -275,4 +306,25 @@ body {
   font-weight: bold;
   font-size: 18px;
   color: black;
+}
+.main_content .legal-links {
+  display: none;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  filter: drop-shadow(0px 0px 1px rgb(255, 255, 255));
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+  position: absolute;
+  bottom: 5px;
+}
+.main_content .legal-links:hover {
+  cursor: pointer;
+}
+@media (max-width: 1000px) {
+  .main_content .legal-links {
+    display: flex;
+    font-size: 14px;
+  }
 }/*# sourceMappingURL=style.css.map */

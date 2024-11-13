@@ -10,6 +10,8 @@
   </head>
   <body>
     <main class="main_content">
+      <img onclick="window.location.href='./privacy_policy.html';" class="privacy_policy" src="./assets/images/landing_page/privacy_policy.png" alt="privacy_policy" />
+      <img onclick="window.location.href='./imprint.html';" class="imprint" src="./assets/images/landing_page/imprint.png" alt="imprint" />
       <img onclick="window.location.href='./index.html';" class="el_pollo_loco_logo" src="./assets/images/landing_page/el_pollo_loco.png" alt="El Pollo Loco" />
       <div class="canvas_container">
         <div onclick="startGame()" id="start_screen" class="start_screen"></div>
@@ -74,13 +76,19 @@
           <p>Moves the player right</p>
         </div>
         <div class="description">
-          <span class="control_button" title="Space bar">[ ]</span>
+          <span class="control_button" title="Space bar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M160-360v-240h80v160h480v-160h80v240H160Z" /></svg>
+          </span>
           <p>Lets the player jump</p>
         </div>
         <div class="description">
           <span class="control_button" title="F key">F</span>
           <p>Throws a salsa bottle</p>
         </div>
+      </div>
+      <div class="legal-links">
+        <span onclick="window.location.href='./privacy_policy.html';">Privacy Policy</span>
+        <span onclick="window.location.href='./imprint.html';">Imprint</span>
       </div>
     </main>
   </body>

@@ -1,0 +1,21 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-color: rgb(244, 183, 124) rgb(194, 104, 70);
+}
+
+svg {
+  user-select: none;
+}
+
+img {
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

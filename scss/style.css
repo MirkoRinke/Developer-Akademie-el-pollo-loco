@@ -11,12 +11,32 @@
   font-weight: 100 900;
 }
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-color: rgb(244, 183, 124) rgb(194, 104, 70);
 }
 
-body {
+svg {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.body_game_site {
   background-image: url("../assets/images/landing_page/bg.png");
   background-color: rgb(244, 183, 124);
   background-size: cover;
@@ -27,20 +47,31 @@ body {
   font-family: "Sour Gummy", sans-serif;
 }
 @media screen and (max-width: 1000px) and (orientation: portrait) {
-  body {
+  .body_game_site {
     background-image: url("../assets/images/landing_page/rotate_device.jpg");
     background-position: 50% 30%;
   }
 }
 @media screen and (max-width: 800px) and (orientation: portrait) {
-  body {
+  .body_game_site {
     background-position: center;
   }
 }
 @media screen and (max-width: 400px) and (orientation: portrait) {
-  body {
+  .body_game_site {
     background-size: 100% 100%;
   }
+}
+
+.body_legal-links {
+  background-image: url("../assets/images/landing_page/bg.png");
+  background-color: rgb(244, 183, 124);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  color: white;
+  font-family: "Sour Gummy", sans-serif;
 }
 
 .main_content {
@@ -48,7 +79,58 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+}
+.main_content .imprint_site,
+.main_content .privacy_Policy_site {
+  background-color: rgb(245, 199, 149);
+  filter: drop-shadow(2px 2px 2px rgb(0, 0, 0));
+  border: 4px solid rgb(194, 104, 70);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+  padding: 10px 20px 30px 20px;
+  width: 80%;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+          hyphens: auto;
+  margin-bottom: 50px;
+}
+.main_content .imprint_site .header,
+.main_content .imprint_site .address,
+.main_content .imprint_site .representedBy,
+.main_content .imprint_site .contact,
+.main_content .privacy_Policy_site .header,
+.main_content .privacy_Policy_site .address,
+.main_content .privacy_Policy_site .representedBy,
+.main_content .privacy_Policy_site .contact {
+  margin-block: 10px;
+}
+.main_content .imprint_site a,
+.main_content .privacy_Policy_site a {
+  color: rgb(194, 104, 70);
+  filter: drop-shadow(0px 0px 1px rgb(255, 255, 255));
+}
+.main_content .imprint_site h1,
+.main_content .imprint_site h2,
+.main_content .imprint_site h3,
+.main_content .imprint_site p,
+.main_content .imprint_site ul,
+.main_content .privacy_Policy_site h1,
+.main_content .privacy_Policy_site h2,
+.main_content .privacy_Policy_site h3,
+.main_content .privacy_Policy_site p,
+.main_content .privacy_Policy_site ul {
+  margin-top: 15px;
+}
+.main_content .imprint_site ul,
+.main_content .privacy_Policy_site ul {
+  margin-left: 20px;
+}
+.main_content .imprint_site li,
+.main_content .privacy_Policy_site li {
+  margin-block: 10px;
 }
 .main_content .privacy_policy {
   position: absolute;
@@ -310,11 +392,11 @@ body {
 .main_content .legal-links {
   display: none;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   width: 100%;
   filter: drop-shadow(0px 0px 1px rgb(255, 255, 255));
   font-weight: bold;
-  font-size: 18px;
+  font-size: clamp(18px, 2vw, 30px);
   color: black;
   position: absolute;
   bottom: 5px;
@@ -325,6 +407,5 @@ body {
 @media (max-width: 1000px) {
   .main_content .legal-links {
     display: flex;
-    font-size: 14px;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -1,24 +1,7 @@
-@font-face {
-  font-family: "Sour Gummy";
-  src: url("../assets/fonts/SourGummy-VariableFont_wdth\,wght.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 100 900;
-}
+@use "fonts";
+@use "default";
 
-@font-face {
-  font-family: "Sour Gummy";
-  src: url("../assets/fonts/SourGummy-Italic-VariableFont_wdth\,wght.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 100 900;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+@mixin bodyStyle {
   background-image: url("../assets/images/landing_page/bg.png");
   background-color: rgb(244, 183, 124);
   background-size: cover;
@@ -27,6 +10,10 @@ body {
   background-position: center;
   color: white;
   font-family: "Sour Gummy", sans-serif;
+}
+
+.body_game_site {
+  @include bodyStyle;
 
   @media screen and (max-width: 1000px) and (orientation: portrait) {
     background-image: url("../assets/images/landing_page/rotate_device.jpg");
@@ -40,6 +27,10 @@ body {
   @media screen and (max-width: 400px) and (orientation: portrait) {
     background-size: 100% 100%;
   }
+}
+
+.body_legal-links {
+  @include bodyStyle;
 }
 
 @mixin buttonStyle {
@@ -65,7 +56,51 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+
+  .imprint_site,
+  .privacy_Policy_site {
+    background-color: rgb(245, 199, 149);
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1));
+    border: 4px solid rgb(194, 104, 70);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    padding: 10px 20px 30px 20px; // top right bottom left
+    width: 80%;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin-bottom: 50px;
+
+    .header,
+    .address,
+    .representedBy,
+    .contact {
+      margin-block: 10px;
+    }
+
+    & a {
+      color: rgb(194, 104, 70);
+      filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 1));
+    }
+
+    & h1,
+    h2,
+    h3,
+    p,
+    ul {
+      margin-top: 15px;
+    }
+
+    & ul {
+      margin-left: 20px;
+    }
+
+    & li {
+      margin-block: 10px;
+    }
+  }
 
   .privacy_policy {
     position: absolute;
@@ -296,11 +331,11 @@ body {
   .legal-links {
     display: none;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     width: 100%;
     filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 1));
     font-weight: bold;
-    font-size: 18px;
+    font-size: clamp(18px, 2vw, 30px);
     color: black;
 
     position: absolute;
@@ -312,7 +347,6 @@ body {
 
     @media (max-width: 1000px) {
       display: flex;
-      font-size: 14px;
     }
   }
 }

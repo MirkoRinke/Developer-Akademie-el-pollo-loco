@@ -152,10 +152,22 @@ export class Endboss extends MovableObject {
         this.animateDead();
       } else if (this.isHurt()) {
         this.animateHurt();
+        this.hasBeenHit();
       } else if (isColliding) {
         this.animateAttack();
       } else this.playAnimation(this.IMAGES_WALK);
     }, 200);
+  }
+
+  /**
+   * Handles the event when the end boss has been hit.
+   * Sets an initial multiplier and then changes it after a delay.
+   */
+  hasBeenHit() {
+    this.multiplier = 6;
+    setStoppableInterval(() => {
+      this.multiplier = 20;
+    }, 2000);
   }
 
   /**

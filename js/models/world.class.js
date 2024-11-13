@@ -375,11 +375,11 @@ export class World {
    */
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
-      if (this.character.isColliding(coin) && this.currentCoins < 10) {
+      if (this.character.isColliding(coin) && this.currentCoins < 20) {
         playSound(coin_sound, 0.3);
         this.currentCoins++;
         this.level.coins.splice(this.level.coins.indexOf(coin), 1);
-        this.coinsBar.setPercentage(this.currentCoins * 10);
+        this.coinsBar.setPercentage(this.currentCoins * 5);
       }
     });
   }

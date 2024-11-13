@@ -18,9 +18,7 @@ export class StatusBar extends DrawableObject {
    */
   IMAGES = [];
 
-  /**
-   * Current percentage of the status bar.
-   * @type  percentage = 100;
+  percentage = 100;
 
   /**
    * Creates an instance of the StatusBar class.

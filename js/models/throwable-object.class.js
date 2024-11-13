@@ -14,8 +14,20 @@ import { characterDirection } from "./character.class.js";
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 
+/**
+ * Represents a throwable object in the game.
+ * @extends MovableObject
+ */
 export class ThrowableObject extends MovableObject {
-  IMAGES_ROTATION = [
+  /**
+   * Array of image paths for the rotation animation.
+   * @type {string[]}
+   */
+  IMAGES_ROTATION = [];
+
+  /**
+   * Array of image paths for the splash animation.
+   * @type  IMAGES_ROTATION = [
     "../../assets/images/items/salsa_bottle/bottle_rotation/1_bottle_rotation.png",
     "../../assets/images/items/salsa_bottle/bottle_rotation/2_bottle_rotation.png",
     "../../assets/images/items/salsa_bottle/bottle_rotation/3_bottle_rotation.png",

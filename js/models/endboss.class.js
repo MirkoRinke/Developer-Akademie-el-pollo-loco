@@ -1,4 +1,8 @@
 /**
+ * @module "endboss.class.js"
+ */
+
+/**
  * Import the MovableObject class from the movable-object-class.js module.
  * Import the setStoppableInterval and playSound functions from the game.js module.
  * Import the chicken_attack_sound, chicken_sound, and fight_sound audio files from the sounds.js module.

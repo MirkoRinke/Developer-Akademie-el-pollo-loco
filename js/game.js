@@ -10,51 +10,14 @@ import { Keyboard } from "./models/keyboard.class.js";
 import { initLevel1 } from "./Levels/level1.js";
 import { bg_sound } from "./sounds.js";
 
-/**
- * Array to store interval IDs for managing game intervals.
- * @type {Array<number>}
- */
 let intervalId = [];
-
-/**
- * Reference to the game's canvas element.
- * @type {HTMLCanvasElement}
- */
 let canvas;
-
-/**
- * Instance of the game world.
- * @type {World}
- */
 let world;
-
-/**
- * Instance of the keyboard input handler.
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
-
-/**
- * Array to store all game sounds.
- * @type {Array<Audio>}
- */
 let allSounds = [];
-
-/**
- * Flag to mute or unmute all game sounds.
- * @type {boolean}
- */
 let muteSounds = false;
-
-/**
- * Flag to track if the user has interacted with the game.
- * @type {boolean}
- */
 export let userInteracted = false;
 
-/**
- * Sets the userInteracted flag to true and removes event listeners for user interaction.
- */
 const setUserInteracted = () => {
   userInteracted = true;
   ["click", "keydown", "touchstart"].forEach((event) => {

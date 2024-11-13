@@ -7,16 +7,7 @@
  */
 import { MovableObject } from "./movable-object-class.js";
 
-/**
- * Reference to the game's canvas element.
- * @type {HTMLCanvasElement}
- */
 const canvas = document.getElementById("canvas");
-
-/**
- * The height of the canvas element.
- * @type {number}
- */
 const canvasHeight = canvas.height;
 
 export class VendingMachine extends MovableObject {

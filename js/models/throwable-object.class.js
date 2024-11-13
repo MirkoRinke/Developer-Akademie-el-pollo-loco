@@ -11,23 +11,10 @@ import { MovableObject } from "./movable-object-class.js";
 import { setStoppableInterval } from "../game.js";
 import { characterDirection } from "./character.class.js";
 
-/**
- * Reference to the game's canvas element.
- * @type {HTMLCanvasElement}
- */
 const canvas = document.getElementById("canvas");
-
-/**
- * The height of the canvas element.
- * @type {number}
- */
 const canvasHeight = canvas.height;
 
 export class ThrowableObject extends MovableObject {
-  /**
-   * Array of image paths for the rotation animation of a salsa bottle.
-   * @type {string[]}
-   */
   IMAGES_ROTATION = [
     "../../assets/images/items/salsa_bottle/bottle_rotation/1_bottle_rotation.png",
     "../../assets/images/items/salsa_bottle/bottle_rotation/2_bottle_rotation.png",
@@ -35,10 +22,6 @@ export class ThrowableObject extends MovableObject {
     "../../assets/images/items/salsa_bottle/bottle_rotation/4_bottle_rotation.png",
   ];
 
-  /**
-   * Array of image paths for the splash animation of a throwable object.
-   * @type {string[]}
-   */
   IMAGES_SPLASH = [
     "../../assets/images/items/salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
     "../../assets/images/items/salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",

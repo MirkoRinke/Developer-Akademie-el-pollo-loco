@@ -10,6 +10,11 @@ import { MovableObject } from "./movable-object-class.js";
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 
+/**
+ * Represents a vending machine object in the game.
+ * @extends MovableObject
+ * @class
+ */
 export class VendingMachine extends MovableObject {
   /**
    * Creates an instance of the VendingMachine class.

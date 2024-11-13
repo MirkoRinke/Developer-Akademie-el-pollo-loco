@@ -1,33 +1,51 @@
-// Load the MovableObject class from the movable-object-class.js file
+/**
+ * @module "cloud.class.js"
+ */
+
+/**
+ * Import the MovableObject class from the movable-object-class.js module.
+ * Import the setStoppableInterval function from the game.js module.
+ * Import the cloudsSpeed constant from the level1.js module.
+ */
 import { MovableObject } from "./movable-object-class.js";
-
-// import the setStoppableInterval function from the script.js file
 import { setStoppableInterval } from "../game.js";
-
 import { cloudsSpeed } from "../Levels/level1.js";
 
 const canvas = document.getElementById("canvas");
 const canvasWidth = canvas.width;
 
-// Cloud class is a subclass of MovableObject
-// It is used to create the cloud background in the game
+/**
+ * Represents a cloud in the game.
+ * @extends MovableObject
+ */
 export class Cloud extends MovableObject {
-  y = 20; // y position of the cloud
-  height = 250; // height of the cloud
-  width = 500; // width of the cloud
+  y = 20;
+  height = 250;
+  width = 500;
+
+  /**
+   * Creates an instance of the Cloud class.
+   * Loads the cloud image and sets a random position for the cloud.
+   */
   constructor() {
-    super().loadImage("../../assets/images/background/layers/4_clouds/1.png"); // load the image of the cloud using the loadImage method from the MovableObject class
-    this.x = Math.random() * (canvasWidth * 2.5); // set the x position of the cloud to a random value
-    this.y = Math.random() * 100; // set the y position of the cloud to a random value
-    this.animate(); // animate the cloud
+    super().loadImage("../../assets/images/background/layers/4_clouds/1.png");
+    this.x = Math.random() * (canvasWidth * 2.5);
+    this.y = Math.random() * 100;
+    this.animate();
   }
 
-  // Animate the cloud by managing the cloud movement
+  /**
+   * Animates the cloud by managing its movement.
+   */
   animate() {
     this.manageCloudMovement();
   }
 
-  // Manage the cloud movement by moving the cloud to the left at a constant speed
+  /**
+   * Manages the movement of the cloud by updating its position at regular intervals.
+   * The cloud moves to the left based on its speed and a global cloudsSpeed variable.
+   * When the cloud moves off the canvas, it reappears at a random position on the right.
+   */
   manageCloudMovement() {
     setStoppableInterval(() => {
       this.x -= this.speed * cloudsSpeed;

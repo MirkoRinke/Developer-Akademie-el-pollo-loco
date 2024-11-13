@@ -1,55 +1,59 @@
-// Load MovableObject class from movable-object-class.js
+/**
+ * Import the MovableObject class from the movable-object-class.js module.
+ * Import the setStoppableInterval and playSound functions from the game.js module.
+ * Import the chicken_attack_sound, chicken_sound, and fight_sound audio files from the sounds.js module.
+ * Import the characterPostion constant from the character.class.js module.
+ */
 import { MovableObject } from "./movable-object-class.js";
-
-// import the setStoppableInterval function from the script.js file
 import { setStoppableInterval, playSound } from "../game.js";
-
 import { chicken_attack_sound, chicken_sound, fight_sound } from "../sounds.js";
-
 import { characterPostion } from "../models/character.class.js";
 
-// Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 const canvasWidth = canvas.width;
+let startAlert = 0;
+let firstContact = false;
+let isColliding = false;
 
-// Create a variable to store the startAlert value
-let startAlert = 0; // set the initial value of the startAlert variable to
-
-// Create a variable to store the alertInterval value for the end boss
-let firstContact = false; // set the initial value of the alertInterval variable to true
-
-// Create a variable to store the isColliding value for the end boss
-let isColliding = false; // set the initial value of the isColliding variable to false
-
-// Function to reset the alert for the end boss
+/**
+ * Resets the alert status for the end boss.
+ * If it's the first contact, it sets the start alert to 0.
+ * Sets the first contact flag to true.
+ */
 export function resetAlert() {
-  if (!firstContact) {
-    startAlert = 0; // reset the value of the startAlert variable to 0
-  }
-  firstContact = true; // set the alertInterval variable to false
+  if (!firstContact) startAlert = 0;
+  firstContact = true;
 }
 
-// Function to set the first contact with the end boss
+/**
+ * Resets the first contact flag to false.
+ */
 export function resetFirstContact() {
   firstContact = false;
 }
 
-// Function to check character collision with the end boss
+/**
+ * Checks for collision with the Endboss character.
+ *
+ * @param {boolean} colliding - Indicates if a collision is occurring.
+ * @param {string} enemy - The type of enemy to check collision against.
+ */
 export function checkCharacterCollision(colliding, enemy) {
   if (enemy === "Endboss") isColliding = colliding;
 }
 
-// Create Endboss class that extends MovableObject class
-// It is used to create the end boss in the game
+/**
+ * Represents the Endboss character in the game.
+ * @extends MovableObject
+ */
 export class Endboss extends MovableObject {
-  height = 400; // height of the end boss
-  width = 350; // width of the end boss
-  y = canvasHeight - this.height - 25; // y position of the end boss
-  energy = 10; // energy of the chicken
-  multiplier = 20; // multiplier for the speed of the end boss
+  height = 400;
+  width = 350;
+  y = canvasHeight - this.height - 25;
+  energy = 10;
+  multiplier = 20;
 
-  // Array of images for the end boss walk animation
   IMAGES_ALERT = [
     "../../assets/images/enemies/chicken_boss/2_alert/G5.png",
     "../../assets/images/enemies/chicken_boss/2_alert/G6.png",
@@ -61,7 +65,6 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
   ];
 
-  // Array of images for the end boss walk animation
   IMAGES_WALK = [
     "../../assets/images/enemies/chicken_boss/1_walk/G1.png",
     "../../assets/images/enemies/chicken_boss/1_walk/G2.png",
@@ -69,7 +72,6 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/1_walk/G4.png",
   ];
 
-  // Array of images for the end boss attack animation
   IMAGES_ATTACK = [
     "../../assets/images/enemies/chicken_boss/3_attack/G13.png",
     "../../assets/images/enemies/chicken_boss/3_attack/G14.png",
@@ -81,66 +83,110 @@ export class Endboss extends MovableObject {
     "../../assets/images/enemies/chicken_boss/3_attack/G20.png",
   ];
 
-  // Array of images for the end boss hurt animation
   IMAGES_HURT = ["../../assets/images/enemies/chicken_boss/4_hurt/G21.png", "../../assets/images/enemies/chicken_boss/4_hurt/G22.png", "../../assets/images/enemies/chicken_boss/4_hurt/G23.png"];
 
-  // Array of images for the end boss dying animation
   IMAGES_DEAD = ["../../assets/images/enemies/chicken_boss/5_dead/G24.png", "../../assets/images/enemies/chicken_boss/5_dead/G25.png", "../../assets/images/enemies/chicken_boss/5_dead/G26.png"];
 
+  /**
+   * Constructs an instance of the EndBoss class.
+   * Loads images for different states and sets the initial position.
+   */
   constructor() {
-    super().loadImage(this.IMAGES_ALERT[0]); // load the first image of the end boss walk animation
-    this.loadImages(this.IMAGES_WALK); // load all images of the end boss walk animation
-    this.loadImages(this.IMAGES_ALERT); // load all images of the end boss walk animation
-    this.loadImages(this.IMAGES_ATTACK); // load all images of the end boss attack animation
-    this.loadImages(this.IMAGES_HURT); // load all images of the end boss hurt animation
-    this.loadImages(this.IMAGES_DEAD); // load all images of the end boss dying animation
-    this.x = canvasWidth * 2.5; // set the x position of the end boss
-    this.animate(); // animate the end boss
+    super().loadImage(this.IMAGES_ALERT[0]);
+    this.loadImages(this.IMAGES_WALK);
+    this.loadImages(this.IMAGES_ALERT);
+    this.loadImages(this.IMAGES_ATTACK);
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
+    this.x = canvasWidth * 2.5;
+    this.animate();
   }
 
-  // Animate the end boss by playing the end boss walk animation
+  /**
+   * Animates the end boss by managing its movement and triggering its animation.
+   */
   animate() {
     this.manageEndbossMovement();
     this.endbossAnimation();
   }
 
-  // Manage the end boss movement by moving the end boss to the left
+  /**
+   * Manages the movement of the end boss by setting an interval that checks for the first contact
+   * and moves the end boss towards the character if contact is made.
+   */
   manageEndbossMovement() {
     setStoppableInterval(() => {
-      if (firstContact) {
-        const distance = Math.abs(this.x - characterPostion);
-        if (distance > this.speed * this.multiplier) {
-          if (this.x > characterPostion) {
-            this.x -= this.speed * this.multiplier;
-            this.otherDirection = false;
-          } else {
-            this.x += this.speed * this.multiplier;
-            this.otherDirection = true;
-          }
-        } else {
-          this.x = characterPostion;
-        }
-      }
+      if (firstContact) this.moveTowardsCharacter();
     }, 1000 / 60);
   }
 
-  // Animate the end boss by playing the end boss walk animation repeatedly at a certain interval
+  /**
+   * Moves the end boss towards the character's position.
+   * Adjusts the position based on the distance and speed.
+   * Changes direction if necessary.
+   */
+  moveTowardsCharacter() {
+    const distance = Math.abs(this.x - characterPostion);
+    if (distance > this.speed * this.multiplier) {
+      this.x += (this.x > characterPostion ? -1 : 1) * this.speed * this.multiplier;
+      this.otherDirection = this.x < characterPostion;
+    } else {
+      this.x = characterPostion;
+    }
+  }
+
+  /**
+   * Animates the end boss character based on its current state.
+   * The animation changes depending on whether the end boss is alert, dead, hurt, or attacking.
+   * If none of these states apply, the end boss will play its walking animation.
+   */
   endbossAnimation() {
     setStoppableInterval(() => {
       if (startAlert <= 10) {
-        this.playAnimation(this.IMAGES_ALERT); // play the end boss walk animation
-        if (firstContact && startAlert < 1) playSound(fight_sound); // play the chicken sound
-        startAlert++; // increment the startAlert variable by 1
+        this.animateAlert();
       } else if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
-        this.y = canvasHeight - this.height; // set the y position of the end boss to 0
+        this.animateDead();
       } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT); // play the hurt animation if the chicken is hurt
-        playSound(chicken_sound); // play the chicken sound
+        this.animateHurt();
       } else if (isColliding) {
-        this.playAnimation(this.IMAGES_ATTACK); // play the attack animation if the chicken is attacking
-        playSound(chicken_attack_sound); // play the chicken attack sound
-      } else this.playAnimation(this.IMAGES_WALK); // play the end boss walk animation
+        this.animateAttack();
+      } else this.playAnimation(this.IMAGES_WALK);
     }, 200);
+  }
+
+  /**
+   * Triggers the alert animation and plays a sound on first contact.
+   * Increments the alert counter after the first contact.
+   */
+  animateAlert() {
+    this.playAnimation(this.IMAGES_ALERT);
+    if (firstContact && startAlert < 1) playSound(fight_sound);
+    startAlert++;
+  }
+
+  /**
+   * Animates the end boss's death sequence by playing the dead animation
+   * and adjusting its vertical position to the bottom of the canvas.
+   */
+  animateDead() {
+    this.playAnimation(this.IMAGES_DEAD);
+    this.y = canvasHeight - this.height;
+  }
+
+  /**
+   * Animates the hurt state of the end boss by playing the hurt animation and sound.
+   */
+  animateHurt() {
+    this.playAnimation(this.IMAGES_HURT);
+    playSound(chicken_sound);
+  }
+
+  /**
+   * Animates the attack sequence for the end boss.
+   * Plays the attack animation and sound.
+   */
+  animateAttack() {
+    this.playAnimation(this.IMAGES_ATTACK);
+    playSound(chicken_attack_sound);
   }
 }

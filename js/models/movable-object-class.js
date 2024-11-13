@@ -1,4 +1,8 @@
 /**
+ * @module "movable-object-class.js"
+ */
+
+/**
  * Import the DrawableObject class from the drawable-object.class.js module.
  * Import the setStoppableInterval and playSound functions from the game.js module.
  * Import the jump_sound and snoring_sound audio files from the sounds.js module.

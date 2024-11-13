@@ -2,7 +2,7 @@
 @use "default";
 
 @mixin bodyStyle {
-  background-image: url("../assets/images/landing_page/bg.png");
+  background-image: url("../assets/images/landing_page/bg.jpg");
   background-color: rgb(244, 183, 124);
   background-size: cover;
   background-repeat: no-repeat;
@@ -163,7 +163,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas.png");
+      background-image: url("../assets/images/landing_page/bg_canvas.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;
@@ -180,7 +180,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas_game_over.png");
+      background-image: url("../assets/images/landing_page/bg_canvas_game_over.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;
@@ -193,7 +193,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas_win.png");
+      background-image: url("../assets/images/landing_page/bg_canvas_win.jpg");
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;

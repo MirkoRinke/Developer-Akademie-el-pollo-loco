@@ -1,53 +1,72 @@
-// Load DrawableObject class from drawable-object-class.js
+/**
+ * Import the DrawableObject class from the drawable-object.class.js module.
+ * Import the setStoppableInterval and playSound functions from the game.js module.
+ * Import the jump_sound and snoring_sound audio files from the sounds.js module.
+ */
 import { DrawableObject } from "./drawable-object.class.js";
-
-// import the setStoppableInterval function from the script.js file
 import { setStoppableInterval, playSound } from "../game.js";
-
-// import the jump_sound from the script.js file
 import { jump_sound, snoring_sound } from "../sounds.js";
 
-// Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 
-// Create MovableObject class that extends DrawableObject class
-// This class will be used to create objects that can move
+/**
+ * Represents a movable object that extends DrawableObject.
+ * @class
+ * @extends DrawableObject
+ */
 export class MovableObject extends DrawableObject {
-  speed = 0.2; // Speed of the object
-  otherDirection = false; // Direction of the object
-  speedY = 0; // Speed of the object in Y direction
-  acceleration = 2.5; // Acceleration of the object
-  energy = 100; // Energy of the object
-  lastHit = 0; // Time of the last hit
+  speed = 0.2;
+  otherDirection = false;
+  speedY = 0;
+  acceleration = 2.5;
+  energy = 100;
+  lastHit = 0;
 
-  // The applyGravity method will be used to apply gravity to the object
+  /**
+   * Applies gravity to the object by continuously adjusting its vertical position and speed.
+   * Uses a stoppable interval to repeatedly check if the object is in the air and update its position and speed accordingly.
+   */
   applyGravity() {
     setStoppableInterval(() => {
-      // If the object is in the air
       if (this.isInAir()) {
-        this.y -= this.speedY; // Move the object in Y direction
-        this.speedY -= this.acceleration; // Apply acceleration to the object in Y direction
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
       }
     }, 1000 / 25);
   }
 
-  // The isInAir method will be used to check if the object is in the air
+  /**
+   * Checks if the object is in the air.
+   *
+   * @param {number} [currentY=0] - The current Y position to compare with the object's vertical speed.
+   * @returns {boolean} - Returns true if the object is above ground or its vertical speed is greater than the current Y position.
+   */
   isInAir(currentY = 0) {
     return this.isAboveGround() || this.speedY > currentY;
   }
 
-  // The isAboveGround method will be used to check if the object is above the ground
+  /**
+   * Checks if the object is above the ground.
+   * For ThrowableObject instances, it always returns true.
+   * For other instances, it checks if the object's y position is above a certain threshold.
+   *
+   * @returns {boolean} True if the object is above the ground, otherwise false.
+   */
   isAboveGround() {
     if (this.constructor.name === "ThrowableObject") {
-      // If the object is a ThrowableObject
-      return true; // Return true
+      return true;
     } else {
-      return this.y < canvasHeight - 349; // Return true if the object is above the ground level (150)
+      return this.y < canvasHeight - 349;
     }
   }
 
-  // The isColliding method will be used to check if the object is colliding with another object
+  /**
+   * Checks if this object is colliding with another movable object.
+   *
+   * @param {Object} movableObject - The other movable object to check collision with.
+   * @returns {boolean} - Returns true if there is a collision, otherwise false.
+   */
   isColliding(movableObject) {
     const buffers = {
       Character: { top: -150, bottom: 0, left: -50, right: -50 },
@@ -63,53 +82,75 @@ export class MovableObject extends DrawableObject {
     return collisionX && collisionY;
   }
 
-  // The hit method will be used to reduce the energy of the object
+  /**
+   * Reduces the energy of the object when hit.
+   *
+   * @param {number} [multiplier=1] - The multiplier for the energy reduction.
+   * @param {boolean} [fromAbove=false] - Indicates if the hit is from above.
+   */
   hit(multiplier = 1, fromAbove = false) {
-    const currentTime = new Date().getTime(); // Get the current time
-    if (currentTime - this.lastHit < 1000) return; // If the time passed since the last hit is less than 1 second, return
-    if (this.energy <= 0) return; // If the object has no energy, return
+    const currentTime = new Date().getTime();
+    if (currentTime - this.lastHit < 1000) return;
+    if (this.energy <= 0) return;
     if (!fromAbove) {
-      this.energy -= 2 * multiplier; // Reduce the energy of the object by 2
+      this.energy -= 2 * multiplier;
     }
     if (this.energy <= 0) {
-      // If the energy of the object is less than or equal to 0
-      this.energy = 0; // Set the energy of the object to 0
+      this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime(); // Set the time of the last hit to the current time
+      this.lastHit = new Date().getTime();
     }
   }
 
-  // The isHurt method will be used to check if the object is hurt
+  /**
+   * Checks if the object is currently hurt.
+   *
+   * @returns {boolean} True if the object was hit within the last second, otherwise false.
+   */
   isHurt() {
-    let timePassed = new Date().getTime() - this.lastHit; // Calculate the time passed since the last hit
-    timePassed = timePassed / 1000; // Convert the time passed to seconds
-    return timePassed < 1; // Return true if the time passed is less than 1 second
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
+    return timePassed < 1;
   }
 
-  // The isDead method will be used to check if the object is dead
+  /**
+   * Checks if the object is dead.
+   *
+   * @returns {boolean} True if the object's energy is zero, otherwise false.
+   */
   isDead() {
-    return this.energy === 0; // Return true if the energy of the object is 0
+    return this.energy === 0;
   }
 
-  // The playAnimation method will be used to play the animation of the object
+  /**
+   * Plays an animation by cycling through an array of image paths.
+   *
+   * @param {string[]} images - An array of image paths to be used in the animation.
+   */
   playAnimation(images) {
-    let i = this.currentImage % images.length; // Get the current image index
-    let path = images[i]; // Get the path of the current image
-    this.img = this.imageCache[path]; // Set the image of the object to the current image
-    this.currentImage++; // Increment the current image index by 1
+    let i = this.currentImage % images.length;
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
   }
 
-  // The moveRight method will be used to move the object to the right side
+  /**
+   * Moves the object to the right by increasing its x-coordinate by its speed.
+   */
   moveRight() {
     this.x += this.speed;
   }
 
-  // The moveLeft method will be used to move the object to the left side
+  /**
+   * Moves the object to the left by decreasing its x-coordinate by its speed.
+   */
   moveLeft() {
     this.x -= this.speed;
   }
 
-  // The jump method will be used to make the object jump in the air
+  /**
+   * Makes the object jump by setting the vertical speed and playing the jump sound.
+   */
   jump() {
     this.speedY = 30;
     snoring_sound.pause();

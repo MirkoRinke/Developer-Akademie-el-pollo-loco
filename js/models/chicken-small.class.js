@@ -1,56 +1,78 @@
-// Load the MovableObject class from the movable-object-class.js file
-import { MovableObject } from "./movable-object-class.js";
+/**
+ * @module "chicken-small.class.js"
+ */
 
-// import the setStoppableInterval function from the script.js file
+/**
+ * Import the MovableObject class from the movable-object-class.js module.
+ * Import the setStoppableInterval function from the game.js module.
+ */
+import { MovableObject } from "./movable-object-class.js";
 import { setStoppableInterval } from "../game.js";
 
-// Reference to the canvas element
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
 const canvasWidth = canvas.width;
 
-// Chicken class is a subclass of MovableObject
-// It is used to create the chicken enemy in the game
+/**
+ * Represents a small chicken enemy in the game.
+ * @extends MovableObject
+ */
 export class ChickenSmall extends MovableObject {
-  height = 40; // height of the chicken
-  width = 40; // width of the chicken
-  y = canvasHeight - this.height - 50; // y position of the chicken
-  energy = 2; // energy of the chicken
-  // Array of image paths for the chicken walking animation
+  height = 40;
+  width = 40;
+  y = canvasHeight - this.height - 50;
+  energy = 2;
+
   IMAGES_WALK = [
     "../../assets/images/enemies/chicken/chicken_small/1_walk/1_w.png",
     "../../assets/images/enemies/chicken/chicken_small/1_walk/2_w.png",
     "../../assets/images/enemies/chicken/chicken_small/1_walk/3_w.png",
   ];
+
   IMAGES_DEAD = ["../../assets/images/enemies/chicken/chicken_small/2_dead/dead.png"];
+
+  /**
+   * Creates an instance of a small chicken enemy.
+   * Loads images for walking and dead states.
+   * Sets initial position and speed.
+   */
   constructor() {
-    super().loadImage("../../assets/images/enemies/chicken/chicken_small/1_walk/1_w.png"); // load the image of the chicken using the loadImage method from the MovableObject class
-    this.loadImages(this.IMAGES_WALK); // load the images for the walking animation
-    this.loadImages(this.IMAGES_DEAD); // load the images for the dying animation
-    this.x = 500 + Math.random() * (canvasWidth * 2.3); // set the x position of the chicken to a random value
-    this.speed = 0.3 + Math.random() * 0.33; // set the speed of the chicken to a random value
-    this.animate(); // animate the chicken
+    super().loadImage("../../assets/images/enemies/chicken/chicken_small/1_walk/1_w.png");
+    this.loadImages(this.IMAGES_WALK);
+    this.loadImages(this.IMAGES_DEAD);
+    this.x = 500 + Math.random() * (canvasWidth * 2.3);
+    this.speed = 0.3 + Math.random() * 0.33;
+    this.animate();
   }
 
-  // Animate the chicken by managing the chicken movement and chicken animation
+  /**
+   * Animates the small chicken by managing its movement and triggering the chicken animation.
+   */
   animate() {
     this.manageChickenMovement();
     this.chickenAnimation();
   }
 
-  // Manage the chicken movement by moving the chicken to the left
+  /**
+   * Manages the movement of the chicken by decrementing its x-coordinate
+   * based on its speed at a regular interval.
+   */
   manageChickenMovement() {
     setStoppableInterval(() => {
       this.x -= this.speed;
     }, 1000 / 60);
   }
 
-  // Animate the chicken by playing the chicken walking animation
+  /**
+   * Animates the chicken by switching between walking and dead images.
+   * Uses a stoppable interval to periodically update the animation.
+   * If the chicken is dead, it plays the dead animation; otherwise, it plays the walking animation.
+   */
   chickenAnimation() {
     setStoppableInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD); // play the dying animation if the chicken is dead
-      } else this.playAnimation(this.IMAGES_WALK); // play the walking animation if the chicken is alive
+        this.playAnimation(this.IMAGES_DEAD);
+      } else this.playAnimation(this.IMAGES_WALK);
     }, 200);
   }
 }

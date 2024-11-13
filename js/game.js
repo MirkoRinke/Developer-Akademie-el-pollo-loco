@@ -118,7 +118,7 @@ export async function loadGameWorld() {
 document.addEventListener("keydown", (e) => {
   if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = true;
   if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = true;
-  if (e.key === " " || e.key == "ArrowUp" || e.key == "w") keyboard.JUMP = true;
+  if (e.key === " " || e.key == "w") keyboard.JUMP = true;
   if (e.key === "f") keyboard.THRO = true;
 });
 
@@ -128,6 +128,6 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keyup", (e) => {
   if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = false;
   if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = false;
-  if (e.key === " " || e.key == "ArrowUp" || e.key == "w") keyboard.JUMP = false;
+  if (e.key === " " || e.key == "w") keyboard.JUMP = false;
   if (e.key === "f") keyboard.THRO = false;
 });

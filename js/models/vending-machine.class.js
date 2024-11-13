@@ -1,4 +1,8 @@
 /**
+ * @module "vending-machine.class.js"
+ */
+
+/**
  * Import the MovableObject class from the movable-object-class.js module.
  */
 import { MovableObject } from "./movable-object-class.js";

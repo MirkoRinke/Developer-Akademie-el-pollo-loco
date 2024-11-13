@@ -1,11 +1,26 @@
 /**
+ * @module "status-bar.class.js"
+ */
+
+/**
  * Import the DrawableObject class from the drawable-object.class.js module.
  */
 import { DrawableObject } from "./drawable-object.class.js";
 
+/**
+ * Class representing a status bar.
+ * @extends DrawableObject
+ */
 export class StatusBar extends DrawableObject {
+  /**
+   * Array of image paths for different status levels.
+   * @type {string[]}
+   */
   IMAGES = [];
-  percentage = 100;
+
+  /**
+   * Current percentage of the status bar.
+   * @type  percentage = 100;
 
   /**
    * Creates an instance of the StatusBar class.

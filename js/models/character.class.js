@@ -32,63 +32,63 @@ export class Character extends MovableObject {
   idle_time = 0;
 
   IMAGES_IDLE = [
-    "../../assets/images/player/pepe/1_idle/idle/I-1.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-2.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-3.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-4.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-5.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-6.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-7.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-8.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-9.png",
-    "../../assets/images/player/pepe/1_idle/idle/I-10.png",
+    "./assets/images/player/pepe/1_idle/idle/I-1.png",
+    "./assets/images/player/pepe/1_idle/idle/I-2.png",
+    "./assets/images/player/pepe/1_idle/idle/I-3.png",
+    "./assets/images/player/pepe/1_idle/idle/I-4.png",
+    "./assets/images/player/pepe/1_idle/idle/I-5.png",
+    "./assets/images/player/pepe/1_idle/idle/I-6.png",
+    "./assets/images/player/pepe/1_idle/idle/I-7.png",
+    "./assets/images/player/pepe/1_idle/idle/I-8.png",
+    "./assets/images/player/pepe/1_idle/idle/I-9.png",
+    "./assets/images/player/pepe/1_idle/idle/I-10.png",
   ];
 
   IMAGES_IDLE_LONG = [
-    "../../assets/images/player/pepe/1_idle//long_idle/I-11.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-12.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-13.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-14.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-15.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-16.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-17.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-18.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-19.png",
-    "../../assets/images/player/pepe/1_idle//long_idle/I-20.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-11.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-12.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-13.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-14.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-15.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-16.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-17.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-18.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-19.png",
+    "./assets/images/player/pepe/1_idle//long_idle/I-20.png",
   ];
 
   IMAGES_WALK = [
-    "../../assets/images/player/pepe/2_walk/W-21.png",
-    "../../assets/images/player/pepe/2_walk/W-22.png",
-    "../../assets/images/player/pepe/2_walk/W-23.png",
-    "../../assets/images/player/pepe/2_walk/W-24.png",
-    "../../assets/images/player/pepe/2_walk/W-25.png",
-    "../../assets/images/player/pepe/2_walk/W-26.png",
+    "./assets/images/player/pepe/2_walk/W-21.png",
+    "./assets/images/player/pepe/2_walk/W-22.png",
+    "./assets/images/player/pepe/2_walk/W-23.png",
+    "./assets/images/player/pepe/2_walk/W-24.png",
+    "./assets/images/player/pepe/2_walk/W-25.png",
+    "./assets/images/player/pepe/2_walk/W-26.png",
   ];
 
   IMAGES_JUMP = [
-    "../../assets/images/player/pepe/3_jump/J-31.png",
-    "../../assets/images/player/pepe/3_jump/J-32.png",
-    "../../assets/images/player/pepe/3_jump/J-33.png",
-    "../../assets/images/player/pepe/3_jump/J-34.png",
-    "../../assets/images/player/pepe/3_jump/J-35.png",
-    "../../assets/images/player/pepe/3_jump/J-36.png",
-    "../../assets/images/player/pepe/3_jump/J-37.png",
-    "../../assets/images/player/pepe/3_jump/J-38.png",
-    "../../assets/images/player/pepe/3_jump/J-39.png",
+    "./assets/images/player/pepe/3_jump/J-31.png",
+    "./assets/images/player/pepe/3_jump/J-32.png",
+    "./assets/images/player/pepe/3_jump/J-33.png",
+    "./assets/images/player/pepe/3_jump/J-34.png",
+    "./assets/images/player/pepe/3_jump/J-35.png",
+    "./assets/images/player/pepe/3_jump/J-36.png",
+    "./assets/images/player/pepe/3_jump/J-37.png",
+    "./assets/images/player/pepe/3_jump/J-38.png",
+    "./assets/images/player/pepe/3_jump/J-39.png",
   ];
 
   IMAGES_DEAD = [
-    "../../assets/images/player/pepe/5_dead/D-51.png",
-    "../../assets/images/player/pepe/5_dead/D-52.png",
-    "../../assets/images/player/pepe/5_dead/D-53.png",
-    "../../assets/images/player/pepe/5_dead/D-54.png",
-    "../../assets/images/player/pepe/5_dead/D-55.png",
-    "../../assets/images/player/pepe/5_dead/D-56.png",
+    "./assets/images/player/pepe/5_dead/D-51.png",
+    "./assets/images/player/pepe/5_dead/D-52.png",
+    "./assets/images/player/pepe/5_dead/D-53.png",
+    "./assets/images/player/pepe/5_dead/D-54.png",
+    "./assets/images/player/pepe/5_dead/D-55.png",
+    "./assets/images/player/pepe/5_dead/D-56.png",
   ];
-  IMAGES_REMOVE_CHARACTER = ["../../assets/images/player/pepe/5_dead/D-57.png"];
+  IMAGES_REMOVE_CHARACTER = ["./assets/images/player/pepe/5_dead/D-57.png"];
 
-  IMAGES_HURT = ["../../assets/images/player/pepe/4_hurt/H-41.png", "../../assets/images/player/pepe/4_hurt/H-42.png", "../../assets/images/player/pepe/4_hurt/H-43.png"];
+  IMAGES_HURT = ["./assets/images/player/pepe/4_hurt/H-41.png", "./assets/images/player/pepe/4_hurt/H-42.png", "./assets/images/player/pepe/4_hurt/H-43.png"];
 
   world;
 
@@ -97,7 +97,7 @@ export class Character extends MovableObject {
    * checking the character's position, applying gravity, and starting animations.
    */
   constructor() {
-    super().loadImage("../../assets/images/player/pepe/2_walk/W-21.png");
+    super().loadImage("./assets/images/player/pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_IDLE_LONG);
     this.loadImages(this.IMAGES_WALK);

@@ -29,10 +29,10 @@ let currentBackgroundObjects = 4;
 export let level1;
 
 const backgroundLayers = [
-  "../../assets/images/background/layers/air.png",
-  "../../assets/images/background/layers/3_third_layer/full.png",
-  "../../assets/images/background/layers/2_second_layer/full.png",
-  "../../assets/images/background/layers/1_first_layer/full.png",
+  "./assets/images/background/layers/air.png",
+  "./assets/images/background/layers/3_third_layer/full.png",
+  "./assets/images/background/layers/2_second_layer/full.png",
+  "./assets/images/background/layers/1_first_layer/full.png",
 ];
 
 let endboss = [],

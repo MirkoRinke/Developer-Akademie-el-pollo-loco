@@ -13,12 +13,12 @@ import { StatusBar } from "./status-bar.class.js";
  */
 export class StatusBarHealth extends StatusBar {
   IMAGES = [
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/0.png",
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/20.png",
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/40.png",
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/60.png",
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/80.png",
-    "../../assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/100.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/0.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/20.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/40.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/60.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/80.png",
+    "./assets/images/ui/statusbars/1_statusbar/2_statusbar_health/green/100.png",
   ];
 
   /**

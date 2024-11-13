@@ -22,12 +22,12 @@ export class Coins extends MovableObject {
   width = 30;
 
   IMAGES_ROTATE = [
-    "../../assets/images/items/coin/coin_1.png",
-    "../../assets/images/items/coin/coin_2.png",
-    "../../assets/images/items/coin/coin_3.png",
-    "../../assets/images/items/coin/coin_4.png",
-    "../../assets/images/items/coin/coin_5.png",
-    "../../assets/images/items/coin/coin_6.png",
+    "./assets/images/items/coin/coin_1.png",
+    "./assets/images/items/coin/coin_2.png",
+    "./assets/images/items/coin/coin_3.png",
+    "./assets/images/items/coin/coin_4.png",
+    "./assets/images/items/coin/coin_5.png",
+    "./assets/images/items/coin/coin_6.png",
   ];
 
   WIDTHS = [30, 20, 10, 10, 20, 30];
@@ -38,7 +38,7 @@ export class Coins extends MovableObject {
    * Starts the coin animation.
    */
   constructor() {
-    super().loadImage("../../assets/images/items/coin/coin_1.png");
+    super().loadImage("./assets/images/items/coin/coin_1.png");
     this.loadImages(this.IMAGES_ROTATE);
     this.x = 200 + Math.random() * (canvasWidth * 1.5);
     this.y = canvasHeight / 2.3 + Math.random() * 100;

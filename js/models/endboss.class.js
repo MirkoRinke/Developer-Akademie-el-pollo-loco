@@ -59,37 +59,37 @@ export class Endboss extends MovableObject {
   multiplier = 20;
 
   IMAGES_ALERT = [
-    "../../assets/images/enemies/chicken_boss/2_alert/G5.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G6.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G7.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G8.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G9.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G10.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G11.png",
-    "../../assets/images/enemies/chicken_boss/2_alert/G12.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G5.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G6.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G7.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G8.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G9.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G10.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G11.png",
+    "./assets/images/enemies/chicken_boss/2_alert/G12.png",
   ];
 
   IMAGES_WALK = [
-    "../../assets/images/enemies/chicken_boss/1_walk/G1.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G2.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G3.png",
-    "../../assets/images/enemies/chicken_boss/1_walk/G4.png",
+    "./assets/images/enemies/chicken_boss/1_walk/G1.png",
+    "./assets/images/enemies/chicken_boss/1_walk/G2.png",
+    "./assets/images/enemies/chicken_boss/1_walk/G3.png",
+    "./assets/images/enemies/chicken_boss/1_walk/G4.png",
   ];
 
   IMAGES_ATTACK = [
-    "../../assets/images/enemies/chicken_boss/3_attack/G13.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G14.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G15.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G16.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G17.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G18.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G19.png",
-    "../../assets/images/enemies/chicken_boss/3_attack/G20.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G13.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G14.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G15.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G16.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G17.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G18.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G19.png",
+    "./assets/images/enemies/chicken_boss/3_attack/G20.png",
   ];
 
-  IMAGES_HURT = ["../../assets/images/enemies/chicken_boss/4_hurt/G21.png", "../../assets/images/enemies/chicken_boss/4_hurt/G22.png", "../../assets/images/enemies/chicken_boss/4_hurt/G23.png"];
+  IMAGES_HURT = ["./assets/images/enemies/chicken_boss/4_hurt/G21.png", "./assets/images/enemies/chicken_boss/4_hurt/G22.png", "./assets/images/enemies/chicken_boss/4_hurt/G23.png"];
 
-  IMAGES_DEAD = ["../../assets/images/enemies/chicken_boss/5_dead/G24.png", "../../assets/images/enemies/chicken_boss/5_dead/G25.png", "../../assets/images/enemies/chicken_boss/5_dead/G26.png"];
+  IMAGES_DEAD = ["./assets/images/enemies/chicken_boss/5_dead/G24.png", "./assets/images/enemies/chicken_boss/5_dead/G25.png", "./assets/images/enemies/chicken_boss/5_dead/G26.png"];
 
   /**
    * Constructs an instance of the EndBoss class.

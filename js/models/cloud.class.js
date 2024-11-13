@@ -28,7 +28,7 @@ export class Cloud extends MovableObject {
    * Loads the cloud image and sets a random position for the cloud.
    */
   constructor() {
-    super().loadImage("../../assets/images/background/layers/4_clouds/1.png");
+    super().loadImage("./assets/images/background/layers/4_clouds/1.png");
     this.x = Math.random() * (canvasWidth * 2.5);
     this.y = Math.random() * 100;
     this.animate();

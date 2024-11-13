@@ -29,7 +29,7 @@ export class SalsaBottles extends MovableObject {
    * Loads the image of the salsa bottle and sets its initial position.
    */
   constructor() {
-    super().loadImage("../../assets/images/items/salsa_bottle/1_salsa_bottle_on_ground.png");
+    super().loadImage("./assets/images/items/salsa_bottle/1_salsa_bottle_on_ground.png");
     this.x = 200 + Math.random() * (canvasWidth * 1.5);
     this.y = this.y + Math.random() * 40;
   }

@@ -13,12 +13,12 @@ import { StatusBar } from "./status-bar.class.js";
  */
 export class CoinsBar extends StatusBar {
   IMAGES = [
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/20.png",
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/40.png",
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/60.png",
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/80.png",
-    "../../assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/100.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/20.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/40.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/60.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/80.png",
+    "./assets/images/ui/statusbars/1_statusbar/1_statusbar_coin/blue/100.png",
   ];
 
   /**

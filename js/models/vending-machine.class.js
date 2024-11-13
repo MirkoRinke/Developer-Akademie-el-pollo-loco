@@ -21,7 +21,7 @@ export class VendingMachine extends MovableObject {
    * Initializes the vending machine image, dimensions, and position.
    */
   constructor() {
-    super().loadImage("../../assets/images/ui/vending-machine/2.png");
+    super().loadImage("./assets/images/ui/vending-machine/2.png");
     this.width = 217;
     this.height = 264;
     this.x = 0 - this.width / 2;

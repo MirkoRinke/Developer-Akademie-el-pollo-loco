@@ -13,12 +13,12 @@ import { StatusBar } from "./status-bar.class.js";
  */
 export class SalsaBottlesBar extends StatusBar {
   IMAGES = [
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
-    "../../assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/0.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/20.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/40.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/60.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/80.png",
+    "./assets/images/ui/statusbars/1_statusbar/3_statusbar_bottle/orange/100.png",
   ];
 
   /**

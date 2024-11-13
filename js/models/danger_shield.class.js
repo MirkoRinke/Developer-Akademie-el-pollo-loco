@@ -20,7 +20,7 @@ export class DangerShield extends MovableObject {
    * Constructs a DangerShield object, loads its image, and sets its dimensions and position.
    */
   constructor() {
-    super().loadImage("../../assets/images/ui/shield/danger.png");
+    super().loadImage("./assets/images/ui/shield/danger.png");
     this.width = 108;
     this.height = 132;
     this.x = canvasWidth * 1.7;

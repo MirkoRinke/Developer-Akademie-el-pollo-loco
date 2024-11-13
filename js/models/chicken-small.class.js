@@ -24,12 +24,12 @@ export class ChickenSmall extends MovableObject {
   energy = 2;
 
   IMAGES_WALK = [
-    "../../assets/images/enemies/chicken/chicken_small/1_walk/1_w.png",
-    "../../assets/images/enemies/chicken/chicken_small/1_walk/2_w.png",
-    "../../assets/images/enemies/chicken/chicken_small/1_walk/3_w.png",
+    "./assets/images/enemies/chicken/chicken_small/1_walk/1_w.png",
+    "./assets/images/enemies/chicken/chicken_small/1_walk/2_w.png",
+    "./assets/images/enemies/chicken/chicken_small/1_walk/3_w.png",
   ];
 
-  IMAGES_DEAD = ["../../assets/images/enemies/chicken/chicken_small/2_dead/dead.png"];
+  IMAGES_DEAD = ["./assets/images/enemies/chicken/chicken_small/2_dead/dead.png"];
 
   /**
    * Creates an instance of a small chicken enemy.
@@ -37,7 +37,7 @@ export class ChickenSmall extends MovableObject {
    * Sets initial position and speed.
    */
   constructor() {
-    super().loadImage("../../assets/images/enemies/chicken/chicken_small/1_walk/1_w.png");
+    super().loadImage("./assets/images/enemies/chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALK);
     this.loadImages(this.IMAGES_DEAD);
     this.x = 500 + Math.random() * (canvasWidth * 2.3);

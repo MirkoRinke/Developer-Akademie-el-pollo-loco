@@ -16,12 +16,12 @@ const canvasWidth = canvas.width;
  */
 export class StatusBarEndbossHealth extends StatusBar {
   IMAGES = [
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange0.png",
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange20.png",
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange40.png",
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange60.png",
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange80.png",
-    "../../assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange100.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange0.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange20.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange40.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange60.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange80.png",
+    "./assets/images/ui/statusbars/2_statusbar_endboss/orange-mirrored/orange100.png",
   ];
 
   /**

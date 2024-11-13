@@ -161,22 +161,8 @@ export class World {
 
   /**
    * Handles the game over sequence when the player is dead.
+   *
    * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
-   * @param {HTMLElement} startScreenRef - Reference to the start screen element.
-   */
-  gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
-    this.isGameOver = true;
-    setTimeout(() => stopGame(), 100);
-    playSound(game_over_sound);
-    setTimeout(() => (gameOverScreenRef.style.display = "block"), 12000);
-    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 16000);
-  }
-
-  /**
-   * Handles the game over scenario when the end boss is defeated.
-   * Stops the game, plays the winning sound, displays the win screen,
-   * and then transitions back to the start screen after a delay.
-   * @param {HTMLElement} winScreenRef - Reference to the win screen element.
    * @param {HTMLElement} startScreenRef - Reference to the start screen element.
    */
   gameOverEndbossDead(winScreenRef, startScreenRef) {

@@ -1,50 +1,64 @@
-// Class for all drawable objects in the game
-export class DrawableObject {
-  img; // Image object
-  imageCache = {}; // Cache for images
-  currentImage = 0; // Current image index
-  x = 120; // X coordinate
-  y = 330; // Y coordinate
-  height = 100; // Height
-  width = 100; // Width
+/**
+ * @module "drawable-object.class.js"
+ */
 
-  // This method is used to load an image from a path and store it in the img property
+/**
+ * Class representing a drawable object.
+ */
+export class DrawableObject {
+  img;
+  imageCache = {};
+  currentImage = 0;
+  x = 120;
+  y = 330;
+  height = 100;
+  width = 100;
+
+  /**
+   * Loads an image from the specified path and assigns it to the img property.
+   *
+   * @param {string} path - The path to the image file.
+   */
   loadImage(path) {
-    this.img = new Image(); // Create new image object
-    this.img.src = path; // Set the path of the image
+    this.img = new Image();
+    this.img.src = path;
   }
 
-  // This method is used to draw the image on the canvas
+  /**
+   * Draws the image on the canvas context at the specified position and size.
+   *
+   * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw on.
+   */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  // This method is used to draw a frame around the object
+  /**
+   * Draws a red frame around the object if it belongs to certain drawable classes.
+   *
+   * @param {CanvasRenderingContext2D} ctx - The rendering context to draw on.
+   */
   drawFrame(ctx) {
-    if (
-      this.constructor.name === "Character" ||
-      this.constructor.name === "Chicken" ||
-      this.constructor.name === "ChickenSmall" ||
-      this.constructor.name === "ThrowableObject" ||
-      this.constructor.name === "SalsaBottles" ||
-      this.constructor.name === "VendingMachine"
-    ) {
-      // Check if the object is a character or a chicken
-      ctx.beginPath(); // Start drawing
-      ctx.lineWidth = "2"; // Set the line width
-      ctx.strokeStyle = "transparent"; // Set the line color transparent
-      ctx.rect(this.x, this.y, this.width, this.height); // Draw the rectangle around the object
-      ctx.stroke(); // Finish drawing
+    const drawableClasses = ["Character", "Chicken", "ChickenSmall", "ThrowableObject", "SalsaBottles", "VendingMachine"];
+    if (drawableClasses.includes(this.constructor.name)) {
+      ctx.beginPath();
+      ctx.lineWidth = "2";
+      ctx.strokeStyle = "transparent";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
     }
   }
 
-  // This method is used load multiple images at once and store them in the imageCache property
+  /**
+   * Loads an array of image paths into the image cache.
+   *
+   * @param {string[]} arr - An array of image paths to be loaded.
+   */
   loadImages(arr) {
     arr.forEach((path) => {
-      // Loop through the array of paths
-      let img = new Image(); // Create new image object
-      img.src = path; // Set the path of the image
-      this.imageCache[path] = img; // Store the image in the cache object
+      let img = new Image();
+      img.src = path;
+      this.imageCache[path] = img;
     });
   }
 }

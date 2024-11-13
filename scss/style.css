@@ -46,7 +46,7 @@ a {
   color: white;
   font-family: "Sour Gummy", sans-serif;
 }
-@media screen and (max-width: 1000px) and (orientation: portrait) {
+@media screen and (max-width: 945px) and (orientation: portrait) {
   .body_game_site {
     background-image: url("../assets/images/landing_page/rotate_device.jpg");
     background-position: 50% 30%;
@@ -98,7 +98,7 @@ a {
   margin-bottom: 50px;
   position: relative;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .imprint_site,
   .main_content .privacy_Policy_site {
     margin-block: 25px;
@@ -111,7 +111,7 @@ a {
   top: 10px;
   right: 20px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .imprint_site .return,
   .main_content .privacy_Policy_site .return {
     display: block;
@@ -173,7 +173,7 @@ a {
 .main_content .privacy_policy:hover {
   cursor: pointer;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .privacy_policy {
     display: none;
   }
@@ -189,7 +189,7 @@ a {
 .main_content .imprint:hover {
   cursor: pointer;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .imprint {
     display: none;
   }
@@ -202,7 +202,7 @@ a {
 .main_content .el_pollo_loco_logo:hover {
   cursor: pointer;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .el_pollo_loco_logo {
     display: none;
   }
@@ -213,7 +213,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-@media screen and (max-width: 1000px) and (orientation: portrait) {
+@media screen and (max-width: 945px) and (orientation: portrait) {
   .main_content .canvas_container {
     display: none;
   }
@@ -272,7 +272,7 @@ a {
   padding-inline: 10px;
   z-index: 5;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .canvas_container .game_control {
     display: flex;
   }
@@ -337,7 +337,7 @@ a {
   right: 10px;
   z-index: 1;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .canvas_container .request_fullscreen {
     display: none;
   }
@@ -392,7 +392,7 @@ a {
   width: 100%;
   padding: 10px 20px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .control_description {
     display: none;
   }
@@ -438,7 +438,7 @@ a {
 .main_content .legal-links:hover {
   cursor: pointer;
 }
-@media (max-width: 1000px) {
+@media (max-width: 945px) {
   .main_content .legal-links {
     display: flex;
   }

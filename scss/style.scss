@@ -15,7 +15,7 @@
 .body_game_site {
   @include bodyStyle;
 
-  @media screen and (max-width: 1000px) and (orientation: portrait) {
+  @media screen and (max-width: 945px) and (orientation: portrait) {
     background-image: url("../assets/images/landing_page/rotate_device.jpg");
     background-position: 50% 30%;
   }
@@ -74,7 +74,7 @@
     margin-bottom: 50px;
     position: relative;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       margin-block: 25px;
     }
 
@@ -84,7 +84,7 @@
       top: 10px;
       right: 20px;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 945px) {
         display: block;
       }
 
@@ -140,7 +140,7 @@
       cursor: pointer;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       display: none;
     }
   }
@@ -157,7 +157,7 @@
       cursor: pointer;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       display: none;
     }
   }
@@ -171,7 +171,7 @@
       cursor: pointer;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       display: none;
     }
   }
@@ -180,7 +180,7 @@
     position: relative;
     @include displayFlexCenter;
 
-    @media screen and (max-width: 1000px) and (orientation: portrait) {
+    @media screen and (max-width: 945px) and (orientation: portrait) {
       display: none;
     }
 
@@ -243,7 +243,7 @@
       padding-inline: 10px;
       z-index: 5;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 945px) {
         display: flex;
       }
 
@@ -284,7 +284,7 @@
       right: 10px;
       z-index: 1;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 945px) {
         display: none;
       }
 
@@ -335,7 +335,7 @@
     width: 100%;
     padding: 10px 20px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       display: none;
     }
 
@@ -374,7 +374,7 @@
       cursor: pointer;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 945px) {
       display: flex;
     }
   }

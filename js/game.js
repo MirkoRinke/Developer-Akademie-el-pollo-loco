@@ -1,4 +1,8 @@
 /**
+ * @module "game.js"
+ */
+
+/**
  * Import necessary modules and assets for the game.
  */
 import { World } from "./models/world.class.js";

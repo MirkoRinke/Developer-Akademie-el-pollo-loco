@@ -65,13 +65,40 @@
     border: 4px solid rgb(194, 104, 70);
     border-radius: 10px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     color: black;
-    padding: 10px 20px 30px 20px; // top right bottom left
+    padding: 20px 20px 30px 20px; // top right bottom left
     width: 80%;
     overflow-wrap: break-word;
     hyphens: auto;
     margin-bottom: 50px;
+    position: relative;
+
+    @media (max-width: 1000px) {
+      margin-block: 25px;
+    }
+
+    .return {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+
+      @media (max-width: 1000px) {
+        display: block;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      & svg {
+        height: 35px;
+        width: 35px;
+        fill: rgb(194, 104, 70);
+        filter: drop-shadow(2px 2px 2px rgba(255, 255, 255, 1));
+      }
+    }
 
     .header,
     .address,
@@ -338,6 +365,7 @@
     font-weight: bold;
     font-size: clamp(18px, 2vw, 30px);
     color: black;
+    z-index: 10;
 
     position: absolute;
     bottom: 5px;

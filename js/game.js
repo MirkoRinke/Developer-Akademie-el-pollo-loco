@@ -1,18 +1,56 @@
-let intervalId = []; // variable to store the interval ID
-
-// Load World and Keyboard classes from the models folder
+/**
+ * Import necessary modules and assets for the game.
+ */
 import { World } from "./models/world.class.js";
 import { Keyboard } from "./models/keyboard.class.js";
 import { initLevel1 } from "./Levels/level1.js";
 import { bg_sound } from "./sounds.js";
 
-let canvas; // canvas element
-let world; // world object
-let keyboard = new Keyboard(); // keyboard object to handle key presses
-let allSounds = []; // array to store all sounds
-let muteSounds = false; // variable to mute all sounds
+/**
+ * Array to store interval IDs for managing game intervals.
+ * @type {Array<number>}
+ */
+let intervalId = [];
+
+/**
+ * Reference to the game's canvas element.
+ * @type {HTMLCanvasElement}
+ */
+let canvas;
+
+/**
+ * Instance of the game world.
+ * @type {World}
+ */
+let world;
+
+/**
+ * Instance of the keyboard input handler.
+ * @type {Keyboard}
+ */
+let keyboard = new Keyboard();
+
+/**
+ * Array to store all game sounds.
+ * @type {Array<Audio>}
+ */
+let allSounds = [];
+
+/**
+ * Flag to mute or unmute all game sounds.
+ * @type {boolean}
+ */
+let muteSounds = false;
+
+/**
+ * Flag to track if the user has interacted with the game.
+ * @type {boolean}
+ */
 export let userInteracted = false;
 
+/**
+ * Sets the userInteracted flag to true and removes event listeners for user interaction.
+ */
 const setUserInteracted = () => {
   userInteracted = true;
   ["click", "keydown", "touchstart"].forEach((event) => {
@@ -20,21 +58,36 @@ const setUserInteracted = () => {
   });
 };
 
+/**
+ * Adds event listeners for user interaction events to set the userInteracted flag.
+ * The event listeners are removed after the first interaction.
+ */
 ["click", "keydown", "touchstart"].forEach((event) => {
   document.addEventListener(event, setUserInteracted, { once: true });
 });
 
-// Function to set a stoppable interval
+/**
+ * Sets an interval that can be stopped later by pushing the interval ID to an array.
+ * This function is a workaround for an interval issue.
+ *
+ * @param {Function} callback - The function to be executed at each interval.
+ * @param {number} delay - The time, in milliseconds, that the timer should delay between executions of the callback function.
+ */
 export function setStoppableInterval(callback, delay) {
-  //! Only fix for the interval issue
+  //! setTimeout only fix for the interval issue
   setTimeout(() => {
-    // set a timeout to delay the execution of the interval by 0 milliseconds to allow the game to start
     let Id = setInterval(callback, delay);
     intervalId.push(Id);
   }, 0);
 }
 
-// Function to play a sound
+/**
+ * Plays a sound if the user has interacted and sounds are not muted.
+ *
+ * @param {HTMLAudioElement} sound - The sound to be played.
+ * @param {number} [volume=0.5] - The volume level of the sound (default is 0.5).
+ * @param {boolean} [loop=false] - Whether the sound should loop (default is false).
+ */
 export function playSound(sound, volume = 0.5, loop = false) {
   if (userInteracted === true) {
     if (muteSounds) return;
@@ -45,7 +98,13 @@ export function playSound(sound, volume = 0.5, loop = false) {
   }
 }
 
-// Function to stop all sounds
+/**
+ * Toggles the mute state of all sounds in the game.
+ *
+ * This function switches the display of mute and unmute icons based on the current mute state.
+ * It pauses and resets all sounds, clears the list of sounds, and toggles the mute state.
+ * If the sounds are unmuted, it plays the background sound at a specified volume.
+ */
 export function toggleAllSounds() {
   const muteSoundRef = document.getElementById("mute_sound");
   const unmuteSoundRef = document.getElementById("unmute_sound");
@@ -59,34 +118,49 @@ export function toggleAllSounds() {
   muteSounds = !muteSounds;
   if (!muteSounds) playSound(bg_sound, 0.05, true);
 }
-window.toggleAllSounds = toggleAllSounds; //! make the stopAllSounds function available globally temporarily
+window.toggleAllSounds = toggleAllSounds;
 
-// Function to stop the game by clearing all intervals
+/**
+ * Stops the game by clearing all intervals stored in the intervalId array.
+ *
+ * @function
+ */
 export function stopGame() {
   intervalId.forEach((Id) => {
     clearInterval(Id);
   });
 }
 
-// Initialize the world object
+/**
+ * Loads the game world by initializing the first level,
+ * setting up the canvas element, and creating a new World instance.
+ *
+ * @async
+ * @function loadGameWorld
+ * @returns {Promise<void>} A promise that resolves when the game world is loaded.
+ */
 export async function loadGameWorld() {
-  initLevel1(); // call the updateLevel1 function to update the level
-  canvas = document.getElementById("canvas"); // get the canvas element
-  world = new World(canvas, keyboard); // create a new world object
+  initLevel1();
+  canvas = document.getElementById("canvas");
+  world = new World(canvas, keyboard);
 }
 
-// Event listeners to handle key presses
+/**
+ * Event listener to handle key presses and update the keyboard state.
+ */
 document.addEventListener("keydown", (e) => {
-  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = true; // set RIGHT to true if the right arrow key is pressed
-  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = true; // set LEFT to true if the left arrow key is pressed
-  if (e.key === " ") keyboard.JUMP = true; // set JUMP to true if the space key is pressed
-  if (e.key === "f") keyboard.THRO = true; // set D to true if the d key is pressed
+  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = true;
+  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = true;
+  if (e.key === " " || e.key == "ArrowUp" || e.key == "w") keyboard.JUMP = true;
+  if (e.key === "f") keyboard.THRO = true;
 });
 
-// Event listeners to handle key releases
+/**
+ * Event listener to handle key releases and update the keyboard state.
+ */
 document.addEventListener("keyup", (e) => {
-  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = false; // set RIGHT to false if the right arrow key is released
-  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = false; // set LEFT to false if the left arrow key is released
-  if (e.key === " ") keyboard.JUMP = false; // set JUMP to false if the space key is released
-  if (e.key === "f") keyboard.THRO = false; // set D to false if the d key is released
+  if (e.key === "d" || e.key == "ArrowRight") keyboard.RIGHT = false;
+  if (e.key === "a" || e.key == "ArrowLeft") keyboard.LEFT = false;
+  if (e.key === " " || e.key == "ArrowUp" || e.key == "w") keyboard.JUMP = false;
+  if (e.key === "f") keyboard.THRO = false;
 });

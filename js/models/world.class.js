@@ -53,8 +53,7 @@ export class World {
 
   /**
    * Creates an instance of the World class.
-   * @constructor
-   * @param {HTMLCanvasElement} canvas - The canvas element where the game is rendered.
+   * @param {HTMLCanvasElement} canvas - The canvas element to draw on.
    * @param {Object} keyboard - The keyboard input handler.
    */
   constructor(canvas, keyboard) {
@@ -68,21 +67,18 @@ export class World {
 
   /**
    * Sets the world reference for the character.
-   * This method assigns the current world instance to the character's world property.
    */
   setWorld() {
     this.character.world = this;
   }
 
   /**
-   * Starts the main game loop by setting up various intervals to check for game events.
-   * The following intervals are set:
-   * - Every 1 millisecond: Checks for collisions.
-   * - Every 1 millisecond: Checks for throwable objects.
-   * - Every 250 milliseconds: Checks if the character is dead.
-   * - Every 250 milliseconds: Checks if any enemy is dead.
-   * - Every 250 milliseconds: Deletes dead enemies.
-   * - Every 1000 milliseconds: Checks and spawns salsa bottles.
+   * Starts the game loop by setting up intervals to check various game conditions.
+   * - Checks for collisions every 1 millisecond.
+   * - Checks for throwable objects every 1 millisecond.
+   * - Checks if the character is dead every 250 milliseconds.
+   * - Checks if the end boss is dead every 250 milliseconds.
+   * - Deletes enemies every 250 milliseconds.
    */
   run() {
     setStoppableInterval(() => this.checkCollisions(), 1);
@@ -92,6 +88,10 @@ export class World {
     setStoppableInterval(() => this.deleteEnemy(), 250);
   }
 
+  /**
+   * Checks for collisions between the character and vending machines in the level.
+   * If a collision is detected, it triggers the spawning of salsa bottles.
+   */
   checkCollisionsVendingMachine() {
     this.level.vendingMachine.forEach((machine) => {
       if (this.character.isColliding(machine)) this.checkAndSpawnSalsaBottles();
@@ -99,9 +99,9 @@ export class World {
   }
 
   /**
-   * Checks if the current number of coins is sufficient to spawn salsa bottles.
-   * If there are at least 5 coins and no bottles, spawns 5 salsa bottles,
-   * deducts 5 coins, plays a sound, and updates the UI bars for coins and bottles.
+   * Checks if the player has enough coins to spawn a salsa bottle.
+   * If conditions are met, it increments the number of salsa bottles,
+   * decrements the number of coins, plays a sound, and updates the UI bars.
    */
   checkAndSpawnSalsaBottles() {
     if (this.currentCoins >= 1 && this.currentBottles <= 4) {
@@ -120,10 +120,11 @@ export class World {
   }
 
   /**
-   * Checks if any enemies in the level are dead. If an enemy is dead, it stops the enemy's movement,
-   * removes the dead enemies from the level, and plays kill sounds. If the dead enemy is the Endboss,
-   * it triggers the game over sequence.
-   * @returns {boolean} - Returns true if an enemy is dead, otherwise undefined.
+   * Checks if the Endboss is dead among the enemies in the level.
+   * If an enemy is dead, it stops the enemy's movement, removes dead enemies,
+   * and plays kill sounds. If the dead enemy is the Endboss, it removes the
+   * Endboss from the enemies list after a delay and triggers the game over sequence.
+   * @returns {boolean} True if an enemy is dead, otherwise false.
    */
   checkEndbossIsDead() {
     this.level.enemies.forEach((enemy) => {
@@ -139,8 +140,8 @@ export class World {
   }
 
   /**
-   * Handles the game over logic.
-   * @param {boolean} [isPlayerDead=false] - Indicates whether the player is dead.
+   * Handles the game over logic by displaying the appropriate screen based on the game outcome.
+   * @param {boolean} [isPlayerDead=false] - Indicates if the player is dead. If true, the game over screen for player death is shown. Otherwise, the win screen is shown.
    */
   gameOver(isPlayerDead = false) {
     const gameOverScreenRef = document.getElementById("game_over_screen");
@@ -152,8 +153,7 @@ export class World {
   }
 
   /**
-   * Ends the game when the player is dead and displays the game over screen.
-   *
+   * Handles the game over sequence when the player is dead.
    * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
    * @param {HTMLElement} startScreenRef - Reference to the start screen element.
    */
@@ -166,10 +166,10 @@ export class World {
   }
 
   /**
-   * Handles the game over scenario when the player is dead.
-   * This function sets the game over state, stops the game, plays the game over sound,
-   * displays the game over screen, and then switches back to the start screen after a delay.
-   * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
+   * Handles the game over scenario when the end boss is defeated.
+   * Stops the game, plays the winning sound, displays the win screen,
+   * and then transitions back to the start screen after a delay.
+   * @param {HTMLElement} winScreenRef - Reference to the win screen element.
    * @param {HTMLElement} startScreenRef - Reference to the start screen element.
    */
   gameOverEndbossDead(winScreenRef, startScreenRef) {
@@ -181,9 +181,8 @@ export class World {
   }
 
   /**
-   * Removes dead enemies from the level's enemies array.
+   * Removes dead enemies from the level's enemies array, excluding the Endboss.
    * Increments the deadEnemyCount and rampageCount for each removed enemy.
-   * Does not remove enemies of type "Endboss".
    */
   removeDeadEnemies() {
     this.level.enemies.forEach((enemy) => {
@@ -208,9 +207,8 @@ export class World {
 
   /**
    * Plays various kill sounds and resets the rampage count after a delay.
-   * This method triggers multiple sound effects related to different kill streaks
-   * such as rampage, first blood, double kill, triple kill, kill streak, and dominating.
-   * It also ensures that the sounds are played only once by resetting the `playOnlyOnce` flag.
+   * Calls methods to handle different kill streaks.
+   * Resets the playOnlyOnce flag if it is set.
    */
   playKillSounds() {
     setTimeout(() => (this.rampageCount = 0), 2000);
@@ -220,7 +218,6 @@ export class World {
 
   /**
    * Triggers a rampage sound if the rampage count is 6 or more.
-   * @method rampage
    */
   rampage() {
     if (this.rampageCount >= 6) playSound(rampage_sound);
@@ -228,7 +225,7 @@ export class World {
 
   /**
    * Plays a sound when the first enemy is killed.
-   * If the enemy count is 1 or the sound has already been played once, it will play the appropriate sound.
+   * If the enemy count is 1 or the sound has already been played once, it plays a specific sound.
    * Resets the dead enemy count after playing the sound.
    */
   firstBlood() {
@@ -238,10 +235,8 @@ export class World {
   }
 
   /**
-   * Checks if two enemies have been killed and plays a double kill sound if true.
+   * Checks if two enemies have been killed and plays a sound if true.
    * Resets the dead enemy count after playing the sound.
-   * @method doubleKill
-   * @memberof World
    */
   doubleKill() {
     if (this.deadEnemyCount == 2 && !this.playOnlyOnce) {
@@ -250,8 +245,8 @@ export class World {
   }
 
   /**
-   * Checks if the number of dead enemies is exactly three and if the sound has not been played yet.
-   * If both conditions are met, it plays the triple kill sound and resets the dead enemy count.
+   * Plays a sound when three enemies are killed and resets the dead enemy count.
+   * Ensures the sound is played only once.
    */
   tripleKill() {
     if (this.deadEnemyCount == 3 && !this.playOnlyOnce) {
@@ -261,9 +256,7 @@ export class World {
 
   /**
    * Checks the number of dead enemies and plays a kill streak sound if the count is between 4 and 5.
-   * Resets the dead enemy count to 0 after playing the sound.
-   *
-   * @method killStreak
+   * Resets the dead enemy count after playing the sound.
    */
   killStreak() {
     if (this.deadEnemyCount >= 4 && this.deadEnemyCount < 6 && !this.playOnlyOnce) {
@@ -272,8 +265,7 @@ export class World {
   }
 
   /**
-   * Checks if there is only one enemy left in the level and if that enemy is the Endboss with energy greater than 0.
-   * If these conditions are met, it plays the dominating sound.
+   * Plays a sound if there is only one enemy left in the level and it is the Endboss with energy greater than 0.
    */
   dominating() {
     if (this.level.enemies.length == 1 && this.level.enemies[0].constructor.name === "Endboss" && this.level.enemies[0].energy > 0) {
@@ -283,11 +275,8 @@ export class World {
 
   /**
    * Checks if throwable objects can be thrown based on the current time and keyboard input.
-   * If the time since the last hit is less than 1000 milliseconds, the function returns early.
-   * If the 'THRO' key is pressed and there are bottles available, a new throwable object is created
-   * and added to the throwableObjects array. The number of available bottles is then decremented,
-   * and the salsaBottlesBar is updated to reflect the current number of bottles.
-   * The lastHit time is updated to the current time.
+   * If the conditions are met, creates a new throwable object, updates the bottle count,
+   * updates the salsa bottles bar, and plays a sound after a delay.
    */
   checkThrowableObjects() {
     const currentTime = new Date().getTime();
@@ -302,8 +291,8 @@ export class World {
 
   /**
    * Checks for various types of collisions in the game world.
-   * This method checks for collisions with enemies, throwable objects,
-   * salsa bottles, and coins.
+   * This includes collisions with enemies, throwable objects,
+   * salsa bottles, coins, and the vending machine.
    */
   checkCollisions() {
     this.checkCollisionsEnemy(), this.checkCollisionsThrowableObjects(), this.checkCollisionsSalasBottles(), this.checkCollisionsCoins(), this.checkCollisionsVendingMachine();
@@ -311,13 +300,8 @@ export class World {
 
   /**
    * Checks for collisions between the character and enemies in the level.
-   * If the character collides with an enemy, appropriate actions are taken based on the type of enemy.
-   * - If the character is above the enemy, the enemy is hit with a damage of 4.
-   * - If the character collides with the enemy from the side, the character is hit with damage:
-   *   - 4 if the enemy is an Endboss
-   *   - 1 if the enemy is any other type
-   * - Updates the character's health status bar after a collision.
-   * @method checkCollisionsEnemy
+   * If a collision is detected, it handles the collision effects such as
+   * reducing health and updating the status bar.
    */
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
@@ -335,7 +319,7 @@ export class World {
   }
 
   /**
-   * Checks for collisions between throwable objects and enemies in the game world.
+   * Checks for collisions between throwable objects and enemies in the game.
    * If a collision is detected, the enemy is hit. If the enemy is the Endboss,
    * its health status bar is updated accordingly.
    */
@@ -353,8 +337,8 @@ export class World {
   /**
    * Checks for collisions between the character and salsa bottles in the level.
    * If a collision is detected and the character has fewer than 5 bottles,
-   * increments the current bottle count, removes the collided salsa bottle from the level,
-   * and updates the salsa bottles bar percentage.
+   * increments the bottle count, plays a looting sound, removes the bottle
+   * from the level, and updates the salsa bottles bar percentage.
    */
   checkCollisionsSalasBottles() {
     this.level.salsaBottles.forEach((salsaBottle) => {
@@ -369,8 +353,8 @@ export class World {
 
   /**
    * Checks for collisions between the character and coins in the level.
-   * If a collision is detected and the current coin count is less than 10,
-   * it plays a sound, increments the coin count, removes the coin from the level,
+   * If a collision is detected and the current coin count is less than 20,
+   * plays a sound, increments the coin count, removes the coin from the level,
    * and updates the coin bar percentage.
    */
   checkCollisionsCoins() {
@@ -387,8 +371,8 @@ export class World {
   /**
    * Draws the game world on the canvas.
    * Clears the canvas, translates the context for camera movement,
-   * and adds various game objects to the map in the correct order.
-   * Uses requestAnimationFrame to continuously update the drawing.
+   * and adds various game objects to the map.
+   * Continuously calls itself using requestAnimationFrame for animation.
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -414,20 +398,20 @@ export class World {
 
   /**
    * Adds multiple objects to the map.
-   * @param {Array} objects - An array of objects to be added to the map.
+   * @param {Array} objects - The objects to be added to the map.
    */
   addObjectsToMap(objects) {
     objects.forEach((object) => this.addToMap(object));
   }
 
   /**
-   * Adds a movable object to the map, drawing it on the provided context.
-   * If the object is facing the other direction, it flips the image before drawing
-   * and flips it back after drawing.
+   * Adds a movable object to the map, drawing it on the canvas context.
+   * If the object is facing the other direction, it flips the image before drawing and flips it back after drawing.
    * @param {Object} movableObject - The object to be added to the map.
    * @param {boolean} movableObject.otherDirection - Indicates if the object is facing the other direction.
-   * @param {function} movableObject.draw - Method to draw the object on the canvas context.
-   * @param {function} movableObject.drawFrame - Method to draw the object's frame on the canvas context.
+   * @param {CanvasRenderingContext2D} movableObject.ctx - The canvas rendering context.
+   * @param {function} movableObject.draw - Method to draw the object on the canvas.
+   * @param {function} movableObject.drawFrame - Method to draw the object's frame on the canvas.
    */
   addToMap(movableObject) {
     if (movableObject.otherDirection) this.flipImage(movableObject);
@@ -437,13 +421,10 @@ export class World {
   }
 
   /**
-   * Flips the given movable object's image horizontally.
-   * This method saves the current state of the canvas context, translates the context
-   * to the width of the movable object, scales the context horizontally by -1 to flip
-   * the image, and then adjusts the x-coordinate of the movable object to reflect the flip.
+   * Flips the image of a movable object horizontally.
    * @param {Object} movableObject - The object to be flipped.
-   * @param {number} movableObject.width - The width of the movable object.
-   * @param {number} movableObject.x - The x-coordinate of the movable object.
+   * @param {number} movableObject.width - The width of the object.
+   * @param {number} movableObject.x - The x-coordinate of the object.
    */
   flipImage(movableObject) {
     this.ctx.save();
@@ -455,7 +436,6 @@ export class World {
   /**
    * Flips the image of the given movable object back to its original orientation.
    * @param {Object} movableObject - The object whose image is to be flipped.
-   * @param {number} movableObject.x - The x-coordinate of the movable object.
    */
   flipImageBack(movableObject) {
     movableObject.x = movableObject.x * -1;

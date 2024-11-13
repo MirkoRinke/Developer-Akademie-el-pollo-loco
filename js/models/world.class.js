@@ -1,4 +1,8 @@
 /**
+ * @module "world.class.js"
+ */
+
+/**
  * Importing necessary classes and functions for the World class.
  * @module WorldDependencies
  */

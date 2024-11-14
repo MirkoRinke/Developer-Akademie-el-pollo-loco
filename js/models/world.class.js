@@ -318,7 +318,7 @@ export class World {
       }
       if (this.character.isAbove(enemy)) enemy.hit(4);
       else {
-        this.character.hit(enemy.constructor.name === "Endboss" ? 15 : 5); //! 15 damage for Endboss, 5 for other enemies
+        this.character.hit(enemy.constructor.name === "Endboss" ? 30 : 15); //! 15 damage for Endboss, 5 for other enemies
         checkCharacterCollision(true, enemy.constructor.name);
         this.statusBarHealth.setPercentage(this.character.energy);
       }

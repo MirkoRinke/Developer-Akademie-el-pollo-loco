@@ -188,15 +188,18 @@ export class World {
   }
 
   /**
-   * Removes dead enemies from the level's enemies array, excluding the Endboss.
+   * Removes dead enemies from the level's enemies array, except for the Endboss.
    * Increments the deadEnemyCount and rampageCount for each removed enemy.
+   * Executes the removal after a delay of 500 milliseconds.
    */
   removeDeadEnemies() {
-    this.level.enemies.forEach((enemy) => {
-      if (enemy.isDead() && enemy.constructor.name !== "Endboss") {
-        this.deadEnemyCount++, this.rampageCount++, this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-      }
-    });
+    setTimeout(() => {
+      this.level.enemies.forEach((enemy) => {
+        if (enemy.isDead() && enemy.constructor.name !== "Endboss") {
+          this.deadEnemyCount++, this.rampageCount++, this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+        }
+      });
+    }, 500);
   }
 
   /**

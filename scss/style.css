@@ -197,7 +197,7 @@ a {
 .main_content .el_pollo_loco_logo {
   height: 100px;
   width: 100px;
-  margin-block: 25px;
+  margin-block: 10px;
 }
 .main_content .el_pollo_loco_logo:hover {
   cursor: pointer;

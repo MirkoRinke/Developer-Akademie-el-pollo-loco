@@ -13,6 +13,15 @@ import { characterDirection } from "./character.class.js";
 
 const canvas = document.getElementById("canvas");
 const canvasHeight = canvas.height;
+let endBossHit = false;
+
+/**
+ * Sets the value indicating whether the end boss has been hit.
+ * @param {boolean} value - The value to set for endBossHit.
+ */
+export function setEndBossHit(value) {
+  endBossHit = value;
+}
 
 /**
  * Represents a throwable object in the game.
@@ -87,8 +96,9 @@ export class ThrowableObject extends MovableObject {
    * If the object is on the ground, it plays the splash animation.
    */
   checkIfOnGround() {
-    if (this.y >= this.groundY) {
+    if (this.y >= this.groundY || endBossHit) {
       this.playAnimation(this.IMAGES_SPLASH);
+      endBossHit = false;
     }
   }
 }

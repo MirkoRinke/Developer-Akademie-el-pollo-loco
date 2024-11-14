@@ -14,7 +14,7 @@ import { CoinsBar } from "./coins-bar.class.js";
 import { StatusBarEndbossHealth } from "./status-bar-endboss-health.class.js";
 import { VendingMachine } from "./vending-machine.class.js";
 import { DangerShield } from "./danger_shield.class.js";
-import { ThrowableObject } from "./throwable-object.class.js";
+import { ThrowableObject, setEndBossHit } from "./throwable-object.class.js";
 import { setStoppableInterval, stopGame, playSound } from "../game.js";
 import { checkCharacterCollision } from "./endboss.class.js";
 import {
@@ -331,14 +331,17 @@ export class World {
   /**
    * Checks for collisions between throwable objects and enemies in the game.
    * If a collision is detected, the enemy is hit. If the enemy is the Endboss,
-   * its health status bar is updated accordingly.
+   * its health is updated and a hit status is set.
    */
   checkCollisionsThrowableObjects() {
     this.throwableObjects.forEach((throwableObject) => {
       this.level.enemies.forEach((enemy) => {
         if (throwableObject.isColliding(enemy)) {
-          if (enemy.constructor.name === "Endboss") enemy.hit(1), this.statusBarEndbossHealth.setPercentage(enemy.energy * 10);
-          else enemy.hit();
+          if (enemy.constructor.name === "Endboss") {
+            enemy.hit(1);
+            this.statusBarEndbossHealth.setPercentage(enemy.energy * 10);
+            setEndBossHit(true);
+          } else enemy.hit();
         }
       });
     });

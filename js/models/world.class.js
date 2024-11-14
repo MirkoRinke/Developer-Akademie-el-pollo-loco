@@ -387,6 +387,7 @@ export class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.vendingMachine);
     this.addToMap(this.dangerShield);
+    this.addObjectsToMap(this.level.clouds);
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBarHealth);
     this.addToMap(this.salsaBottlesBar);
@@ -397,7 +398,6 @@ export class World {
     this.addObjectsToMap(this.level.coins);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
     requestAnimationFrame(() => this.draw());

@@ -243,7 +243,7 @@ export class Character extends MovableObject {
   checkIdleAnimation() {
     if (!this.isDead() && !this.isHurt() && !this.isAboveGround() && !this.playerMoving()) {
       this.playAnimation(this.IMAGES_IDLE);
-      if (new Date().getTime() - this.idle_time > 15000 && this.idle_time !== 0) {
+      if (new Date().getTime() - this.idle_time > 10000 && this.idle_time !== 0) {
         this.playSnoringSound();
         this.playAnimation(this.IMAGES_IDLE_LONG);
       }

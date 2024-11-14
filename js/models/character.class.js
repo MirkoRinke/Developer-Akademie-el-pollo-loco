@@ -175,7 +175,7 @@ export class Character extends MovableObject {
    * - Idle animation is checked every 250ms.
    */
   characterAnimation() {
-    setStoppableInterval(this.checkDeadAnimation.bind(this), 100);
+    setStoppableInterval(this.checkDeadAnimation.bind(this), 250);
     setStoppableInterval(this.checkHurtAnimation.bind(this), 200);
     setStoppableInterval(this.checkJumpAnimation.bind(this), 250);
     setStoppableInterval(this.checkWalkAnimation.bind(this), 100);

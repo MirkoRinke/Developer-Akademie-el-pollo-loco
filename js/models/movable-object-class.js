@@ -127,11 +127,13 @@ export class MovableObject extends DrawableObject {
   }
 
   /**
-   * Plays an animation by cycling through an array of image paths.
+   * Plays an animation by cycling through a set of images.
    *
    * @param {string[]} images - An array of image paths to be used in the animation.
+   * @param {boolean} [deadAnimation=false] - A flag indicating if the animation is a "dead" animation, which resets the current image index after a certain point.
    */
-  playAnimation(images) {
+  playAnimation(images, deadAnimation = false) {
+    if (deadAnimation && this.currentImage > 5) this.currentImage = 0;
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];

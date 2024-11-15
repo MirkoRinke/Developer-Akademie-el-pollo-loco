@@ -9,7 +9,7 @@
  * Import the hurt_sound, snoring_sound, and walking_sound audio files from the sounds.js module.
  */
 import { MovableObject } from "./movable-object-class.js";
-import { setStoppableInterval, playSound } from "../game.js";
+import { setStoppableInterval, playSound, stopGame } from "../game.js";
 import { resetAlert } from "./endboss.class.js";
 import { hurt_sound, snoring_sound, walking_sound } from "../sounds.js";
 
@@ -30,6 +30,7 @@ export class Character extends MovableObject {
   speed = 10;
   energy = 100;
   idle_time = 0;
+  deadAnimation = 0;
 
   IMAGES_IDLE = [
     "./assets/images/player/pepe/1_idle/idle/I-1.png",
@@ -176,23 +177,20 @@ export class Character extends MovableObject {
    */
   characterAnimation() {
     setStoppableInterval(this.checkDeadAnimation.bind(this), 250);
-    setStoppableInterval(this.checkHurtAnimation.bind(this), 200);
+    setStoppableInterval(this.checkHurtAnimation.bind(this), 250);
     setStoppableInterval(this.checkJumpAnimation.bind(this), 250);
     setStoppableInterval(this.checkWalkAnimation.bind(this), 100);
     setStoppableInterval(this.checkIdleAnimation.bind(this), 250);
   }
 
   /**
-   * Checks and plays the appropriate dead animation for the character.
-   * If the character is already in the dead animation state, it plays the removal animation.
-   * Otherwise, if the character is dead and not yet in the dead animation state, it plays the dead animation and sets the deadAnimation flag to true.
+   * Checks if the character is dead and plays the dead animation if it hasn't been played 5 times.
+   * Increments the dead animation counter each time the animation is played.
    */
   checkDeadAnimation() {
-    if (this.deadAnimation) {
-      this.playAnimation(this.IMAGES_REMOVE_CHARACTER);
-    } else if (this.isDead() && !this.deadAnimation) {
-      this.playAnimation(this.IMAGES_DEAD);
-      this.deadAnimation = true;
+    if (this.isDead() && this.deadAnimation < 5) {
+      this.playAnimation(this.IMAGES_DEAD, true);
+      this.deadAnimation++;
     }
   }
 
@@ -201,7 +199,7 @@ export class Character extends MovableObject {
    * Pauses and resets the snoring sound, then plays the hurt sound.
    */
   checkHurtAnimation() {
-    if (this.isHurt()) {
+    if (this.isHurt() && !this.isDead()) {
       this.playAnimation(this.IMAGES_HURT);
       snoring_sound.pause();
       snoring_sound.currentTime = 0;

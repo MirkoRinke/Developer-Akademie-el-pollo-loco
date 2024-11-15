@@ -161,16 +161,14 @@ export class World {
 
   /**
    * Handles the game over sequence when the player is dead.
-   * Displays the game over screen, plays the game over sound, and then returns to the start screen.
-   *
    * @param {HTMLElement} gameOverScreenRef - Reference to the game over screen element.
    * @param {HTMLElement} startScreenRef - Reference to the start screen element.
    */
   gameOverPlayerDead(gameOverScreenRef, startScreenRef) {
     this.isGameOver = true;
-    setTimeout(() => stopGame(), 100);
     setTimeout(() => ((gameOverScreenRef.style.display = "block"), playSound(game_over_sound)), 2000);
-    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 6000);
+    setTimeout(() => stopGame(), 2500);
+    setTimeout(() => ((gameOverScreenRef.style.display = "none"), (startScreenRef.style.display = "block")), 5000);
   }
 
   /**

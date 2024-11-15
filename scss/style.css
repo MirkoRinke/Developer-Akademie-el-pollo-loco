@@ -167,8 +167,8 @@ a {
   position: absolute;
   top: -30px;
   left: 45px;
-  height: 180px;
-  width: 180px;
+  height: 160px;
+  width: 160px;
 }
 .main_content .privacy_policy:hover {
   cursor: pointer;
@@ -182,8 +182,8 @@ a {
   position: absolute;
   top: -18px;
   right: 45px;
-  height: 180px;
-  width: 180px;
+  height: 160px;
+  width: 160px;
   transform: rotate(8deg);
 }
 .main_content .imprint:hover {

@@ -30,6 +30,7 @@ export class Character extends MovableObject {
   speed = 10;
   energy = 100;
   idle_time = 0;
+  timeToIdle = 10000;
   deadAnimation = 0;
 
   IMAGES_IDLE = [
@@ -241,7 +242,7 @@ export class Character extends MovableObject {
   checkIdleAnimation() {
     if (!this.isDead() && !this.isHurt() && !this.isAboveGround() && !this.playerMoving()) {
       this.playAnimation(this.IMAGES_IDLE);
-      if (new Date().getTime() - this.idle_time > 10000 && this.idle_time !== 0) {
+      if (new Date().getTime() - this.idle_time > this.timeToIdle && this.idle_time !== 0) {
         this.playSnoringSound();
         this.playAnimation(this.IMAGES_IDLE_LONG);
       }

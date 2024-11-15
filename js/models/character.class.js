@@ -169,8 +169,8 @@ export class Character extends MovableObject {
    * Animates the character by setting up intervals for various animations.
    * Each animation is checked at a specified interval.
    *
-   * - Dead animation is checked every 100ms.
-   * - Hurt animation is checked every 200ms.
+   * - Dead animation is checked every 250ms.
+   * - Hurt animation is checked every 250ms.
    * - Jump animation is checked every 250ms.
    * - Walk animation is checked every 100ms.
    * - Idle animation is checked every 250ms.

@@ -9,7 +9,7 @@
  * Import the hurt_sound, snoring_sound, and walking_sound audio files from the sounds.js module.
  */
 import { MovableObject } from "./movable-object-class.js";
-import { setStoppableInterval, playSound, stopGame } from "../game.js";
+import { setStoppableInterval, playSound } from "../game.js";
 import { resetAlert } from "./endboss.class.js";
 import { hurt_sound, snoring_sound, walking_sound } from "../sounds.js";
 

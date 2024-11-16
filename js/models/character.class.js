@@ -261,7 +261,7 @@ export class Character extends MovableObject {
    * @returns {boolean} True if the player is moving, otherwise false.
    */
   playerMoving() {
-    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    return (this.world.keyboard.RIGHT && !this.isDead()) || (this.world.keyboard.LEFT && !this.isDead());
   }
 
   /**
@@ -270,7 +270,7 @@ export class Character extends MovableObject {
    * @returns {boolean} True if the character can move right, otherwise false.
    */
   canMoveRight() {
-    return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isDead();
   }
 
   /**
@@ -294,7 +294,7 @@ export class Character extends MovableObject {
    * @returns {boolean} True if the character can move left, otherwise false.
    */
   canMoveLeft() {
-    return this.world.keyboard.LEFT && this.x > 0;
+    return this.world.keyboard.LEFT && this.x > 0 && !this.isDead();
   }
 
   /**
@@ -320,6 +320,6 @@ export class Character extends MovableObject {
    * @returns {boolean} True if the character can jump, otherwise false.
    */
   canJump() {
-    return this.world.keyboard.JUMP && !this.isAboveGround();
+    return this.world.keyboard.JUMP && !this.isAboveGround() && !this.isDead();
   }
 }

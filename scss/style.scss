@@ -1,22 +1,22 @@
-@use "fonts";
-@use "default";
+@use 'fonts';
+@use 'default';
 
 @mixin bodyStyle {
-  background-image: url("../assets/images/landing_page/bg.jpg");
+  background-image: url('../assets/images/landing_page/bg.jpg');
   background-color: rgb(244, 183, 124);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   color: white;
-  font-family: "Sour Gummy", sans-serif;
+  font-family: 'Sour Gummy', sans-serif;
 }
 
 .body_game_site {
   @include bodyStyle;
 
   @media screen and (max-width: 945px) and (orientation: portrait) {
-    background-image: url("../assets/images/landing_page/rotate_device.jpg");
+    background-image: url('../assets/images/landing_page/rotate_device.jpg');
     background-position: 50% 30%;
   }
 
@@ -114,6 +114,13 @@
 
     & h1,
     h2,
+    h3 {
+      color: rgb(194, 104, 70);
+      filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 1));
+    }
+
+    & h1,
+    h2,
     h3,
     p,
     ul {
@@ -190,7 +197,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas.jpg");
+      background-image: url('../assets/images/landing_page/bg_canvas.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;
@@ -207,7 +214,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas_game_over.jpg");
+      background-image: url('../assets/images/landing_page/bg_canvas_game_over.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;
@@ -220,7 +227,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("../assets/images/landing_page/bg_canvas_win.jpg");
+      background-image: url('../assets/images/landing_page/bg_canvas_win.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       z-index: 6;

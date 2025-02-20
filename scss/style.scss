@@ -136,6 +136,14 @@
     }
   }
 
+  .address,
+  .representedBy,
+  .contact {
+    & p {
+      margin-top: 0;
+    }
+  }
+
   .privacy_policy {
     position: absolute;
     top: -30px;

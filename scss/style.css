@@ -172,6 +172,11 @@ a {
 .main_content .privacy_Policy_site li {
   margin-block: 10px;
 }
+.main_content .address p,
+.main_content .representedBy p,
+.main_content .contact p {
+  margin-top: 0;
+}
 .main_content .privacy_policy {
   position: absolute;
   top: -30px;
